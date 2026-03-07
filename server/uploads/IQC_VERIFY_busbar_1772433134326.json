@@ -1,0 +1,1941 @@
+{
+  "materialType": "busbar",
+  "iqcData": {
+    "documentNo": "GSPL/PVR(IQC)/002",
+    "issueDate": "01-12-2024",
+    "revNo": "",
+    "materialName": "Bus Bar",
+    "supplierName": "Taicang Juren international Trade Co. Usf.",
+    "quantity": "",
+    "quantityNum": 0,
+    "quantityUnit": "",
+    "invoiceNo": "Physical",
+    "receiptDate": "02/08/2025",
+    "rmDetails": "",
+    "lotNo": "",
+    "sampleCount": 13,
+    "aqlInfo": "SIL S3 AQL 1.5 / SIL S3 AQL 4.0 / SIL S3 AQL 4.0 / SIL S3 AQL 1.5 / SIL S3 AQL 4.0 / SIL S3 AQL 4.0",
+    "checkedBy": "Declare/Amit",
+    "approvedBy": "",
+    "inspectionDate": "",
+    "width": [
+      6.04,
+      6.01,
+      6.04,
+      6,
+      6.06,
+      6.07,
+      6.01,
+      6,
+      6
+    ],
+    "thickness": [
+      0.404,
+      0.401,
+      0.406,
+      0.402,
+      0.406,
+      0.401,
+      0.404,
+      0.402,
+      0.402
+    ],
+    "coatingThickness": [
+      28.9,
+      25.4,
+      28.4,
+      24.8,
+      26,
+      25.6,
+      29.4,
+      28.6,
+      23.4,
+      24.2,
+      28.8
+    ],
+    "solderabilityBusBar": 24,
+    "solderabilityRibbon": 24,
+    "weight": [
+      9.725,
+      9.755,
+      9.71,
+      9.785,
+      9.735,
+      9.74,
+      9.79,
+      9.725
+    ],
+    "tensileStrength": 221.88,
+    "yieldStrength": 115,
+    "resistivity": null,
+    "packagingResult": "condition is ok.",
+    "expiryInfo": "Expiry Date\nVisual\n100%\nPacking Box / COC\nDate of expiry should be min. 6 months from the date of re",
+    "mfgDate": "28/06/2025",
+    "rmSpecification": "",
+    "rmSpecWidth": null,
+    "rmSpecThickness": null
+  },
+  "cocData": {
+    "certificateNo": "GAUTAM",
+    "customerName": "GAUTAM SOLAR PRIVATE LIMITED",
+    "productName": "Bus Bar",
+    "productSpec": "",
+    "invoiceNo": "JRIT20250630002",
+    "deliveryDate": "2025.07.01",
+    "productionDate": "-",
+    "totalWeight": "",
+    "totalWeightNum": 0,
+    "supplierName": "TaiCang JuRen International Trade Co., LTD",
+    "widthSpec": null,
+    "thicknessSpec": null,
+    "width": [
+      6.002,
+      6.015,
+      6.017,
+      6.005
+    ],
+    "thickness": [
+      0.35,
+      0.403,
+      0.405,
+      0.453,
+      0.402,
+      0.404,
+      0.353,
+      0.353,
+      0.354
+    ],
+    "tinContent": [],
+    "copperPurity": [
+      99.97,
+      99.97
+    ],
+    "tensileStrength": [
+      145,
+      111,
+      115,
+      113
+    ],
+    "yieldStrength": [
+      145,
+      111.695,
+      115.714,
+      113.091,
+      45
+    ],
+    "elongation": [],
+    "resistivity": [
+      0.01724,
+      0.0225
+    ],
+    "weight": [
+      9.728,
+      9.703,
+      9.754,
+      9.716,
+      9.735
+    ],
+    "solderability": "OK",
+    "derivedRanges": {
+      "width": {
+        "label": "Width",
+        "count": 4,
+        "values": [
+          6.002,
+          6.015,
+          6.017,
+          6.005
+        ],
+        "min": 6.002,
+        "max": 6.017,
+        "mean": 6.00975,
+        "stdDev": 0.006379,
+        "range": 0.015
+      },
+      "thickness": {
+        "label": "Thickness",
+        "count": 9,
+        "values": [
+          0.35,
+          0.403,
+          0.405,
+          0.453,
+          0.402,
+          0.404,
+          0.353,
+          0.353,
+          0.354
+        ],
+        "min": 0.35,
+        "max": 0.453,
+        "mean": 0.386333,
+        "stdDev": 0.033691,
+        "range": 0.103
+      },
+      "tensileStrength": {
+        "label": "Tensile Strength",
+        "count": 4,
+        "values": [
+          145,
+          111,
+          115,
+          113
+        ],
+        "min": 111,
+        "max": 145,
+        "mean": 121,
+        "stdDev": 13.928388,
+        "range": 34
+      },
+      "yieldStrength": {
+        "label": "Yield Strength",
+        "count": 5,
+        "values": [
+          145,
+          111.695,
+          115.714,
+          113.091,
+          45
+        ],
+        "min": 45,
+        "max": 145,
+        "mean": 106.1,
+        "stdDev": 32.9212,
+        "range": 100
+      },
+      "elongation": null,
+      "resistivity": {
+        "label": "Resistivity",
+        "count": 2,
+        "values": [
+          0.01724,
+          0.0225
+        ],
+        "min": 0.01724,
+        "max": 0.0225,
+        "mean": 0.01987,
+        "stdDev": 0.00263,
+        "range": 0.00526
+      },
+      "copperPurity": {
+        "label": "Copper Purity",
+        "count": 2,
+        "values": [
+          99.97,
+          99.97
+        ],
+        "min": 99.97,
+        "max": 99.97,
+        "mean": 99.97,
+        "stdDev": 0,
+        "range": 0
+      },
+      "tinContent": null,
+      "weight": {
+        "label": "Weight",
+        "count": 5,
+        "values": [
+          9.728,
+          9.703,
+          9.754,
+          9.716,
+          9.735
+        ],
+        "min": 9.703,
+        "max": 9.754,
+        "mean": 9.7272,
+        "stdDev": 0.017267,
+        "range": 0.051
+      }
+    },
+    "allJudgmentsOK": true,
+    "judgmentDetails": [
+      "OK",
+      "OK",
+      "OK",
+      "OK",
+      "OK"
+    ]
+  },
+  "verification": {
+    "materialType": "busbar",
+    "materialName": "Bus Bar",
+    "checks": [
+      {
+        "name": "Visual - Packaging (Make, Type)",
+        "status": "PASS",
+        "values": null,
+        "spec": "No Physical Damage, No Mismatch against PO/Invoice",
+        "details": "condition is ok.",
+        "cocValues": null,
+        "cocRange": null,
+        "cocMatchInfo": null
+      },
+      {
+        "name": "Visual - Expiry Date",
+        "status": "WARNING",
+        "values": null,
+        "spec": "Expiry should be min. 6 months from receiving",
+        "details": "Expiry Date\nVisual\n100%\nPacking Box / COC\nDate of expiry should be min. 6 months from the date of re — Material is 8 months old",
+        "cocValues": null,
+        "cocRange": null,
+        "cocMatchInfo": null
+      },
+      {
+        "name": "Physical - Width (IQC vs COC)",
+        "status": "PASS",
+        "values": [
+          "6.04 mm",
+          "6.01 mm",
+          "6.04 mm",
+          "6 mm",
+          "6.06 mm",
+          "6.07 mm",
+          "6.01 mm",
+          "6 mm",
+          "6 mm"
+        ],
+        "spec": "6 ±0.10 mm",
+        "details": "IQC Width MATCHES COC ✓. IQC avg: 6.025556 mm, COC avg: 6.00975 mm — Deviation: 0.292%",
+        "cocValues": [
+          "6.002 mm",
+          "6.015 mm",
+          "6.017 mm",
+          "6.005 mm"
+        ],
+        "cocRange": {
+          "label": "Width",
+          "count": 4,
+          "values": [
+            6.002,
+            6.015,
+            6.017,
+            6.005
+          ],
+          "min": 6.002,
+          "max": 6.017,
+          "mean": 6.00975,
+          "stdDev": 0.006379,
+          "range": 0.015
+        },
+        "cocMatchInfo": {
+          "parameter": "Width",
+          "unit": "mm",
+          "iqcValues": [
+            6.04,
+            6.01,
+            6.04,
+            6,
+            6.06,
+            6.07,
+            6.01,
+            6,
+            6
+          ],
+          "cocValues": [
+            6.002,
+            6.015,
+            6.017,
+            6.005
+          ],
+          "iqcCount": 9,
+          "cocCount": 4,
+          "pairComparisons": [
+            {
+              "index": 1,
+              "iqcValue": 6.04,
+              "cocValue": 6.017,
+              "deviation": 0.023,
+              "absDeviation": 0.023,
+              "deviationPct": 0.382,
+              "status": "MATCH"
+            },
+            {
+              "index": 2,
+              "iqcValue": 6.01,
+              "cocValue": 6.015,
+              "deviation": -0.005,
+              "absDeviation": 0.005,
+              "deviationPct": 0.083,
+              "status": "MATCH"
+            },
+            {
+              "index": 3,
+              "iqcValue": 6.04,
+              "cocValue": 6.017,
+              "deviation": 0.023,
+              "absDeviation": 0.023,
+              "deviationPct": 0.382,
+              "status": "MATCH"
+            },
+            {
+              "index": 4,
+              "iqcValue": 6,
+              "cocValue": 6.002,
+              "deviation": -0.002,
+              "absDeviation": 0.002,
+              "deviationPct": 0.033,
+              "status": "MATCH"
+            },
+            {
+              "index": 5,
+              "iqcValue": 6.06,
+              "cocValue": 6.017,
+              "deviation": 0.043,
+              "absDeviation": 0.043,
+              "deviationPct": 0.715,
+              "status": "MATCH"
+            },
+            {
+              "index": 6,
+              "iqcValue": 6.07,
+              "cocValue": 6.017,
+              "deviation": 0.053,
+              "absDeviation": 0.053,
+              "deviationPct": 0.881,
+              "status": "DEVIATION"
+            },
+            {
+              "index": 7,
+              "iqcValue": 6.01,
+              "cocValue": 6.015,
+              "deviation": -0.005,
+              "absDeviation": 0.005,
+              "deviationPct": 0.083,
+              "status": "MATCH"
+            },
+            {
+              "index": 8,
+              "iqcValue": 6,
+              "cocValue": 6.002,
+              "deviation": -0.002,
+              "absDeviation": 0.002,
+              "deviationPct": 0.033,
+              "status": "MATCH"
+            },
+            {
+              "index": 9,
+              "iqcValue": 6,
+              "cocValue": 6.002,
+              "deviation": -0.002,
+              "absDeviation": 0.002,
+              "deviationPct": 0.033,
+              "status": "MATCH"
+            }
+          ],
+          "overallMatch": true,
+          "avgDeviation": 0.017556,
+          "maxDeviation": 0.053,
+          "avgDeviationPct": 0.292,
+          "iqcMean": 6.025556,
+          "cocMean": 6.00975,
+          "summary": "9 IQC values vs 4 COC values | IQC avg: 6.025556 mm, COC avg: 6.00975 mm | Avg deviation: 0.017556 mm (0.292%) | 8 match, 1 deviation, 0 mismatch"
+        }
+      },
+      {
+        "name": "Physical - Thickness (IQC vs COC)",
+        "status": "PASS",
+        "values": [
+          "0.404 mm",
+          "0.401 mm",
+          "0.406 mm",
+          "0.402 mm",
+          "0.406 mm",
+          "0.401 mm",
+          "0.404 mm",
+          "0.402 mm",
+          "0.402 mm"
+        ],
+        "spec": "0.4 -0.01/+0.01 mm",
+        "details": "IQC Thickness MATCHES COC ✓. IQC avg: 0.403111 mm, COC avg: 0.386333 mm — Deviation: 0.115%",
+        "cocValues": [
+          "0.35 mm",
+          "0.403 mm",
+          "0.405 mm",
+          "0.453 mm",
+          "0.402 mm",
+          "0.404 mm",
+          "0.353 mm",
+          "0.353 mm",
+          "0.354 mm"
+        ],
+        "cocRange": {
+          "label": "Thickness",
+          "count": 9,
+          "values": [
+            0.35,
+            0.403,
+            0.405,
+            0.453,
+            0.402,
+            0.404,
+            0.353,
+            0.353,
+            0.354
+          ],
+          "min": 0.35,
+          "max": 0.453,
+          "mean": 0.386333,
+          "stdDev": 0.033691,
+          "range": 0.103
+        },
+        "cocMatchInfo": {
+          "parameter": "Thickness",
+          "unit": "mm",
+          "iqcValues": [
+            0.404,
+            0.401,
+            0.406,
+            0.402,
+            0.406,
+            0.401,
+            0.404,
+            0.402,
+            0.402
+          ],
+          "cocValues": [
+            0.35,
+            0.403,
+            0.405,
+            0.453,
+            0.402,
+            0.404,
+            0.353,
+            0.353,
+            0.354
+          ],
+          "iqcCount": 9,
+          "cocCount": 9,
+          "pairComparisons": [
+            {
+              "index": 1,
+              "iqcValue": 0.404,
+              "cocValue": 0.404,
+              "deviation": 0,
+              "absDeviation": 0,
+              "deviationPct": 0,
+              "status": "EXACT"
+            },
+            {
+              "index": 2,
+              "iqcValue": 0.401,
+              "cocValue": 0.402,
+              "deviation": -0.001,
+              "absDeviation": 0.001,
+              "deviationPct": 0.249,
+              "status": "MATCH"
+            },
+            {
+              "index": 3,
+              "iqcValue": 0.406,
+              "cocValue": 0.405,
+              "deviation": 0.001,
+              "absDeviation": 0.001,
+              "deviationPct": 0.247,
+              "status": "MATCH"
+            },
+            {
+              "index": 4,
+              "iqcValue": 0.402,
+              "cocValue": 0.402,
+              "deviation": 0,
+              "absDeviation": 0,
+              "deviationPct": 0,
+              "status": "EXACT"
+            },
+            {
+              "index": 5,
+              "iqcValue": 0.406,
+              "cocValue": 0.405,
+              "deviation": 0.001,
+              "absDeviation": 0.001,
+              "deviationPct": 0.247,
+              "status": "MATCH"
+            },
+            {
+              "index": 6,
+              "iqcValue": 0.401,
+              "cocValue": 0.402,
+              "deviation": -0.001,
+              "absDeviation": 0.001,
+              "deviationPct": 0.249,
+              "status": "MATCH"
+            },
+            {
+              "index": 7,
+              "iqcValue": 0.404,
+              "cocValue": 0.404,
+              "deviation": 0,
+              "absDeviation": 0,
+              "deviationPct": 0,
+              "status": "EXACT"
+            },
+            {
+              "index": 8,
+              "iqcValue": 0.402,
+              "cocValue": 0.402,
+              "deviation": 0,
+              "absDeviation": 0,
+              "deviationPct": 0,
+              "status": "EXACT"
+            },
+            {
+              "index": 9,
+              "iqcValue": 0.402,
+              "cocValue": 0.402,
+              "deviation": 0,
+              "absDeviation": 0,
+              "deviationPct": 0,
+              "status": "EXACT"
+            }
+          ],
+          "overallMatch": true,
+          "avgDeviation": 0.000444,
+          "maxDeviation": 0.001,
+          "avgDeviationPct": 0.115,
+          "iqcMean": 0.403111,
+          "cocMean": 0.386333,
+          "summary": "9 IQC values vs 9 COC values | IQC avg: 0.403111 mm, COC avg: 0.386333 mm | Avg deviation: 0.000444 mm (0.115%) | 9 match, 0 deviation, 0 mismatch"
+        }
+      },
+      {
+        "name": "Physical - Coating Thickness",
+        "status": "PASS",
+        "values": [
+          "28.9 um/side",
+          "25.4 um/side",
+          "28.4 um/side",
+          "24.8 um/side",
+          "26 um/side",
+          "25.6 um/side",
+          "29.4 um/side",
+          "28.6 um/side",
+          "23.4 um/side",
+          "24.2 um/side",
+          "28.8 um/side"
+        ],
+        "spec": "25 ±5 um/side (20-30)",
+        "details": "11 samples all within 20-30 um/side. Values: 28.9, 25.4, 28.4, 24.8, 26, 25.6, 29.4, 28.6, 23.4, 24.2, 28.8",
+        "cocValues": null,
+        "cocRange": null,
+        "cocMatchInfo": null
+      },
+      {
+        "name": "Solderability - B/w Bus Bar",
+        "status": "PASS",
+        "values": [
+          "24 N"
+        ],
+        "spec": ">= 24 N",
+        "details": "IQC: 24 N >= 24 N — OK",
+        "cocValues": null,
+        "cocRange": null,
+        "cocMatchInfo": null
+      },
+      {
+        "name": "Solderability - B/w Ribbon & Interconnector",
+        "status": "PASS",
+        "values": [
+          "24 N"
+        ],
+        "spec": ">= 4 N",
+        "details": "IQC: 24 N >= 4 N — OK",
+        "cocValues": null,
+        "cocRange": null,
+        "cocMatchInfo": null
+      },
+      {
+        "name": "Measurement - Weight (IQC vs COC)",
+        "status": "PASS",
+        "values": [
+          "9.725 kg",
+          "9.755 kg",
+          "9.710 kg",
+          "9.785 kg",
+          "9.735 kg",
+          "9.740 kg",
+          "9.790 kg",
+          "9.725 kg"
+        ],
+        "spec": "Must match COC values",
+        "details": "IQC Weight MATCHES COC ✓. IQC avg: 9.745625 kg, COC avg: 9.7272 kg — Deviation: 0.109%",
+        "cocValues": [
+          "9.728 kg",
+          "9.703 kg",
+          "9.754 kg",
+          "9.716 kg",
+          "9.735 kg"
+        ],
+        "cocRange": {
+          "label": "Weight",
+          "count": 5,
+          "values": [
+            9.728,
+            9.703,
+            9.754,
+            9.716,
+            9.735
+          ],
+          "min": 9.703,
+          "max": 9.754,
+          "mean": 9.7272,
+          "stdDev": 0.017267,
+          "range": 0.051
+        },
+        "cocMatchInfo": {
+          "parameter": "Weight",
+          "unit": "kg",
+          "iqcValues": [
+            9.725,
+            9.755,
+            9.71,
+            9.785,
+            9.735,
+            9.74,
+            9.79,
+            9.725
+          ],
+          "cocValues": [
+            9.728,
+            9.703,
+            9.754,
+            9.716,
+            9.735
+          ],
+          "iqcCount": 8,
+          "cocCount": 5,
+          "pairComparisons": [
+            {
+              "index": 1,
+              "iqcValue": 9.725,
+              "cocValue": 9.728,
+              "deviation": -0.003,
+              "absDeviation": 0.003,
+              "deviationPct": 0.031,
+              "status": "MATCH"
+            },
+            {
+              "index": 2,
+              "iqcValue": 9.755,
+              "cocValue": 9.754,
+              "deviation": 0.001,
+              "absDeviation": 0.001,
+              "deviationPct": 0.01,
+              "status": "MATCH"
+            },
+            {
+              "index": 3,
+              "iqcValue": 9.71,
+              "cocValue": 9.716,
+              "deviation": -0.006,
+              "absDeviation": 0.006,
+              "deviationPct": 0.062,
+              "status": "MATCH"
+            },
+            {
+              "index": 4,
+              "iqcValue": 9.785,
+              "cocValue": 9.754,
+              "deviation": 0.031,
+              "absDeviation": 0.031,
+              "deviationPct": 0.318,
+              "status": "MATCH"
+            },
+            {
+              "index": 5,
+              "iqcValue": 9.735,
+              "cocValue": 9.735,
+              "deviation": 0,
+              "absDeviation": 0,
+              "deviationPct": 0,
+              "status": "EXACT"
+            },
+            {
+              "index": 6,
+              "iqcValue": 9.74,
+              "cocValue": 9.735,
+              "deviation": 0.005,
+              "absDeviation": 0.005,
+              "deviationPct": 0.051,
+              "status": "MATCH"
+            },
+            {
+              "index": 7,
+              "iqcValue": 9.79,
+              "cocValue": 9.754,
+              "deviation": 0.036,
+              "absDeviation": 0.036,
+              "deviationPct": 0.369,
+              "status": "MATCH"
+            },
+            {
+              "index": 8,
+              "iqcValue": 9.725,
+              "cocValue": 9.728,
+              "deviation": -0.003,
+              "absDeviation": 0.003,
+              "deviationPct": 0.031,
+              "status": "MATCH"
+            }
+          ],
+          "overallMatch": true,
+          "avgDeviation": 0.010625,
+          "maxDeviation": 0.036,
+          "avgDeviationPct": 0.109,
+          "iqcMean": 9.745625,
+          "cocMean": 9.7272,
+          "summary": "8 IQC values vs 5 COC values | IQC avg: 9.745625 kg, COC avg: 9.7272 kg | Avg deviation: 0.010625 kg (0.109%) | 8 match, 0 deviation, 0 mismatch"
+        }
+      },
+      {
+        "name": "As per COC - Tensile Strength",
+        "status": "FAIL",
+        "values": [
+          "221.88 MPa"
+        ],
+        "spec": "IQC must match COC value | Min: 100 MPa",
+        "details": "Tensile Strength: IQC = 221.88 MPa vs COC = 145 MPa — MISMATCH 83.372% — Value does NOT match COC!",
+        "cocValues": [
+          "145.0 MPa",
+          "111.0 MPa",
+          "115.0 MPa",
+          "113.0 MPa"
+        ],
+        "cocRange": {
+          "label": "Tensile Strength",
+          "count": 4,
+          "values": [
+            145,
+            111,
+            115,
+            113
+          ],
+          "min": 111,
+          "max": 145,
+          "mean": 121,
+          "stdDev": 13.928388,
+          "range": 34
+        },
+        "cocMatchInfo": {
+          "parameter": "Tensile Strength",
+          "unit": "MPa",
+          "iqcValue": 221.88,
+          "cocValues": [
+            145,
+            111,
+            115,
+            113
+          ],
+          "cocMean": 121,
+          "deviation": 100.88,
+          "deviationPct": 83.372,
+          "status": "MISMATCH",
+          "details": "Tensile Strength: IQC = 221.88 MPa vs COC = 145 MPa — MISMATCH 83.372% — Value does NOT match COC!",
+          "closestCocValue": 145,
+          "closestDeviation": 76.88
+        }
+      },
+      {
+        "name": "As per COC - Yield Strength",
+        "status": "FAIL",
+        "values": [
+          "115 MPa"
+        ],
+        "spec": "IQC must match COC value | Min: 60 MPa",
+        "details": "Yield Strength: IQC = 115 MPa vs COC = 115.714 MPa — DEVIATION 8.388% — Inspector ne galat value likhi hai!",
+        "cocValues": [
+          "145.0 MPa",
+          "111.7 MPa",
+          "115.7 MPa",
+          "113.1 MPa",
+          "45.0 MPa"
+        ],
+        "cocRange": {
+          "label": "Yield Strength",
+          "count": 5,
+          "values": [
+            145,
+            111.695,
+            115.714,
+            113.091,
+            45
+          ],
+          "min": 45,
+          "max": 145,
+          "mean": 106.1,
+          "stdDev": 32.9212,
+          "range": 100
+        },
+        "cocMatchInfo": {
+          "parameter": "Yield Strength",
+          "unit": "MPa",
+          "iqcValue": 115,
+          "cocValues": [
+            145,
+            111.695,
+            115.714,
+            113.091,
+            45
+          ],
+          "cocMean": 106.1,
+          "deviation": 8.9,
+          "deviationPct": 8.388,
+          "status": "DEVIATION",
+          "details": "Yield Strength: IQC = 115 MPa vs COC = 115.714 MPa — DEVIATION 8.388% — Inspector ne galat value likhi hai!",
+          "closestCocValue": 115.714,
+          "closestDeviation": -0.714
+        }
+      },
+      {
+        "name": "As per COC - Resistivity",
+        "status": "WARNING",
+        "values": null,
+        "spec": "IQC must match COC value | Max: 0.019 Ω·mm²/m",
+        "details": "Resistivity not detected from IQC OCR",
+        "cocValues": [
+          "0.01724 Ω·mm²/m",
+          "0.0225 Ω·mm²/m"
+        ],
+        "cocRange": {
+          "label": "Resistivity",
+          "count": 2,
+          "values": [
+            0.01724,
+            0.0225
+          ],
+          "min": 0.01724,
+          "max": 0.0225,
+          "mean": 0.01987,
+          "stdDev": 0.00263,
+          "range": 0.00526
+        },
+        "cocMatchInfo": {
+          "parameter": "Resistivity",
+          "unit": "Ω·mm²/m",
+          "iqcValue": null,
+          "cocValues": [
+            0.01724,
+            0.0225
+          ],
+          "cocMean": null,
+          "deviation": null,
+          "deviationPct": null,
+          "status": "IQC_MISSING",
+          "details": "Resistivity not detected in IQC report"
+        }
+      }
+    ],
+    "aqlVerification": {
+      "name": "AQL Sampling Plan Verification",
+      "status": "PASS",
+      "lotSize": 9000,
+      "inspectionLevel": "S3",
+      "requiredSamplesS3": 8,
+      "requiredSamplesS4": 13,
+      "actualSamples": 11,
+      "details": "Lot: 9000 units. SIL S3 -> 8 samples, SIL S4 -> 13 samples. Found: 11 samples. — Meets S3 requirement."
+    },
+    "cocCrossCheck": [
+      {
+        "field": "Invoice Number",
+        "iqcValue": "Physical",
+        "cocValue": "JRIT20250630002",
+        "match": false,
+        "status": "MISMATCH",
+        "importance": "HIGH"
+      },
+      {
+        "field": "Customer Name",
+        "iqcValue": "Gautam Solar Pvt. Ltd.",
+        "cocValue": "GAUTAM SOLAR PRIVATE LIMITED",
+        "match": true,
+        "status": "MATCH",
+        "importance": "HIGH"
+      },
+      {
+        "field": "COC Test Judgments",
+        "iqcValue": "-",
+        "cocValue": "All OK (5 checks)",
+        "match": true,
+        "status": "PASS",
+        "importance": "CRITICAL"
+      },
+      {
+        "field": "Width — Value Comparison",
+        "iqcValue": "6.04 mm, 6.01 mm, 6.04 mm, 6 mm, 6.06 mm, 6.07 mm, 6.01 mm, 6 mm, 6 mm",
+        "cocValue": "6.002 mm, 6.015 mm, 6.017 mm, 6.005 mm",
+        "match": true,
+        "status": "MATCH",
+        "importance": "HIGH",
+        "deviation": "0.292%",
+        "pairDetails": [
+          {
+            "index": 1,
+            "iqcValue": 6.04,
+            "cocValue": 6.017,
+            "deviation": 0.023,
+            "absDeviation": 0.023,
+            "deviationPct": 0.382,
+            "status": "MATCH"
+          },
+          {
+            "index": 2,
+            "iqcValue": 6.01,
+            "cocValue": 6.015,
+            "deviation": -0.005,
+            "absDeviation": 0.005,
+            "deviationPct": 0.083,
+            "status": "MATCH"
+          },
+          {
+            "index": 3,
+            "iqcValue": 6.04,
+            "cocValue": 6.017,
+            "deviation": 0.023,
+            "absDeviation": 0.023,
+            "deviationPct": 0.382,
+            "status": "MATCH"
+          },
+          {
+            "index": 4,
+            "iqcValue": 6,
+            "cocValue": 6.002,
+            "deviation": -0.002,
+            "absDeviation": 0.002,
+            "deviationPct": 0.033,
+            "status": "MATCH"
+          },
+          {
+            "index": 5,
+            "iqcValue": 6.06,
+            "cocValue": 6.017,
+            "deviation": 0.043,
+            "absDeviation": 0.043,
+            "deviationPct": 0.715,
+            "status": "MATCH"
+          },
+          {
+            "index": 6,
+            "iqcValue": 6.07,
+            "cocValue": 6.017,
+            "deviation": 0.053,
+            "absDeviation": 0.053,
+            "deviationPct": 0.881,
+            "status": "DEVIATION"
+          },
+          {
+            "index": 7,
+            "iqcValue": 6.01,
+            "cocValue": 6.015,
+            "deviation": -0.005,
+            "absDeviation": 0.005,
+            "deviationPct": 0.083,
+            "status": "MATCH"
+          },
+          {
+            "index": 8,
+            "iqcValue": 6,
+            "cocValue": 6.002,
+            "deviation": -0.002,
+            "absDeviation": 0.002,
+            "deviationPct": 0.033,
+            "status": "MATCH"
+          },
+          {
+            "index": 9,
+            "iqcValue": 6,
+            "cocValue": 6.002,
+            "deviation": -0.002,
+            "absDeviation": 0.002,
+            "deviationPct": 0.033,
+            "status": "MATCH"
+          }
+        ]
+      },
+      {
+        "field": "Thickness — Value Comparison",
+        "iqcValue": "0.404 mm, 0.401 mm, 0.406 mm, 0.402 mm, 0.406 mm, 0.401 mm, 0.404 mm, 0.402 mm, 0.402 mm",
+        "cocValue": "0.35 mm, 0.403 mm, 0.405 mm, 0.453 mm, 0.402 mm, 0.404 mm, 0.353 mm, 0.353 mm, 0.354 mm",
+        "match": true,
+        "status": "MATCH",
+        "importance": "HIGH",
+        "deviation": "0.115%",
+        "pairDetails": [
+          {
+            "index": 1,
+            "iqcValue": 0.404,
+            "cocValue": 0.404,
+            "deviation": 0,
+            "absDeviation": 0,
+            "deviationPct": 0,
+            "status": "EXACT"
+          },
+          {
+            "index": 2,
+            "iqcValue": 0.401,
+            "cocValue": 0.402,
+            "deviation": -0.001,
+            "absDeviation": 0.001,
+            "deviationPct": 0.249,
+            "status": "MATCH"
+          },
+          {
+            "index": 3,
+            "iqcValue": 0.406,
+            "cocValue": 0.405,
+            "deviation": 0.001,
+            "absDeviation": 0.001,
+            "deviationPct": 0.247,
+            "status": "MATCH"
+          },
+          {
+            "index": 4,
+            "iqcValue": 0.402,
+            "cocValue": 0.402,
+            "deviation": 0,
+            "absDeviation": 0,
+            "deviationPct": 0,
+            "status": "EXACT"
+          },
+          {
+            "index": 5,
+            "iqcValue": 0.406,
+            "cocValue": 0.405,
+            "deviation": 0.001,
+            "absDeviation": 0.001,
+            "deviationPct": 0.247,
+            "status": "MATCH"
+          },
+          {
+            "index": 6,
+            "iqcValue": 0.401,
+            "cocValue": 0.402,
+            "deviation": -0.001,
+            "absDeviation": 0.001,
+            "deviationPct": 0.249,
+            "status": "MATCH"
+          },
+          {
+            "index": 7,
+            "iqcValue": 0.404,
+            "cocValue": 0.404,
+            "deviation": 0,
+            "absDeviation": 0,
+            "deviationPct": 0,
+            "status": "EXACT"
+          },
+          {
+            "index": 8,
+            "iqcValue": 0.402,
+            "cocValue": 0.402,
+            "deviation": 0,
+            "absDeviation": 0,
+            "deviationPct": 0,
+            "status": "EXACT"
+          },
+          {
+            "index": 9,
+            "iqcValue": 0.402,
+            "cocValue": 0.402,
+            "deviation": 0,
+            "absDeviation": 0,
+            "deviationPct": 0,
+            "status": "EXACT"
+          }
+        ]
+      },
+      {
+        "field": "Tensile Strength — MUST match COC",
+        "iqcValue": "221.88 MPa",
+        "cocValue": "145, 111, 115, 113 MPa",
+        "match": false,
+        "status": "MISMATCH",
+        "importance": "CRITICAL",
+        "deviation": "83.372%"
+      },
+      {
+        "field": "Yield Strength — MUST match COC",
+        "iqcValue": "115 MPa",
+        "cocValue": "145, 111.695, 115.714, 113.091, 45 MPa",
+        "match": false,
+        "status": "DEVIATION",
+        "importance": "CRITICAL",
+        "deviation": "8.388%"
+      },
+      {
+        "field": "Copper Purity (Cu%)",
+        "iqcValue": "As per COC",
+        "cocValue": "99.97, 99.97% (min: 99.97%)",
+        "match": true,
+        "status": "PASS",
+        "importance": "HIGH"
+      },
+      {
+        "field": "Weight — Value Comparison",
+        "iqcValue": "9.725 kg, 9.755 kg, 9.710 kg, 9.785 kg, 9.735 kg, 9.740 kg, 9.790 kg, 9.725 kg",
+        "cocValue": "9.728 kg, 9.703 kg, 9.754 kg, 9.716 kg, 9.735 kg",
+        "match": true,
+        "status": "MATCH",
+        "importance": "HIGH",
+        "deviation": "0.109%",
+        "pairDetails": [
+          {
+            "index": 1,
+            "iqcValue": 9.725,
+            "cocValue": 9.728,
+            "deviation": -0.003,
+            "absDeviation": 0.003,
+            "deviationPct": 0.031,
+            "status": "MATCH"
+          },
+          {
+            "index": 2,
+            "iqcValue": 9.755,
+            "cocValue": 9.754,
+            "deviation": 0.001,
+            "absDeviation": 0.001,
+            "deviationPct": 0.01,
+            "status": "MATCH"
+          },
+          {
+            "index": 3,
+            "iqcValue": 9.71,
+            "cocValue": 9.716,
+            "deviation": -0.006,
+            "absDeviation": 0.006,
+            "deviationPct": 0.062,
+            "status": "MATCH"
+          },
+          {
+            "index": 4,
+            "iqcValue": 9.785,
+            "cocValue": 9.754,
+            "deviation": 0.031,
+            "absDeviation": 0.031,
+            "deviationPct": 0.318,
+            "status": "MATCH"
+          },
+          {
+            "index": 5,
+            "iqcValue": 9.735,
+            "cocValue": 9.735,
+            "deviation": 0,
+            "absDeviation": 0,
+            "deviationPct": 0,
+            "status": "EXACT"
+          },
+          {
+            "index": 6,
+            "iqcValue": 9.74,
+            "cocValue": 9.735,
+            "deviation": 0.005,
+            "absDeviation": 0.005,
+            "deviationPct": 0.051,
+            "status": "MATCH"
+          },
+          {
+            "index": 7,
+            "iqcValue": 9.79,
+            "cocValue": 9.754,
+            "deviation": 0.036,
+            "absDeviation": 0.036,
+            "deviationPct": 0.369,
+            "status": "MATCH"
+          },
+          {
+            "index": 8,
+            "iqcValue": 9.725,
+            "cocValue": 9.728,
+            "deviation": -0.003,
+            "absDeviation": 0.003,
+            "deviationPct": 0.031,
+            "status": "MATCH"
+          }
+        ]
+      },
+      {
+        "field": "Supplier Name",
+        "iqcValue": "Taicang Juren international Trade Co. Usf.",
+        "cocValue": "TaiCang JuRen International Trade Co., LTD",
+        "match": false,
+        "status": "MISMATCH",
+        "importance": "HIGH"
+      }
+    ],
+    "valueComparisons": [
+      {
+        "parameter": "Width",
+        "unit": "mm",
+        "iqcValues": [
+          6.04,
+          6.01,
+          6.04,
+          6,
+          6.06,
+          6.07,
+          6.01,
+          6,
+          6
+        ],
+        "cocValues": [
+          6.002,
+          6.015,
+          6.017,
+          6.005
+        ],
+        "iqcCount": 9,
+        "cocCount": 4,
+        "pairComparisons": [
+          {
+            "index": 1,
+            "iqcValue": 6.04,
+            "cocValue": 6.017,
+            "deviation": 0.023,
+            "absDeviation": 0.023,
+            "deviationPct": 0.382,
+            "status": "MATCH"
+          },
+          {
+            "index": 2,
+            "iqcValue": 6.01,
+            "cocValue": 6.015,
+            "deviation": -0.005,
+            "absDeviation": 0.005,
+            "deviationPct": 0.083,
+            "status": "MATCH"
+          },
+          {
+            "index": 3,
+            "iqcValue": 6.04,
+            "cocValue": 6.017,
+            "deviation": 0.023,
+            "absDeviation": 0.023,
+            "deviationPct": 0.382,
+            "status": "MATCH"
+          },
+          {
+            "index": 4,
+            "iqcValue": 6,
+            "cocValue": 6.002,
+            "deviation": -0.002,
+            "absDeviation": 0.002,
+            "deviationPct": 0.033,
+            "status": "MATCH"
+          },
+          {
+            "index": 5,
+            "iqcValue": 6.06,
+            "cocValue": 6.017,
+            "deviation": 0.043,
+            "absDeviation": 0.043,
+            "deviationPct": 0.715,
+            "status": "MATCH"
+          },
+          {
+            "index": 6,
+            "iqcValue": 6.07,
+            "cocValue": 6.017,
+            "deviation": 0.053,
+            "absDeviation": 0.053,
+            "deviationPct": 0.881,
+            "status": "DEVIATION"
+          },
+          {
+            "index": 7,
+            "iqcValue": 6.01,
+            "cocValue": 6.015,
+            "deviation": -0.005,
+            "absDeviation": 0.005,
+            "deviationPct": 0.083,
+            "status": "MATCH"
+          },
+          {
+            "index": 8,
+            "iqcValue": 6,
+            "cocValue": 6.002,
+            "deviation": -0.002,
+            "absDeviation": 0.002,
+            "deviationPct": 0.033,
+            "status": "MATCH"
+          },
+          {
+            "index": 9,
+            "iqcValue": 6,
+            "cocValue": 6.002,
+            "deviation": -0.002,
+            "absDeviation": 0.002,
+            "deviationPct": 0.033,
+            "status": "MATCH"
+          }
+        ],
+        "overallMatch": true,
+        "avgDeviation": 0.017556,
+        "maxDeviation": 0.053,
+        "avgDeviationPct": 0.292,
+        "iqcMean": 6.025556,
+        "cocMean": 6.00975,
+        "summary": "9 IQC values vs 4 COC values | IQC avg: 6.025556 mm, COC avg: 6.00975 mm | Avg deviation: 0.017556 mm (0.292%) | 8 match, 1 deviation, 0 mismatch"
+      },
+      {
+        "parameter": "Thickness",
+        "unit": "mm",
+        "iqcValues": [
+          0.404,
+          0.401,
+          0.406,
+          0.402,
+          0.406,
+          0.401,
+          0.404,
+          0.402,
+          0.402
+        ],
+        "cocValues": [
+          0.35,
+          0.403,
+          0.405,
+          0.453,
+          0.402,
+          0.404,
+          0.353,
+          0.353,
+          0.354
+        ],
+        "iqcCount": 9,
+        "cocCount": 9,
+        "pairComparisons": [
+          {
+            "index": 1,
+            "iqcValue": 0.404,
+            "cocValue": 0.404,
+            "deviation": 0,
+            "absDeviation": 0,
+            "deviationPct": 0,
+            "status": "EXACT"
+          },
+          {
+            "index": 2,
+            "iqcValue": 0.401,
+            "cocValue": 0.402,
+            "deviation": -0.001,
+            "absDeviation": 0.001,
+            "deviationPct": 0.249,
+            "status": "MATCH"
+          },
+          {
+            "index": 3,
+            "iqcValue": 0.406,
+            "cocValue": 0.405,
+            "deviation": 0.001,
+            "absDeviation": 0.001,
+            "deviationPct": 0.247,
+            "status": "MATCH"
+          },
+          {
+            "index": 4,
+            "iqcValue": 0.402,
+            "cocValue": 0.402,
+            "deviation": 0,
+            "absDeviation": 0,
+            "deviationPct": 0,
+            "status": "EXACT"
+          },
+          {
+            "index": 5,
+            "iqcValue": 0.406,
+            "cocValue": 0.405,
+            "deviation": 0.001,
+            "absDeviation": 0.001,
+            "deviationPct": 0.247,
+            "status": "MATCH"
+          },
+          {
+            "index": 6,
+            "iqcValue": 0.401,
+            "cocValue": 0.402,
+            "deviation": -0.001,
+            "absDeviation": 0.001,
+            "deviationPct": 0.249,
+            "status": "MATCH"
+          },
+          {
+            "index": 7,
+            "iqcValue": 0.404,
+            "cocValue": 0.404,
+            "deviation": 0,
+            "absDeviation": 0,
+            "deviationPct": 0,
+            "status": "EXACT"
+          },
+          {
+            "index": 8,
+            "iqcValue": 0.402,
+            "cocValue": 0.402,
+            "deviation": 0,
+            "absDeviation": 0,
+            "deviationPct": 0,
+            "status": "EXACT"
+          },
+          {
+            "index": 9,
+            "iqcValue": 0.402,
+            "cocValue": 0.402,
+            "deviation": 0,
+            "absDeviation": 0,
+            "deviationPct": 0,
+            "status": "EXACT"
+          }
+        ],
+        "overallMatch": true,
+        "avgDeviation": 0.000444,
+        "maxDeviation": 0.001,
+        "avgDeviationPct": 0.115,
+        "iqcMean": 0.403111,
+        "cocMean": 0.386333,
+        "summary": "9 IQC values vs 9 COC values | IQC avg: 0.403111 mm, COC avg: 0.386333 mm | Avg deviation: 0.000444 mm (0.115%) | 9 match, 0 deviation, 0 mismatch"
+      },
+      {
+        "parameter": "Weight",
+        "unit": "kg",
+        "iqcValues": [
+          9.725,
+          9.755,
+          9.71,
+          9.785,
+          9.735,
+          9.74,
+          9.79,
+          9.725
+        ],
+        "cocValues": [
+          9.728,
+          9.703,
+          9.754,
+          9.716,
+          9.735
+        ],
+        "iqcCount": 8,
+        "cocCount": 5,
+        "pairComparisons": [
+          {
+            "index": 1,
+            "iqcValue": 9.725,
+            "cocValue": 9.728,
+            "deviation": -0.003,
+            "absDeviation": 0.003,
+            "deviationPct": 0.031,
+            "status": "MATCH"
+          },
+          {
+            "index": 2,
+            "iqcValue": 9.755,
+            "cocValue": 9.754,
+            "deviation": 0.001,
+            "absDeviation": 0.001,
+            "deviationPct": 0.01,
+            "status": "MATCH"
+          },
+          {
+            "index": 3,
+            "iqcValue": 9.71,
+            "cocValue": 9.716,
+            "deviation": -0.006,
+            "absDeviation": 0.006,
+            "deviationPct": 0.062,
+            "status": "MATCH"
+          },
+          {
+            "index": 4,
+            "iqcValue": 9.785,
+            "cocValue": 9.754,
+            "deviation": 0.031,
+            "absDeviation": 0.031,
+            "deviationPct": 0.318,
+            "status": "MATCH"
+          },
+          {
+            "index": 5,
+            "iqcValue": 9.735,
+            "cocValue": 9.735,
+            "deviation": 0,
+            "absDeviation": 0,
+            "deviationPct": 0,
+            "status": "EXACT"
+          },
+          {
+            "index": 6,
+            "iqcValue": 9.74,
+            "cocValue": 9.735,
+            "deviation": 0.005,
+            "absDeviation": 0.005,
+            "deviationPct": 0.051,
+            "status": "MATCH"
+          },
+          {
+            "index": 7,
+            "iqcValue": 9.79,
+            "cocValue": 9.754,
+            "deviation": 0.036,
+            "absDeviation": 0.036,
+            "deviationPct": 0.369,
+            "status": "MATCH"
+          },
+          {
+            "index": 8,
+            "iqcValue": 9.725,
+            "cocValue": 9.728,
+            "deviation": -0.003,
+            "absDeviation": 0.003,
+            "deviationPct": 0.031,
+            "status": "MATCH"
+          }
+        ],
+        "overallMatch": true,
+        "avgDeviation": 0.010625,
+        "maxDeviation": 0.036,
+        "avgDeviationPct": 0.109,
+        "iqcMean": 9.745625,
+        "cocMean": 9.7272,
+        "summary": "8 IQC values vs 5 COC values | IQC avg: 9.745625 kg, COC avg: 9.7272 kg | Avg deviation: 0.010625 kg (0.109%) | 8 match, 0 deviation, 0 mismatch"
+      },
+      {
+        "parameter": "Tensile Strength",
+        "unit": "MPa",
+        "iqcValue": 221.88,
+        "cocValues": [
+          145,
+          111,
+          115,
+          113
+        ],
+        "cocMean": 121,
+        "deviation": 100.88,
+        "deviationPct": 83.372,
+        "status": "MISMATCH",
+        "details": "Tensile Strength: IQC = 221.88 MPa vs COC = 145 MPa — MISMATCH 83.372% — Value does NOT match COC!",
+        "closestCocValue": 145,
+        "closestDeviation": 76.88
+      },
+      {
+        "parameter": "Yield Strength",
+        "unit": "MPa",
+        "iqcValue": 115,
+        "cocValues": [
+          145,
+          111.695,
+          115.714,
+          113.091,
+          45
+        ],
+        "cocMean": 106.1,
+        "deviation": 8.9,
+        "deviationPct": 8.388,
+        "status": "DEVIATION",
+        "details": "Yield Strength: IQC = 115 MPa vs COC = 115.714 MPa — DEVIATION 8.388% — Inspector ne galat value likhi hai!",
+        "closestCocValue": 115.714,
+        "closestDeviation": -0.714
+      },
+      {
+        "parameter": "Resistivity",
+        "unit": "Ω·mm²/m",
+        "iqcValue": null,
+        "cocValues": [
+          0.01724,
+          0.0225
+        ],
+        "cocMean": null,
+        "deviation": null,
+        "deviationPct": null,
+        "status": "IQC_MISSING",
+        "details": "Resistivity not detected in IQC report"
+      }
+    ],
+    "fraudDetection": {
+      "overallScore": 9,
+      "overallVerdict": "SUSPICIOUS",
+      "inspectorTested": true,
+      "confidence": "HIGH",
+      "totalFlags": 5,
+      "criticalFlags": 0,
+      "highFlags": 1,
+      "mediumFlags": 1,
+      "lowFlags": 3,
+      "parameterResults": [
+        {
+          "parameter": "Width",
+          "score": 4,
+          "verdict": "GENUINE",
+          "flagCount": 1,
+          "flags": [
+            {
+              "id": "ALL_COMFORTABLE_SPEC",
+              "severity": "LOW",
+              "message": "All 9 values are well within spec (not even close to limits). Unusual for large sample sizes."
+            }
+          ],
+          "stats": {
+            "mean": 6.025556,
+            "stdDev": 0.025868,
+            "cv": 0.4293,
+            "min": 6,
+            "max": 6.07,
+            "range": 0.07
+          },
+          "cocComparison": {
+            "exactMatches": 0,
+            "closeMatches": 5,
+            "totalIQC": 9,
+            "totalCOC": 4,
+            "exactCopyRatio": 0,
+            "closeCopyRatio": 0.556
+          }
+        },
+        {
+          "parameter": "Thickness",
+          "score": 26,
+          "verdict": "GENUINE",
+          "flagCount": 3,
+          "flags": [
+            {
+              "id": "LOW_VARIETY_MILD",
+              "severity": "MEDIUM",
+              "message": "Only 4 unique values among 9 samples."
+            },
+            {
+              "id": "COC_CLOSE_COPY",
+              "severity": "HIGH",
+              "message": "9 of 9 values are nearly identical to COC (within 0.005). Suspicious similarity."
+            },
+            {
+              "id": "ALL_COMFORTABLE_SPEC",
+              "severity": "LOW",
+              "message": "All 9 values are well within spec (not even close to limits). Unusual for large sample sizes."
+            }
+          ],
+          "stats": {
+            "mean": 0.403111,
+            "stdDev": 0.001853,
+            "cv": 0.4596,
+            "min": 0.401,
+            "max": 0.406,
+            "range": 0.005
+          },
+          "cocComparison": {
+            "exactMatches": 0,
+            "closeMatches": 9,
+            "totalIQC": 9,
+            "totalCOC": 9,
+            "exactCopyRatio": 0,
+            "closeCopyRatio": 1
+          }
+        },
+        {
+          "parameter": "Coating Thickness",
+          "score": 0,
+          "verdict": "GENUINE",
+          "flagCount": 0,
+          "flags": [],
+          "stats": {
+            "mean": 26.681818,
+            "stdDev": 2.070932,
+            "cv": 7.7616,
+            "min": 23.4,
+            "max": 29.4,
+            "range": 6
+          },
+          "cocComparison": null
+        },
+        {
+          "parameter": "Weight",
+          "score": 5,
+          "verdict": "GENUINE",
+          "flagCount": 1,
+          "flags": [
+            {
+              "id": "MILD_DIGIT_PREFERENCE",
+              "severity": "LOW",
+              "message": "Slight digit preference: 63% end in same digit."
+            }
+          ],
+          "stats": {
+            "mean": 9.745625,
+            "stdDev": 0.027092,
+            "cv": 0.278,
+            "min": 9.71,
+            "max": 9.79,
+            "range": 0.08
+          },
+          "cocComparison": {
+            "exactMatches": 1,
+            "closeMatches": 3,
+            "totalIQC": 8,
+            "totalCOC": 5,
+            "exactCopyRatio": 0.125,
+            "closeCopyRatio": 0.5
+          }
+        }
+      ],
+      "summary": "MINOR CONCERNS - Some patterns are slightly unusual. Authenticity score: 91/100.",
+      "recommendations": [
+        "Have supervisor re-verify 2-3 random measurements",
+        "Check if measurement instruments were calibrated recently",
+        "Compare with this inspector other reports for pattern consistency",
+        "Request re-testing of borderline parameters"
+      ]
+    },
+    "cocDataSummary": {
+      "widthSpec": null,
+      "thicknessSpec": null,
+      "derivedRanges": {
+        "width": {
+          "label": "Width",
+          "count": 4,
+          "values": [
+            6.002,
+            6.015,
+            6.017,
+            6.005
+          ],
+          "min": 6.002,
+          "max": 6.017,
+          "mean": 6.00975,
+          "stdDev": 0.006379,
+          "range": 0.015
+        },
+        "thickness": {
+          "label": "Thickness",
+          "count": 9,
+          "values": [
+            0.35,
+            0.403,
+            0.405,
+            0.453,
+            0.402,
+            0.404,
+            0.353,
+            0.353,
+            0.354
+          ],
+          "min": 0.35,
+          "max": 0.453,
+          "mean": 0.386333,
+          "stdDev": 0.033691,
+          "range": 0.103
+        },
+        "tensileStrength": {
+          "label": "Tensile Strength",
+          "count": 4,
+          "values": [
+            145,
+            111,
+            115,
+            113
+          ],
+          "min": 111,
+          "max": 145,
+          "mean": 121,
+          "stdDev": 13.928388,
+          "range": 34
+        },
+        "yieldStrength": {
+          "label": "Yield Strength",
+          "count": 5,
+          "values": [
+            145,
+            111.695,
+            115.714,
+            113.091,
+            45
+          ],
+          "min": 45,
+          "max": 145,
+          "mean": 106.1,
+          "stdDev": 32.9212,
+          "range": 100
+        },
+        "elongation": null,
+        "resistivity": {
+          "label": "Resistivity",
+          "count": 2,
+          "values": [
+            0.01724,
+            0.0225
+          ],
+          "min": 0.01724,
+          "max": 0.0225,
+          "mean": 0.01987,
+          "stdDev": 0.00263,
+          "range": 0.00526
+        },
+        "copperPurity": {
+          "label": "Copper Purity",
+          "count": 2,
+          "values": [
+            99.97,
+            99.97
+          ],
+          "min": 99.97,
+          "max": 99.97,
+          "mean": 99.97,
+          "stdDev": 0,
+          "range": 0
+        },
+        "tinContent": null,
+        "weight": {
+          "label": "Weight",
+          "count": 5,
+          "values": [
+            9.728,
+            9.703,
+            9.754,
+            9.716,
+            9.735
+          ],
+          "min": 9.703,
+          "max": 9.754,
+          "mean": 9.7272,
+          "stdDev": 0.017267,
+          "range": 0.051
+        }
+      },
+      "totalWeight": "",
+      "certificateNo": "GAUTAM",
+      "allJudgmentsOK": true
+    },
+    "summary": {
+      "totalChecks": 11,
+      "passed": 7,
+      "failed": 2,
+      "warnings": 2,
+      "cocMismatches": 3,
+      "cocDeviations": 1,
+      "cocChecksTotal": 10,
+      "fraudScore": 9,
+      "inspectorTested": true
+    },
+    "overallResult": "FAIL",
+    "overallMessage": "IQC Report FAILED — 2 check(s) failed out of 11. 3 IQC value(s) DO NOT MATCH COC. MINOR CONCERNS - Some patterns are slightly unusual. Authenticity score: 91/100. | 1 COC deviation(s) need review",
+    "timestamp": "2026-03-02T06:32:14.326Z"
+  },
+  "iqcOcrChars": 3601,
+  "cocOcrChars": 2097,
+  "iqcPages": [
+    {
+      "page": 1,
+      "chars": 1834,
+      "tables": 2
+    },
+    {
+      "page": 2,
+      "chars": 1723,
+      "tables": 2
+    }
+  ],
+  "cocPages": [
+    {
+      "page": 1,
+      "chars": 2075,
+      "tables": 3
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "pages": [
+    {
+      "rawText": "",
+      "serialNumbers": [],
+      "pageNumber": 1,
+      "error": "Request failed with status code 502"
+    },
+    {
+      "rawText": "",
+      "serialNumbers": [],
+      "pageNumber": 2,
+      "error": "Request failed with status code 502"
+    },
+    {
+      "rawText": "",
+      "serialNumbers": [],
+      "pageNumber": 3,
+      "error": "Request failed with status code 502"
+    },
+    {
+      "rawText": "",
+      "serialNumbers": [],
+      "pageNumber": 4,
+      "error": "Request failed with status code 502"
+    },
+    {
+      "rawText": "",
+      "serialNumbers": [],
+      "pageNumber": 5,
+      "error": "Request failed with status code 502"
+    },
+    {
+      "rawText": "",
+      "serialNumbers": [],
+      "pageNumber": 6,
+      "error": "Request failed with status code 502"
+    },
+    {
+      "rawText": "",
+      "serialNumbers": [],
+      "pageNumber": 7,
+      "error": "Request failed with status code 502"
+    }
+  ]
+}

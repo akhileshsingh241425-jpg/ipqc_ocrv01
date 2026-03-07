@@ -1,0 +1,904 @@
+{
+  "materialType": "busbar",
+  "iqcData": {
+    "documentNo": "GSPL/PVR(IQC)/002",
+    "issueDate": "01-12-2024",
+    "revNo": "",
+    "materialName": "Bus Bar",
+    "supplierName": "Taicang Juren international Trade Co. Usf.",
+    "quantity": "",
+    "quantityNum": 0,
+    "quantityUnit": "",
+    "invoiceNo": "Physical",
+    "receiptDate": "02/08/2025",
+    "rmDetails": "",
+    "lotNo": "",
+    "sampleCount": 13,
+    "aqlInfo": "SIL S3 AQL 1.5 / SIL S3 AQL 4.0 / SIL S3 AQL 4.0 / SIL S3 AQL 1.5 / SIL S3 AQL 4.0 / SIL S3 AQL 4.0",
+    "checkedBy": "Declare/Amit",
+    "approvedBy": "",
+    "inspectionDate": "",
+    "width": [
+      6.04,
+      6.01,
+      6.04,
+      6,
+      6.06,
+      6.07,
+      6.01,
+      6,
+      6
+    ],
+    "thickness": [
+      0.404,
+      0.401,
+      0.406,
+      0.402,
+      0.406,
+      0.401,
+      0.404,
+      0.402,
+      0.402
+    ],
+    "coatingThickness": [
+      28.9,
+      25.4,
+      28.4,
+      24.8,
+      26,
+      25.6,
+      29.4,
+      28.6,
+      23.4,
+      24.2,
+      28.8
+    ],
+    "solderabilityBusBar": 24,
+    "solderabilityRibbon": 24,
+    "weight": [
+      9.725,
+      9.755,
+      9.71,
+      9.785,
+      9.735,
+      9.74,
+      9.79,
+      9.725
+    ],
+    "tensileStrength": 221.88,
+    "yieldStrength": 115,
+    "resistivity": null,
+    "packagingResult": "condition is ok.",
+    "expiryInfo": "Expiry Date\nVisual\n100%\nPacking Box / COC\nDate of expiry should be min. 6 months from the date of re",
+    "mfgDate": "28/06/2025",
+    "rmSpecification": "",
+    "rmSpecWidth": null,
+    "rmSpecThickness": null
+  },
+  "cocData": {
+    "certificateNo": "GAUTAM",
+    "customerName": "GAUTAM SOLAR PRIVATE LIMITED",
+    "productName": "Bus Bar",
+    "productSpec": "",
+    "invoiceNo": "JRIT20250630002",
+    "deliveryDate": "2025.07.01",
+    "productionDate": "-",
+    "totalWeight": "",
+    "totalWeightNum": 0,
+    "supplierName": "TaiCang JuRen International Trade Co., LTD",
+    "widthSpec": null,
+    "thicknessSpec": null,
+    "width": [
+      6.002,
+      6.015,
+      6.017,
+      6.005
+    ],
+    "thickness": [
+      0.35,
+      0.403,
+      0.405,
+      0.453,
+      0.402,
+      0.404,
+      0.353,
+      0.353,
+      0.354
+    ],
+    "tinContent": [],
+    "copperPurity": [
+      99.97,
+      99.97
+    ],
+    "tensileStrength": [
+      145,
+      111,
+      115,
+      113
+    ],
+    "yieldStrength": [
+      145,
+      111.695,
+      115.714,
+      113.091,
+      45
+    ],
+    "elongation": [],
+    "resistivity": [
+      0.01724,
+      0.0225
+    ],
+    "weight": [
+      9.728,
+      9.703,
+      9.754,
+      9.716,
+      9.735
+    ],
+    "solderability": "OK",
+    "derivedRanges": {
+      "width": {
+        "label": "Width",
+        "count": 4,
+        "values": [
+          6.002,
+          6.015,
+          6.017,
+          6.005
+        ],
+        "min": 6.002,
+        "max": 6.017,
+        "mean": 6.00975,
+        "stdDev": 0.006379,
+        "range": 0.015
+      },
+      "thickness": {
+        "label": "Thickness",
+        "count": 9,
+        "values": [
+          0.35,
+          0.403,
+          0.405,
+          0.453,
+          0.402,
+          0.404,
+          0.353,
+          0.353,
+          0.354
+        ],
+        "min": 0.35,
+        "max": 0.453,
+        "mean": 0.386333,
+        "stdDev": 0.033691,
+        "range": 0.103
+      },
+      "tensileStrength": {
+        "label": "Tensile Strength",
+        "count": 4,
+        "values": [
+          145,
+          111,
+          115,
+          113
+        ],
+        "min": 111,
+        "max": 145,
+        "mean": 121,
+        "stdDev": 13.928388,
+        "range": 34
+      },
+      "yieldStrength": {
+        "label": "Yield Strength",
+        "count": 5,
+        "values": [
+          145,
+          111.695,
+          115.714,
+          113.091,
+          45
+        ],
+        "min": 45,
+        "max": 145,
+        "mean": 106.1,
+        "stdDev": 32.9212,
+        "range": 100
+      },
+      "elongation": null,
+      "resistivity": {
+        "label": "Resistivity",
+        "count": 2,
+        "values": [
+          0.01724,
+          0.0225
+        ],
+        "min": 0.01724,
+        "max": 0.0225,
+        "mean": 0.01987,
+        "stdDev": 0.00263,
+        "range": 0.00526
+      },
+      "copperPurity": {
+        "label": "Copper Purity",
+        "count": 2,
+        "values": [
+          99.97,
+          99.97
+        ],
+        "min": 99.97,
+        "max": 99.97,
+        "mean": 99.97,
+        "stdDev": 0,
+        "range": 0
+      },
+      "tinContent": null,
+      "weight": {
+        "label": "Weight",
+        "count": 5,
+        "values": [
+          9.728,
+          9.703,
+          9.754,
+          9.716,
+          9.735
+        ],
+        "min": 9.703,
+        "max": 9.754,
+        "mean": 9.7272,
+        "stdDev": 0.017267,
+        "range": 0.051
+      }
+    },
+    "allJudgmentsOK": true,
+    "judgmentDetails": [
+      "OK",
+      "OK",
+      "OK",
+      "OK",
+      "OK"
+    ]
+  },
+  "verification": {
+    "materialType": "busbar",
+    "materialName": "Bus Bar",
+    "checks": [
+      {
+        "name": "Visual - Packaging (Make, Type)",
+        "status": "PASS",
+        "values": null,
+        "spec": "No Physical Damage, No Mismatch against PO/Invoice",
+        "details": "condition is ok.",
+        "cocValues": null,
+        "cocRange": null
+      },
+      {
+        "name": "Visual - Expiry Date",
+        "status": "WARNING",
+        "values": null,
+        "spec": "Expiry should be min. 6 months from receiving",
+        "details": "Expiry Date\nVisual\n100%\nPacking Box / COC\nDate of expiry should be min. 6 months from the date of re - Material is 8 months old",
+        "cocValues": null,
+        "cocRange": null
+      },
+      {
+        "name": "Physical - Width",
+        "status": "PASS",
+        "values": [
+          "6.04 mm",
+          "6.01 mm",
+          "6.04 mm",
+          "6 mm",
+          "6.06 mm",
+          "6.07 mm",
+          "6.01 mm",
+          "6 mm",
+          "6 mm"
+        ],
+        "spec": "6 ±0.10 mm",
+        "details": "9 samples measured. All within 5.9-6.1 mm. Spec source: GSPL Hardcoded",
+        "cocValues": [
+          "6.002 mm",
+          "6.015 mm",
+          "6.017 mm",
+          "6.005 mm"
+        ],
+        "cocRange": {
+          "label": "Width",
+          "count": 4,
+          "values": [
+            6.002,
+            6.015,
+            6.017,
+            6.005
+          ],
+          "min": 6.002,
+          "max": 6.017,
+          "mean": 6.00975,
+          "stdDev": 0.006379,
+          "range": 0.015
+        }
+      },
+      {
+        "name": "Physical - Thickness",
+        "status": "PASS",
+        "values": [
+          "0.404 mm",
+          "0.401 mm",
+          "0.406 mm",
+          "0.402 mm",
+          "0.406 mm",
+          "0.401 mm",
+          "0.404 mm",
+          "0.402 mm",
+          "0.402 mm"
+        ],
+        "spec": "0.4 -0.01/+0.01 mm",
+        "details": "9 samples measured. All within 0.39-0.41 mm. Spec source: GSPL Hardcoded",
+        "cocValues": [
+          "0.35 mm",
+          "0.403 mm",
+          "0.405 mm",
+          "0.453 mm",
+          "0.402 mm",
+          "0.404 mm",
+          "0.353 mm",
+          "0.353 mm",
+          "0.354 mm"
+        ],
+        "cocRange": {
+          "label": "Thickness",
+          "count": 9,
+          "values": [
+            0.35,
+            0.403,
+            0.405,
+            0.453,
+            0.402,
+            0.404,
+            0.353,
+            0.353,
+            0.354
+          ],
+          "min": 0.35,
+          "max": 0.453,
+          "mean": 0.386333,
+          "stdDev": 0.033691,
+          "range": 0.103
+        }
+      },
+      {
+        "name": "Verification - Coating Thickness",
+        "status": "PASS",
+        "values": [
+          "28.9 um/side",
+          "25.4 um/side",
+          "28.4 um/side",
+          "24.8 um/side",
+          "26 um/side",
+          "25.6 um/side",
+          "29.4 um/side",
+          "28.6 um/side",
+          "23.4 um/side",
+          "24.2 um/side",
+          "28.8 um/side"
+        ],
+        "spec": "25 +-5 um/side (20-30)",
+        "details": "11 samples. All within 20-30 um/side",
+        "cocValues": null,
+        "cocRange": null
+      },
+      {
+        "name": "Solderability - B/w Bus Bar",
+        "status": "PASS",
+        "values": [
+          "24 N"
+        ],
+        "spec": ">= 24 N",
+        "details": "24 N >= 24 N - OK",
+        "cocValues": null,
+        "cocRange": null
+      },
+      {
+        "name": "Solderability - B/w Ribbon & Interconnector",
+        "status": "PASS",
+        "values": [
+          "24 N"
+        ],
+        "spec": ">= 4 N",
+        "details": "24 N >= 4 N - OK",
+        "cocValues": null,
+        "cocRange": null
+      },
+      {
+        "name": "Measurement - Weight",
+        "status": "PASS",
+        "values": [
+          "9.725 kg",
+          "9.755 kg",
+          "9.710 kg",
+          "9.785 kg",
+          "9.735 kg",
+          "9.740 kg",
+          "9.790 kg",
+          "9.725 kg"
+        ],
+        "spec": "As per COC / GSPL TS",
+        "details": "8 samples weighed. Mean: 9.746 kg, Range: 9.710-9.790 kg. Matches COC (avg: 9.727 kg, dev: 0.2%)",
+        "cocValues": [
+          "9.728 kg",
+          "9.703 kg",
+          "9.754 kg",
+          "9.716 kg",
+          "9.735 kg"
+        ],
+        "cocRange": {
+          "label": "Weight",
+          "count": 5,
+          "values": [
+            9.728,
+            9.703,
+            9.754,
+            9.716,
+            9.735
+          ],
+          "min": 9.703,
+          "max": 9.754,
+          "mean": 9.7272,
+          "stdDev": 0.017267,
+          "range": 0.051
+        }
+      },
+      {
+        "name": "Verification - Tensile Strength",
+        "status": "WARNING",
+        "values": [
+          "221.88 MPa"
+        ],
+        "spec": ">= 100 MPa",
+        "details": "221.88 MPa >= 100 MPa - OK. COC avg: 121.0 MPa - HIGH DEVIATION 83.4%. Source: COC Test Data + GSPL Min",
+        "cocValues": [
+          "145.0 MPa",
+          "111.0 MPa",
+          "115.0 MPa",
+          "113.0 MPa"
+        ],
+        "cocRange": {
+          "label": "Tensile Strength",
+          "count": 4,
+          "values": [
+            145,
+            111,
+            115,
+            113
+          ],
+          "min": 111,
+          "max": 145,
+          "mean": 121,
+          "stdDev": 13.928388,
+          "range": 34
+        }
+      },
+      {
+        "name": "Verification - Yield Strength",
+        "status": "PASS",
+        "values": [
+          "115 MPa"
+        ],
+        "spec": ">= 60 MPa",
+        "details": "115 MPa >= 60 MPa - OK. COC avg: 106.1 MPa",
+        "cocValues": [
+          "145.0 MPa",
+          "111.7 MPa",
+          "115.7 MPa",
+          "113.1 MPa",
+          "45.0 MPa"
+        ],
+        "cocRange": {
+          "label": "Yield Strength",
+          "count": 5,
+          "values": [
+            145,
+            111.695,
+            115.714,
+            113.091,
+            45
+          ],
+          "min": 45,
+          "max": 145,
+          "mean": 106.1,
+          "stdDev": 32.9212,
+          "range": 100
+        }
+      },
+      {
+        "name": "Verification - Resistivity",
+        "status": "WARNING",
+        "values": null,
+        "spec": "<= 0.019 ohm.mm2/m",
+        "details": "Resistivity not detected from OCR. Source: COC Test Data + GSPL Max",
+        "cocValues": [
+          "0.01724 ohm.mm2/m",
+          "0.0225 ohm.mm2/m"
+        ],
+        "cocRange": {
+          "label": "Resistivity",
+          "count": 2,
+          "values": [
+            0.01724,
+            0.0225
+          ],
+          "min": 0.01724,
+          "max": 0.0225,
+          "mean": 0.01987,
+          "stdDev": 0.00263,
+          "range": 0.00526
+        }
+      }
+    ],
+    "aqlVerification": {
+      "name": "AQL Sampling Plan Verification",
+      "status": "PASS",
+      "lotSize": 9000,
+      "inspectionLevel": "S3",
+      "requiredSamplesS3": 8,
+      "requiredSamplesS4": 13,
+      "actualSamples": 11,
+      "details": "Lot: 9000 units. SIL S3 -> 8 samples, SIL S4 -> 13 samples. Found: 11 samples. - Meets S3 requirement."
+    },
+    "cocCrossCheck": [
+      {
+        "field": "Invoice Number",
+        "iqcValue": "Physical",
+        "cocValue": "JRIT20250630002",
+        "match": false,
+        "status": "MISMATCH",
+        "importance": "HIGH"
+      },
+      {
+        "field": "Customer Name",
+        "iqcValue": "Gautam Solar Pvt. Ltd.",
+        "cocValue": "GAUTAM SOLAR PRIVATE LIMITED",
+        "match": true,
+        "status": "MATCH",
+        "importance": "HIGH"
+      },
+      {
+        "field": "COC Test Judgments",
+        "iqcValue": "-",
+        "cocValue": "All OK (5 checks)",
+        "match": true,
+        "status": "PASS",
+        "importance": "CRITICAL"
+      },
+      {
+        "field": "Width - IQC vs COC",
+        "iqcValue": "Avg: 6.026 mm (9 samples)",
+        "cocValue": "Avg: 6.010 mm (4 samples)",
+        "match": true,
+        "status": "MATCH",
+        "importance": "MEDIUM",
+        "deviation": "0.26%"
+      },
+      {
+        "field": "Thickness - IQC vs COC",
+        "iqcValue": "Avg: 0.4031 mm (9 samples)",
+        "cocValue": "Avg: 0.3863 mm (9 samples)",
+        "match": false,
+        "status": "DEVIATION",
+        "importance": "MEDIUM",
+        "deviation": "4.34%"
+      },
+      {
+        "field": "Tensile Strength - IQC vs COC",
+        "iqcValue": "221.88 MPa",
+        "cocValue": "121.0 MPa (avg)",
+        "match": false,
+        "status": "MISMATCH",
+        "importance": "MEDIUM",
+        "deviation": "83.37%"
+      },
+      {
+        "field": "Copper Purity (Cu%)",
+        "iqcValue": "As per COC",
+        "cocValue": "99.97, 99.97% (min: 99.97%)",
+        "match": true,
+        "status": "PASS",
+        "importance": "HIGH"
+      },
+      {
+        "field": "Supplier Name",
+        "iqcValue": "Taicang Juren international Trade Co. Usf.",
+        "cocValue": "TaiCang JuRen International Trade Co., LTD",
+        "match": false,
+        "status": "MISMATCH",
+        "importance": "HIGH"
+      }
+    ],
+    "fraudDetection": {
+      "overallScore": 9,
+      "overallVerdict": "SUSPICIOUS",
+      "inspectorTested": true,
+      "confidence": "HIGH",
+      "totalFlags": 5,
+      "criticalFlags": 0,
+      "highFlags": 1,
+      "mediumFlags": 1,
+      "lowFlags": 3,
+      "parameterResults": [
+        {
+          "parameter": "Width",
+          "score": 4,
+          "verdict": "GENUINE",
+          "flagCount": 1,
+          "flags": [
+            {
+              "id": "ALL_COMFORTABLE_SPEC",
+              "severity": "LOW",
+              "message": "All 9 values are well within spec (not even close to limits). Unusual for large sample sizes."
+            }
+          ],
+          "stats": {
+            "mean": 6.025556,
+            "stdDev": 0.025868,
+            "cv": 0.4293,
+            "min": 6,
+            "max": 6.07,
+            "range": 0.07
+          },
+          "cocComparison": {
+            "exactMatches": 0,
+            "closeMatches": 5,
+            "totalIQC": 9,
+            "totalCOC": 4,
+            "exactCopyRatio": 0,
+            "closeCopyRatio": 0.556
+          }
+        },
+        {
+          "parameter": "Thickness",
+          "score": 26,
+          "verdict": "GENUINE",
+          "flagCount": 3,
+          "flags": [
+            {
+              "id": "LOW_VARIETY_MILD",
+              "severity": "MEDIUM",
+              "message": "Only 4 unique values among 9 samples."
+            },
+            {
+              "id": "COC_CLOSE_COPY",
+              "severity": "HIGH",
+              "message": "9 of 9 values are nearly identical to COC (within 0.005). Suspicious similarity."
+            },
+            {
+              "id": "ALL_COMFORTABLE_SPEC",
+              "severity": "LOW",
+              "message": "All 9 values are well within spec (not even close to limits). Unusual for large sample sizes."
+            }
+          ],
+          "stats": {
+            "mean": 0.403111,
+            "stdDev": 0.001853,
+            "cv": 0.4596,
+            "min": 0.401,
+            "max": 0.406,
+            "range": 0.005
+          },
+          "cocComparison": {
+            "exactMatches": 0,
+            "closeMatches": 9,
+            "totalIQC": 9,
+            "totalCOC": 9,
+            "exactCopyRatio": 0,
+            "closeCopyRatio": 1
+          }
+        },
+        {
+          "parameter": "Coating Thickness",
+          "score": 0,
+          "verdict": "GENUINE",
+          "flagCount": 0,
+          "flags": [],
+          "stats": {
+            "mean": 26.681818,
+            "stdDev": 2.070932,
+            "cv": 7.7616,
+            "min": 23.4,
+            "max": 29.4,
+            "range": 6
+          },
+          "cocComparison": null
+        },
+        {
+          "parameter": "Weight",
+          "score": 5,
+          "verdict": "GENUINE",
+          "flagCount": 1,
+          "flags": [
+            {
+              "id": "MILD_DIGIT_PREFERENCE",
+              "severity": "LOW",
+              "message": "Slight digit preference: 63% end in same digit."
+            }
+          ],
+          "stats": {
+            "mean": 9.745625,
+            "stdDev": 0.027092,
+            "cv": 0.278,
+            "min": 9.71,
+            "max": 9.79,
+            "range": 0.08
+          },
+          "cocComparison": {
+            "exactMatches": 1,
+            "closeMatches": 3,
+            "totalIQC": 8,
+            "totalCOC": 5,
+            "exactCopyRatio": 0.125,
+            "closeCopyRatio": 0.5
+          }
+        }
+      ],
+      "summary": "MINOR CONCERNS - Some patterns are slightly unusual. Authenticity score: 91/100.",
+      "recommendations": [
+        "Have supervisor re-verify 2-3 random measurements",
+        "Check if measurement instruments were calibrated recently",
+        "Compare with this inspector other reports for pattern consistency",
+        "Request re-testing of borderline parameters"
+      ]
+    },
+    "cocDataSummary": {
+      "widthSpec": null,
+      "thicknessSpec": null,
+      "derivedRanges": {
+        "width": {
+          "label": "Width",
+          "count": 4,
+          "values": [
+            6.002,
+            6.015,
+            6.017,
+            6.005
+          ],
+          "min": 6.002,
+          "max": 6.017,
+          "mean": 6.00975,
+          "stdDev": 0.006379,
+          "range": 0.015
+        },
+        "thickness": {
+          "label": "Thickness",
+          "count": 9,
+          "values": [
+            0.35,
+            0.403,
+            0.405,
+            0.453,
+            0.402,
+            0.404,
+            0.353,
+            0.353,
+            0.354
+          ],
+          "min": 0.35,
+          "max": 0.453,
+          "mean": 0.386333,
+          "stdDev": 0.033691,
+          "range": 0.103
+        },
+        "tensileStrength": {
+          "label": "Tensile Strength",
+          "count": 4,
+          "values": [
+            145,
+            111,
+            115,
+            113
+          ],
+          "min": 111,
+          "max": 145,
+          "mean": 121,
+          "stdDev": 13.928388,
+          "range": 34
+        },
+        "yieldStrength": {
+          "label": "Yield Strength",
+          "count": 5,
+          "values": [
+            145,
+            111.695,
+            115.714,
+            113.091,
+            45
+          ],
+          "min": 45,
+          "max": 145,
+          "mean": 106.1,
+          "stdDev": 32.9212,
+          "range": 100
+        },
+        "elongation": null,
+        "resistivity": {
+          "label": "Resistivity",
+          "count": 2,
+          "values": [
+            0.01724,
+            0.0225
+          ],
+          "min": 0.01724,
+          "max": 0.0225,
+          "mean": 0.01987,
+          "stdDev": 0.00263,
+          "range": 0.00526
+        },
+        "copperPurity": {
+          "label": "Copper Purity",
+          "count": 2,
+          "values": [
+            99.97,
+            99.97
+          ],
+          "min": 99.97,
+          "max": 99.97,
+          "mean": 99.97,
+          "stdDev": 0,
+          "range": 0
+        },
+        "tinContent": null,
+        "weight": {
+          "label": "Weight",
+          "count": 5,
+          "values": [
+            9.728,
+            9.703,
+            9.754,
+            9.716,
+            9.735
+          ],
+          "min": 9.703,
+          "max": 9.754,
+          "mean": 9.7272,
+          "stdDev": 0.017267,
+          "range": 0.051
+        }
+      },
+      "totalWeight": "",
+      "certificateNo": "GAUTAM",
+      "allJudgmentsOK": true
+    },
+    "summary": {
+      "totalChecks": 11,
+      "passed": 8,
+      "failed": 0,
+      "warnings": 3,
+      "cocMismatches": 3,
+      "cocDeviations": 1,
+      "cocChecksTotal": 8,
+      "fraudScore": 9,
+      "inspectorTested": true
+    },
+    "overallResult": "PASS",
+    "overallMessage": "IQC Report PASSED with CONCERNS - 8/11 checks passed, but 5 fraud indicator(s) found. MINOR CONCERNS - Some patterns are slightly unusual. Authenticity score: 91/100. | 3 COC mismatch(es) | 1 COC deviation(s)",
+    "timestamp": "2026-02-28T23:31:47.997Z"
+  },
+  "iqcOcrChars": 3601,
+  "cocOcrChars": 2097,
+  "iqcPages": [
+    {
+      "page": 1,
+      "chars": 1834,
+      "tables": 2
+    },
+    {
+      "page": 2,
+      "chars": 1723,
+      "tables": 2
+    }
+  ],
+  "cocPages": [
+    {
+      "page": 1,
+      "chars": 2075,
+      "tables": 3
+    }
+  ]
+}

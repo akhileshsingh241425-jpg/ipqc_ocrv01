@@ -1,0 +1,361 @@
+{
+  "materialType": "busbar",
+  "iqcData": {
+    "documentNo": "GSPL/PVR(IQC)/002",
+    "issueDate": "01-12-2024",
+    "materialName": "Bus Bar",
+    "supplierName": "s' RM Batch No .:",
+    "quantity": "",
+    "quantityNum": 0,
+    "invoiceNo": "Physical",
+    "receiptDate": "02/08/2025",
+    "rmDetails": "0.4×6.0 mm",
+    "sampleCount": 13,
+    "aqlInfo": "SIL S3 AQL 1.5",
+    "lotNo": "",
+    "checkedBy": "Deepak/Amit",
+    "width": [
+      6.04,
+      6.09,
+      6.01,
+      6.04,
+      6,
+      6.06,
+      6.07,
+      6.01,
+      6,
+      6
+    ],
+    "thickness": [
+      0.401,
+      0.407,
+      0.406,
+      0.402,
+      0.406,
+      0.401,
+      0.404,
+      0.402,
+      0.402
+    ],
+    "coatingThickness": [
+      28.9,
+      25.4,
+      28.4,
+      24.8,
+      26,
+      25.6,
+      29.4,
+      28.6,
+      23.4,
+      24.2,
+      29.8
+    ],
+    "solderabilityBusBar": 224,
+    "solderabilityRibbon": 24,
+    "weight": [
+      9.725,
+      9.755,
+      9.71,
+      9.785,
+      9.735,
+      9.74,
+      9.79,
+      9.725
+    ],
+    "tensileStrength": 221.88,
+    "yieldStrength": 115,
+    "resistivity": null,
+    "packagingResult": "condition is sk.",
+    "expiryInfo": "Expiry Date\nVisual\n100%\nPacking Box / Coc\nDate of expiry should be min. 6 months from the date of re"
+  },
+  "cocData": {
+    "customerName": "GAUTAM SOLAR PRIVATE LIMITED ",
+    "productName": "Bus Bar",
+    "invoiceNo": "JRIT20250630002",
+    "deliveryDate": "2025.07.01",
+    "totalWeight": "",
+    "width": [
+      6.002,
+      6.015,
+      6.017,
+      6.005
+    ],
+    "thickness": [
+      0.403,
+      0.405,
+      0.453,
+      0.402,
+      0.404,
+      0.353,
+      0.353,
+      0.354
+    ],
+    "tinContent": [],
+    "copperPurity": [
+      99.97,
+      99.97
+    ],
+    "tensileStrength": [
+      145,
+      111.695,
+      115.714,
+      113.091
+    ],
+    "yieldStrength": [
+      145,
+      111.695,
+      115.714,
+      113.091,
+      45
+    ],
+    "elongation": [],
+    "resistivity": [
+      0.01724,
+      0.0225
+    ],
+    "solderability": "OK",
+    "weight": [
+      9.728,
+      9.703,
+      9.754,
+      9.716,
+      9.735
+    ],
+    "allJudgmentsOK": true
+  },
+  "verification": {
+    "materialType": "busbar",
+    "materialName": "Bus Bar",
+    "checks": [
+      {
+        "name": "Visual — Packaging (Make, Type)",
+        "status": "FAIL",
+        "values": null,
+        "spec": "No Physical Damage, No Mismatch against PO/Invoice",
+        "details": "condition is sk.",
+        "cocValues": null
+      },
+      {
+        "name": "Visual — Expiry Date",
+        "status": "PASS",
+        "values": null,
+        "spec": "Expiry should be min. 6 months from receiving",
+        "details": "Expiry Date\nVisual\n100%\nPacking Box / Coc\nDate of expiry should be min. 6 months from the date of re",
+        "cocValues": null
+      },
+      {
+        "name": "Physical — Width",
+        "status": "PASS",
+        "values": [
+          "6.04 mm",
+          "6.09 mm",
+          "6.01 mm",
+          "6.04 mm",
+          "6 mm",
+          "6.06 mm",
+          "6.07 mm",
+          "6.01 mm",
+          "6 mm",
+          "6 mm"
+        ],
+        "spec": "6 ± 0.10 mm (5.9–6.1)",
+        "details": "10 samples measured. All within 5.9–6.1 mm",
+        "cocValues": [
+          "6.002 mm",
+          "6.015 mm",
+          "6.017 mm",
+          "6.005 mm"
+        ]
+      },
+      {
+        "name": "Physical — Thickness",
+        "status": "PASS",
+        "values": [
+          "0.401 mm",
+          "0.407 mm",
+          "0.406 mm",
+          "0.402 mm",
+          "0.406 mm",
+          "0.401 mm",
+          "0.404 mm",
+          "0.402 mm",
+          "0.402 mm"
+        ],
+        "spec": "0.4 ± 0.02 mm (0.38–0.42)",
+        "details": "9 samples measured. All within 0.38–0.42 mm",
+        "cocValues": [
+          "0.403 mm",
+          "0.405 mm",
+          "0.453 mm",
+          "0.402 mm",
+          "0.404 mm",
+          "0.353 mm",
+          "0.353 mm",
+          "0.354 mm"
+        ]
+      },
+      {
+        "name": "Verification — Coating Thickness",
+        "status": "PASS",
+        "values": [
+          "28.9 μm/side",
+          "25.4 μm/side",
+          "28.4 μm/side",
+          "24.8 μm/side",
+          "26 μm/side",
+          "25.6 μm/side",
+          "29.4 μm/side",
+          "28.6 μm/side",
+          "23.4 μm/side",
+          "24.2 μm/side",
+          "29.8 μm/side"
+        ],
+        "spec": "25 ± 5 μm/side (20–30)",
+        "details": "11 samples measured. All within 20–30 μm/side",
+        "cocValues": null
+      },
+      {
+        "name": "Solderability — B/w Bus Bar",
+        "status": "PASS",
+        "values": [
+          "224 N"
+        ],
+        "spec": "≥ 24 N",
+        "details": "224 N ≥ 24 N — OK",
+        "cocValues": null
+      },
+      {
+        "name": "Solderability — B/w Ribbon & Interconnector",
+        "status": "PASS",
+        "values": [
+          "24 N"
+        ],
+        "spec": "≥ 4 N",
+        "details": "24 N ≥ 4 N — OK",
+        "cocValues": null
+      },
+      {
+        "name": "Measurement — Weight",
+        "status": "PASS",
+        "values": [
+          "9.725 kg",
+          "9.755 kg",
+          "9.71 kg",
+          "9.785 kg",
+          "9.735 kg",
+          "9.74 kg",
+          "9.79 kg",
+          "9.725 kg"
+        ],
+        "spec": "GSPL TS/COC",
+        "details": "8 samples weighed. Avg: 9.746 kg. Range: 9.710–9.790 kg. Matches COC (avg: 9.727 kg)",
+        "cocValues": [
+          "9.728 kg",
+          "9.703 kg",
+          "9.754 kg",
+          "9.716 kg",
+          "9.735 kg"
+        ]
+      },
+      {
+        "name": "Verification — Tensile Strength",
+        "status": "PASS",
+        "values": [
+          "221.88 MPa"
+        ],
+        "spec": "≥ 100 MPa",
+        "details": "221.88 MPa ≥ 100 MPa — OK. COC avg: 121.4 MPa",
+        "cocValues": [
+          "145 MPa",
+          "111.695 MPa",
+          "115.714 MPa",
+          "113.091 MPa"
+        ]
+      },
+      {
+        "name": "Verification — Yield Strength",
+        "status": "PASS",
+        "values": [
+          "115 MPa"
+        ],
+        "spec": "≥ 60 MPa",
+        "details": "115 MPa ≥ 60 MPa — OK",
+        "cocValues": null
+      },
+      {
+        "name": "Verification — Resistivity",
+        "status": "WARNING",
+        "values": null,
+        "spec": "≤ 0.025 Ω·mm²/m",
+        "details": "Resistivity not detected from OCR",
+        "cocValues": [
+          "0.01724 Ω·mm²/m",
+          "0.0225 Ω·mm²/m"
+        ]
+      }
+    ],
+    "aqlVerification": {
+      "name": "AQL Sampling Plan Verification",
+      "status": "PASS",
+      "lotSize": 9000,
+      "inspectionLevel": "S3",
+      "requiredSamples": 8,
+      "actualSamples": 11,
+      "details": "Lot size: 9000. SIL S3 requires 8 samples. Found 11 samples in IQC report. — Sufficient samples tested."
+    },
+    "cocCrossCheck": [
+      {
+        "field": "Invoice Number",
+        "iqcValue": "Physical",
+        "cocValue": "JRIT20250630002",
+        "match": false,
+        "status": "MISMATCH"
+      },
+      {
+        "field": "Customer Name",
+        "iqcValue": "Gautam Solar Pvt. Ltd.",
+        "cocValue": "GAUTAM SOLAR PRIVATE LIMITED ",
+        "match": true,
+        "status": "MATCH"
+      },
+      {
+        "field": "COC Test Judgments",
+        "iqcValue": "—",
+        "cocValue": "All OK",
+        "match": true,
+        "status": "PASS"
+      }
+    ],
+    "summary": {
+      "totalChecks": 11,
+      "passed": 9,
+      "failed": 1,
+      "warnings": 1,
+      "cocMismatches": 1
+    },
+    "overallResult": "FAIL",
+    "overallMessage": "❌ IQC Report FAILED — 1 check(s) failed out of 11",
+    "timestamp": "2026-02-28T18:40:39.270Z"
+  },
+  "iqcOcrChars": 3679,
+  "cocOcrChars": 2097,
+  "iqcPages": [
+    {
+      "page": 1,
+      "chars": 1882,
+      "tables": 3
+    },
+    {
+      "page": 2,
+      "chars": 1753,
+      "tables": 3
+    }
+  ],
+  "cocPages": [
+    {
+      "page": 1,
+      "chars": 2075,
+      "tables": 3
+    }
+  ]
+}
