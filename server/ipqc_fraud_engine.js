@@ -21,50 +21,116 @@ const path = require('path');
 // ================================================================
 function extractIPQCValues(pagesData) {
   var values = {
-    // Page 1
+    // Page 1 - Shop Floor & Stringer
     shopFloorTemp: null,        // e.g., 24.7°C
     shopFloorHumidity: null,    // e.g., 40%
-    cellToGapValues: [],        // e.g., [0.72, 0.81, 0.78, ...] per stringer
+    glassDimension: null,       // e.g., 2376×1128×2.000mm
+    glassVisual: 'OK',
+    evaEpeType: null,           // e.g., EP304
+    evaEpeDimension: null,      // e.g., 12328×1125×0.700mm
+    evaEpeStatus: 'OK',
     solderingTemp: null,        // e.g., 413°C
+    cellManufacturer: null,     // e.g., Solar Space
     cellEfficiency: null,       // e.g., 25.40%
+    cellSize: null,             // e.g., 105.07×182.34mm
+    cellCondition: 'OK',
+    cellLoadingCleanliness: 'Clean',
+    stringerSpecification: 'OK',
+    cuttingEqual: 'Equal',
+    tsVisual: 'OK',
+    tsElImage: 'OK',
+    stringLength: null,         // e.g., 1163mm
+    cellToGapValues: [],        // e.g., [0.72, 0.81, 0.78, ...] per stringer
 
-    // Page 2
-    peelStrengthRibbonToCell: null,
-    peelStrengthRibbonToBusbar: null,
+    // Page 2 - Soldering & Layout
+    peelStrengthRibbonToCell: null,   // e.g., 1.50N
+    peelStrengthRibbonToBusbar: null, // e.g., ≥2N
     stringToStringGap: null,    // e.g., 1.52 mm
     cellEdgeToGlassTop: null,   // e.g., 18.70 mm
     cellEdgeToGlassBottom: null,// e.g., 18.58 mm
     cellEdgeToGlassSides: null, // e.g., 12.46 mm
     terminalBusbarToCell: null, // e.g., 3.04 mm
+    solderingQuality: 'OK',
     creepageDistances: [],      // e.g., [11.48, 11.24, 10.98, 11.56, 11.21]
+    autoTaping: 'OK',
+    rfidLogoPosition: 'OK',
+    backEvaType: null,          // e.g., EVA EP309
+    backEvaDimension: null,     // e.g., 2378×1125×0.200mm
+    backGlassDimension: null,   // e.g., 2376×1128×2.000mm
 
-    // Page 3
+    // Page 3 - Pre-Lamination
+    holesCount: 3,
     holeDimensions: [],         // e.g., [11.99, 12.02, 12.01]
+    busbarFlatten: 'OK',
+    preLamVisual: 'OK',
+    reworkStationClean: 'Clean',
     solderingIronTemp: null,    // e.g., 421°C
     solderingIronTemp2: null,   // second station
+    reworkMethod: 'Manual',
     preELSerials: [],
 
-    // Page 4
+    // Page 4 - Post-Lamination
+    peelTestEvaGlass: null,     // e.g., ≥60N/cm
+    peelTestEvaBacksheet: null, // e.g., ≥60N/cm
+    gelContent: null,           // e.g., 75-95%
+    tapeRemoving: 'OK',
+    trimmingQuality: 'OK',
+    trimmingBladeStatus: 'OK',
+    postLamVisual: 'OK',
+    glueUniformity: 'OK',
+    shortSideGlueWeight: null,
+    longSideGlueWeight: null,
     anodizingThickness: null,   // e.g., 18.5 micron
     postLamSerials: [],
 
-    // Page 5
-    glueWeight: null,           // e.g., 16.394 gm
-    pottingWeight: null,        // e.g., 19.593 gm
+    // Page 5 - JB Assembly & Curing
+    jbAppearance: 'OK',
+    jbCableLength: null,        // e.g., 300mm
+    siliconGlueWeight: null,    // e.g., 19.334gm
+    weldingTime: null,          // e.g., 2.5 Sec
     weldingCurrent: null,       // e.g., 17 Amp
+    solderingQualityJB: 'OK',
+    glueRatio: null,
+    pottingWeight: null,        // e.g., 19.593 gm
+    nozzleStatus: 'OK',
+    pottingInspection: 'OK',
+    curingVisual: 'OK',
     curingTemp: null,           // e.g., 24.6°C
     curingHumidity: null,       // e.g., 57%
+    curingTime: null,           // e.g., 4 hours
+    buffingCondition: 'OK',
+    cleaningStatus: 'OK',
+    glueWeight: null,           // e.g., 16.394 gm
 
-    // Page 6
+    // Page 6 - Flash Tester & EL
     ambientTemp: null,          // e.g., 27.93°C
     moduleTemp: null,           // e.g., 26.48°C
+    simulatorCalibration: 'OK',
+    silverRefModule: null,
+    elCheck: 'OK',
     dcwValues: [],              // e.g., [1.4, 1.4, 1.448, 1.44]
     irValues: [],               // e.g., [3.58, 3.88, 5.68, 3.83]
+    groundContinuity: null,     // e.g., 4.547mΩ
+    voltageVerification: null,  // e.g., 51.81V
+    currentVerification: null,  // e.g., 7.464A
+    postElVisual: 'OK',
+    rfidPosition: 'Center',
+    manufacturingMonth: null,   // e.g., March 2026
     flashTesterSerials: [],
 
-    // Page 7
-    moduleDimension: null,      // e.g., 2278x1134x30
-    diagonalDiff: null,         // e.g., 2 mm
+    // Page 7 - Final & Packaging
+    finalVisual: 'OK',
+    backlabel: 'OK',
+    moduleDimension: null,      // e.g., 2382×1134×30mm
+    mountingHoleX: null,        // e.g., 1400mm
+    mountingHoleY: null,        // e.g., 1091mm
+    diagonalDiff: null,         // e.g., 1 mm
+    cornerGap: null,            // e.g., 0.02mm
+    cableLengthFinal: null,     // e.g., 300mm
+    packagingLabel: 'OK',
+    boxContent: 'OK',
+    boxCondition: 'OK',
+    palletDimension: null,      // e.g., 2400×1081×147mm
     finalVisualSerials: [],
 
     // All numeric values for comparison (flattened)
@@ -92,6 +158,7 @@ function extractIPQCValues(pagesData) {
     if (pageNum === 1) {
       // Date
       var dateMatch = text.match(/Date[:\s-]+(\d{2}[-\/]\d{2}[-\/]\d{4})/i);
+      if (!dateMatch) dateMatch = text.match(/Date[:\s-]+(\d{2}[-\/]\d{2}[-\/]\d{2,4})/i);
       if (dateMatch) values.date = dateMatch[1];
 
       // Time
@@ -111,14 +178,38 @@ function extractIPQCValues(pagesData) {
       if (!humMatch) humMatch = text.match(/(\d{2,3})\s*%\s*(?:\n|$)/);
       if (humMatch) values.shopFloorHumidity = parseFloat(humMatch[1]);
 
+      // Glass dimension - e.g., (2376×1128×2.000)mm
+      var glassDimMatch = text.match(/\(?\s*(\d{3,4}\s*[×xX]\s*\d{3,4}\s*[×xX]\s*\d+\.?\d*)\s*\)?\s*mm/i);
+      if (glassDimMatch) values.glassDimension = glassDimMatch[1].replace(/\s/g, '');
+
+      // EVA/EPE Type - e.g., EP304
+      var evaTypeMatch = text.match(/(?:EVA|EPE|EVA\/EPE)[^A-Z]*([A-Z]{1,3}\d{3})/i);
+      if (evaTypeMatch) values.evaEpeType = evaTypeMatch[1];
+
+      // EVA/EPE Dimension
+      var evaDimMatch = text.match(/EVA\/EPE[\s\S]{0,100}?(\d{4,5}\s*[×xX]\s*\d{3,4}\s*[×xX]\s*\d+\.?\d*)\s*\)?mm/i);
+      if (evaDimMatch) values.evaEpeDimension = evaDimMatch[1].replace(/\s/g, '');
+
       // Soldering temperature
       var soldTemp = text.match(/(?:soldered|soldering)[^0-9]*(\d{3,4})\s*[°℃]/i);
       if (!soldTemp) soldTemp = text.match(/(\d{3})[\s°℃]+[Cc]?\s*(?:\n|Refer)/);
       if (soldTemp) values.solderingTemp = parseFloat(soldTemp[1]);
 
+      // Cell Manufacturer - e.g., Solar Space
+      var cellMfgMatch = text.match(/(?:Refer\s*Process\s*Card|Cell\s*Manufacturer)[^A-Z]*([A-Z][a-z]+\s*[A-Z]?[a-z]*)/i);
+      if (cellMfgMatch) values.cellManufacturer = cellMfgMatch[1].trim();
+
       // Cell efficiency
       var effMatch = text.match(/(\d{2}\.\d{2})\s*%/);
       if (effMatch) values.cellEfficiency = parseFloat(effMatch[1]);
+
+      // Cell Size - e.g., 105.07×182.34mm
+      var cellSizeMatch = text.match(/\(?\s*(\d{2,3}\.\d{2}\s*[×xX]\s*\d{2,3}\.\d{2})\s*\)?\s*mm/i);
+      if (cellSizeMatch) values.cellSize = cellSizeMatch[1].replace(/\s/g, '');
+
+      // String length - e.g., 1163mm
+      var stringLenMatch = text.match(/TS\d{2}[AB]\s*(?:\n)?\s*(\d{4})\s/);
+      if (stringLenMatch) values.stringLength = stringLenMatch[1] + 'mm';
 
       // Cell-to-Cell Gap values (look for TS01A 0.72, TS01B 0.81, etc.)
       var gapMatches = text.match(/TS\d{2}[AB]\s*(?:\n)?\s*(0\.\d{2})/gi);
@@ -140,10 +231,24 @@ function extractIPQCValues(pagesData) {
           }
         }
       }
+
+      // OK/Visual status checks
+      if (/visual[\s\S]{0,20}OK/i.test(text)) values.tsVisual = 'OK';
+      if (/EL[\s\S]{0,20}OK/i.test(text)) values.tsElImage = 'OK';
+      if (/clean/i.test(text)) values.cellLoadingCleanliness = 'Clean';
+      if (/equal/i.test(text)) values.cuttingEqual = 'Equal';
     }
 
     // ---- PAGE 2 ----
     if (pageNum === 2) {
+      // Peel strength ribbon to cell - e.g., 1.50N
+      var peelCellMatch = text.match(/(?:ribbon\s*to\s*cell|peel\s*strength)[^0-9]*(\d+\.?\d*)\s*(?:N|mm)/i);
+      if (peelCellMatch) values.peelStrengthRibbonToCell = parseFloat(peelCellMatch[1]);
+
+      // Peel strength ribbon to busbar
+      var peelBusMatch = text.match(/(?:ribbon\s*to\s*busbar)[^0-9]*(\d+\.?\d*)\s*N?/i);
+      if (peelBusMatch) values.peelStrengthRibbonToBusbar = parseFloat(peelBusMatch[1]);
+
       // Cell edge to glass edge - Top
       var topMatch = text.match(/TOP\s*(?:\n)?\s*(\d{1,2}\.\d{2})\s*mm/i);
       if (topMatch) values.cellEdgeToGlassTop = parseFloat(topMatch[1]);
@@ -173,6 +278,23 @@ function extractIPQCValues(pagesData) {
           values.creepageDistances.push(cv);
         }
       }
+
+      // Back EVA Type - e.g., EVA EP309
+      var backEvaMatch = text.match(/EVA\s*([A-Z]{1,3}\d{3})/i);
+      if (backEvaMatch) values.backEvaType = 'EVA ' + backEvaMatch[1];
+
+      // Back EVA Dimension
+      var backEvaDimMatch = text.match(/\(?\s*(\d{4}\s*[×xX]\s*\d{3,4}\s*[×xX]\s*0\.\d{3})\s*\)?\s*mm/i);
+      if (backEvaDimMatch) values.backEvaDimension = backEvaDimMatch[1].replace(/\s/g, '');
+
+      // Back Glass Dimension
+      var backGlassMatch = text.match(/(?:Glass|PO)\s*[\s\S]{0,30}?\(?\s*(\d{4}\s*[×xX]\s*\d{3,4}\s*[×xX]\s*\d+\.?\d*)\s*\)?\s*mm/i);
+      if (backGlassMatch) values.backGlassDimension = backGlassMatch[1].replace(/\s/g, '');
+
+      // OK status checks
+      if (/soldering[\s\S]{0,30}OK/i.test(text)) values.solderingQuality = 'OK';
+      if (/taping[\s\S]{0,30}OK/i.test(text)) values.autoTaping = 'OK';
+      if (/RFID[\s\S]{0,30}OK/i.test(text)) values.rfidLogoPosition = 'OK';
     }
 
     // ---- PAGE 3 ----
@@ -187,7 +309,10 @@ function extractIPQCValues(pagesData) {
           holeVals.push(hv);
         }
       }
-      if (holeVals.length > 0) values.holeDimensions = holeVals.slice(0, 3);
+      if (holeVals.length > 0) {
+        values.holeDimensions = holeVals.slice(0, 3);
+        values.holesCount = holeVals.length >= 3 ? 3 : holeVals.length;
+      }
 
       // Soldering iron temp — look for 4XXᵒC pattern
       var siTemp = text.match(/(\d{3})\s*[°º]?\s*[Cc]/);
@@ -203,22 +328,54 @@ function extractIPQCValues(pagesData) {
         }
       }
 
+      // Rework method
+      if (/manual/i.test(text)) values.reworkMethod = 'Manual';
+      else if (/auto/i.test(text)) values.reworkMethod = 'Auto';
+
+      // OK status checks
+      if (/flatten[\s\S]{0,30}OK/i.test(text)) values.busbarFlatten = 'OK';
+      if (/visual[\s\S]{0,30}OK/i.test(text)) values.preLamVisual = 'OK';
+      if (/clean[\s\S]{0,20}wet/i.test(text)) values.reworkStationClean = 'Clean';
+
       // Pre-EL serials
       values.preELSerials = page.serialNumbers || [];
     }
 
     // ---- PAGE 4 ----
     if (pageNum === 4) {
+      // Peel test EVA to Glass - e.g., ≥60N/cm
+      var peelGlassMatch = text.match(/E\/G\s*[≥>]?\s*(\d+)\s*N\/cm/i);
+      if (peelGlassMatch) values.peelTestEvaGlass = '≥' + peelGlassMatch[1] + 'N/cm';
+
+      // Peel test EVA to Backsheet
+      var peelBsMatch = text.match(/E\/B\s*[≥>]?\s*(\d+)\s*N\/cm/i);
+      if (peelBsMatch) values.peelTestEvaBacksheet = '≥' + peelBsMatch[1] + 'N/cm';
+
+      // Gel content - e.g., 75-95%
+      var gelMatch = text.match(/(\d{2})\s*(?:to|-)\s*(\d{2,3})\s*%/i);
+      if (gelMatch) values.gelContent = gelMatch[1] + '-' + gelMatch[2] + '%';
+
       // Anodizing thickness
       var anoMatch = text.match(/(\d{1,2}\.?\d*)\s*[Mm]icron/i);
       if (anoMatch) values.anodizingThickness = parseFloat(anoMatch[1]);
+
+      // OK status checks
+      if (/tape[\s\S]{0,20}remov[\s\S]{0,20}OK/i.test(text)) values.tapeRemoving = 'OK';
+      if (/trimming[\s\S]{0,30}OK/i.test(text)) values.trimmingQuality = 'OK';
+      if (/blade[\s\S]{0,30}OK/i.test(text)) values.trimmingBladeStatus = 'OK';
+      if (/visual[\s\S]{0,30}OK/i.test(text)) values.postLamVisual = 'OK';
+      if (/uniform[\s\S]{0,20}OK/i.test(text)) values.glueUniformity = 'OK';
 
       values.postLamSerials = page.serialNumbers || [];
     }
 
     // ---- PAGE 5 ----
     if (pageNum === 5) {
-      // Glue weight
+      // Silicon glue weight - first gm value
+      var siliconMatch = text.match(/(\d{1,2}\.\d{1,3})\s*gm/i);
+      if (siliconMatch) values.siliconGlueWeight = parseFloat(siliconMatch[1]);
+
+      // Glue weight (short side)
       var glueMatch = text.match(/(\d{1,2}\.\d{1,3})\s*gm/i);
       if (glueMatch) values.glueWeight = parseFloat(glueMatch[1]);
 
@@ -229,9 +386,19 @@ function extractIPQCValues(pagesData) {
         if (pm2) values.pottingWeight = parseFloat(pm2[1]);
       }
 
+      // Welding time - e.g., 2.5 Sec
+      var wTimeMatch = text.match(/(\d+\.?\d*)\s*Sec/i);
+      if (wTimeMatch) values.weldingTime = wTimeMatch[1] + ' Sec';
+
       // Welding current
       var wcMatch = text.match(/(\d{1,2})\s*Amp/i);
       if (wcMatch) values.weldingCurrent = parseFloat(wcMatch[1]);
+
+      // JB Cable length - e.g., 300mm
+      var cableLenMatch = text.match(/(\d{3})\s*mm/);
+      if (cableLenMatch && parseInt(cableLenMatch[1]) >= 200 && parseInt(cableLenMatch[1]) <= 500) {
+        values.jbCableLength = parseFloat(cableLenMatch[1]);
+      }
 
       // Curing temperature
       var curTemp = text.match(/(\d{2}\.\d)[\s°]*[Cc]/);
@@ -240,6 +407,19 @@ function extractIPQCValues(pagesData) {
       // Curing humidity
       var curHum = text.match(/(\d{2,3})\s*%/);
       if (curHum && parseInt(curHum[1]) < 100) values.curingHumidity = parseFloat(curHum[1]);
+
+      // Curing time - e.g., 4 hours
+      var curTimeMatch = text.match(/(\d+)\s*hours?/i);
+      if (curTimeMatch) values.curingTime = curTimeMatch[1] + ' hours';
+
+      // OK status checks
+      if (/JB[\s\S]{0,30}OK/i.test(text) || /junction[\s\S]{0,30}OK/i.test(text)) values.jbAppearance = 'OK';
+      if (/soldering[\s\S]{0,30}OK/i.test(text)) values.solderingQualityJB = 'OK';
+      if (/nozzle[\s\S]{0,30}OK/i.test(text)) values.nozzleStatus = 'OK';
+      if (/potting[\s\S]{0,30}OK/i.test(text)) values.pottingInspection = 'OK';
+      if (/curing[\s\S]{0,30}OK/i.test(text)) values.curingVisual = 'OK';
+      if (/buffing[\s\S]{0,30}OK/i.test(text)) values.buffingCondition = 'OK';
+      if (/clean[\s\S]{0,30}OK/i.test(text)) values.cleaningStatus = 'OK';
     }
 
     // ---- PAGE 6 ----
@@ -273,16 +453,72 @@ function extractIPQCValues(pagesData) {
         }
       }
 
+      // Ground continuity - e.g., 4.547mΩ
+      var gcMatch = text.match(/(\d+\.?\d*)\s*m[Ωm2]/i);
+      if (gcMatch) values.groundContinuity = gcMatch[1] + 'mΩ';
+
+      // Voltage verification - e.g., 51.81V
+      var voltMatch = text.match(/(\d{2,3}\.\d{1,2})\s*V/);
+      if (voltMatch) values.voltageVerification = parseFloat(voltMatch[1]);
+
+      // Current verification - e.g., 7.464A
+      var currMatch = text.match(/(\d{1,2}\.\d{1,3})\s*A[^m]/);
+      if (currMatch) values.currentVerification = parseFloat(currMatch[1]);
+
+      // Manufacturing month - e.g., March 2026
+      var monthMatch = text.match(/(January|February|March|April|May|June|July|August|September|October|November|December)\s*\d{4}/i);
+      if (monthMatch) values.manufacturingMonth = monthMatch[0];
+
+      // RFID Position - e.g., Center
+      var rfidPosMatch = text.match(/(Center|Left|Right|Top|Bottom)/i);
+      if (rfidPosMatch) values.rfidPosition = rfidPosMatch[1];
+
+      // OK status checks
+      if (/calibrat[\s\S]{0,30}OK/i.test(text)) values.simulatorCalibration = 'OK';
+      if (/EL[\s\S]{0,30}OK/i.test(text)) values.elCheck = 'OK';
+      if (/visual[\s\S]{0,30}OK/i.test(text)) values.postElVisual = 'OK';
+
       values.flashTesterSerials = page.serialNumbers || [];
     }
 
     // ---- PAGE 7 ----
     if (pageNum === 7) {
-      // Diagonal difference
-      var diagMatch = text.match(/(\d\.?\d*)\s*mm\s*(?:\n|$)/);
+      // Module dimension - e.g., 2382×1134×30mm
+      var modDimMatch = text.match(/\(?\s*(\d{4}\s*[×xX]\s*\d{3,4}\s*[×xX]\s*\d{2,3})\s*\)?\s*mm/i);
+      if (modDimMatch) values.moduleDimension = modDimMatch[1].replace(/\s/g, '');
+
+      // Mounting hole X & Y - e.g., (1400×1091)mm
+      var mountMatch = text.match(/\(?\s*(\d{3,4})\s*[×xX]\s*(\d{3,4})\s*\)?\s*mm/i);
+      if (mountMatch) {
+        values.mountingHoleX = parseFloat(mountMatch[1]);
+        values.mountingHoleY = parseFloat(mountMatch[2]);
+      }
+
+      // Diagonal difference - e.g., 1mm
+      var diagMatch = text.match(/diagonal[\s\S]{0,50}?(\d\.?\d*)\s*mm/i);
+      if (!diagMatch) diagMatch = text.match(/(\d\.?\d*)\s*mm\s*(?:\n|$)/);
       if (diagMatch && parseFloat(diagMatch[1]) <= 10) {
         values.diagonalDiff = parseFloat(diagMatch[1]);
       }
+
+      // Corner gap - e.g., 0.02mm
+      var cornerMatch = text.match(/corner[\s\S]{0,30}?(\d+\.?\d*)\s*mm/i);
+      if (cornerMatch) values.cornerGap = parseFloat(cornerMatch[1]);
+
+      // Cable length final - e.g., 300mm
+      var cableFinalMatch = text.match(/cable[\s\S]{0,30}?(\d{3})\s*mm/i);
+      if (cableFinalMatch) values.cableLengthFinal = parseFloat(cableFinalMatch[1]);
+
+      // Pallet dimension - e.g., 2400×1081×147mm
+      var palletMatch = text.match(/pallet[\s\S]{0,50}?\(?\s*(\d{4}\s*[×xX]\s*\d{3,4}\s*[×xX]\s*\d{2,3})\s*\)?/i);
+      if (palletMatch) values.palletDimension = palletMatch[1].replace(/\s/g, '') + 'mm';
+
+      // OK status checks
+      if (/visual[\s\S]{0,30}OK/i.test(text)) values.finalVisual = 'OK';
+      if (/backlabel[\s\S]{0,30}OK/i.test(text) || /label[\s\S]{0,30}OK/i.test(text)) values.backlabel = 'OK';
+      if (/packaging[\s\S]{0,30}OK/i.test(text)) values.packagingLabel = 'OK';
+      if (/box[\s\S]{0,20}content[\s\S]{0,20}OK/i.test(text)) values.boxContent = 'OK';
+      if (/box[\s\S]{0,20}condition[\s\S]{0,20}OK/i.test(text)) values.boxCondition = 'OK';
 
       values.finalVisualSerials = page.serialNumbers || [];
     }
