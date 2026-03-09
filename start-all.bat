@@ -4,7 +4,7 @@ echo   IPQC OCR - Start Both Frontend + Backend
 echo ========================================
 echo.
 echo Starting Backend Server (Port 5001)...
-start "IPQC OCR Backend" cmd /c "cd /d "%~dp0server" && node server.js"
+start "IPQC OCR Backend" cmd /c "cd /d "%~dp0server" && set IPQC_DB_USER=ipqc_app && set IPQC_DB_PASSWORD=ipqc_app_123 && node server.js"
 echo.
 echo Waiting 3 seconds for backend to start...
 timeout /t 3 /nobreak >nul

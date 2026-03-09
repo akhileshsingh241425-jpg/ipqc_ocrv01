@@ -1,197 +1,245 @@
 /**
- * IPQC Database Module — SQLite
- * ==============================
- * Stores all IPQC checksheet data persistently.
- * Tables: ipqc_checksheets, ipqc_values, ipqc_serials
+ * IPQC Database Module — MySQL
+ * ============================
+ * Stores all IPQC checksheet data in MySQL (Workbench compatible).
  */
 
-const Database = require('better-sqlite3');
-const path = require('path');
-const fs = require('fs');
-
-const DB_PATH = path.join(__dirname, 'ipqc_data.db');
+const mysql = require('mysql2/promise');
 
 let db;
+let initPromise;
 
-function getDB() {
+const dbConfig = {
+  host: process.env.IPQC_DB_HOST || 'localhost',
+  port: Number(process.env.IPQC_DB_PORT || 3306),
+  user: process.env.IPQC_DB_USER || 'root',
+  password: process.env.IPQC_DB_PASSWORD || '',
+  database: process.env.IPQC_DB_NAME || 'ipqc_ocr',
+  waitForConnections: true,
+  connectionLimit: 10,
+  queueLimit: 0,
+};
+
+function getSafeDatabaseName() {
+  const dbName = dbConfig.database;
+  if (!/^[a-zA-Z0-9_]+$/.test(dbName)) {
+    throw new Error(`Invalid MySQL database name: ${dbName}`);
+  }
+  return dbName;
+}
+
+async function ensureDatabaseExists() {
+  const dbName = getSafeDatabaseName();
+  const conn = await mysql.createConnection({
+    host: dbConfig.host,
+    port: dbConfig.port,
+    user: dbConfig.user,
+    password: dbConfig.password,
+  });
+  try {
+    await conn.query(`CREATE DATABASE IF NOT EXISTS \`${dbName}\` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci`);
+  } finally {
+    await conn.end();
+  }
+}
+
+async function getDB() {
   if (!db) {
-    db = new Database(DB_PATH);
-    db.pragma('journal_mode = WAL');
-    db.pragma('foreign_keys = ON');
-    initTables();
+    await ensureDatabaseExists();
+    db = mysql.createPool(dbConfig);
   }
   return db;
 }
 
-// ========== CREATE TABLES ==========
-function initTables() {
-  const d = getDB();
+async function ensureIndex(d, tableName, indexName, columns) {
+  const [rows] = await d.query(
+    'SELECT COUNT(*) as cnt FROM INFORMATION_SCHEMA.STATISTICS WHERE TABLE_SCHEMA = ? AND TABLE_NAME = ? AND INDEX_NAME = ?',
+    [dbConfig.database, tableName, indexName]
+  );
+  if (rows[0].cnt === 0) {
+    await d.query(`CREATE INDEX ${indexName} ON ${tableName}(${columns})`);
+  }
+}
 
-  d.exec(`
+// ========== CREATE TABLES ==========
+async function initTables() {
+  if (initPromise) return initPromise;
+
+  initPromise = (async () => {
+    const d = await getDB();
+
+    await d.query(`
     CREATE TABLE IF NOT EXISTS ipqc_checksheets (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
-      date TEXT NOT NULL,
-      shift TEXT NOT NULL,
-      line TEXT NOT NULL,
-      time TEXT,
-      po_number TEXT,
-      inspector_name TEXT,
-      source TEXT DEFAULT 'form',
+      id INT AUTO_INCREMENT PRIMARY KEY,
+      date VARCHAR(20) NOT NULL,
+      shift VARCHAR(20) NOT NULL,
+      line VARCHAR(50) NOT NULL,
+      time VARCHAR(30),
+      po_number VARCHAR(100),
+      inspector_name VARCHAR(120),
+      source VARCHAR(20) DEFAULT 'form',
 
       -- Page 1: Shop Floor & Stringer
-      shop_floor_temp REAL,
-      shop_floor_humidity REAL,
-      glass_dimension TEXT,
-      glass_visual TEXT DEFAULT 'OK',
-      eva_epe_type TEXT,
-      eva_epe_dimension TEXT,
-      eva_epe_status TEXT DEFAULT 'OK',
-      soldering_temp REAL,
-      cell_manufacturer TEXT,
-      cell_efficiency REAL,
-      cell_size TEXT,
-      cell_condition TEXT DEFAULT 'OK',
-      cell_loading_cleanliness TEXT DEFAULT 'Clean',
-      stringer_specification TEXT DEFAULT 'OK',
-      cutting_equal TEXT DEFAULT 'Equal',
-      ts_visual TEXT DEFAULT 'OK',
-      ts_el_image TEXT DEFAULT 'OK',
-      string_length TEXT,
-      cell_gap_ts01a REAL,
-      cell_gap_ts01b REAL,
-      cell_gap_ts02a REAL,
-      cell_gap_ts02b REAL,
-      cell_gap_ts03a REAL,
-      cell_gap_ts03b REAL,
-      cell_gap_ts04a REAL,
-      cell_gap_ts04b REAL,
+      shop_floor_temp DOUBLE,
+      shop_floor_humidity DOUBLE,
+      glass_dimension VARCHAR(100),
+      glass_visual VARCHAR(20) DEFAULT 'OK',
+      eva_epe_type VARCHAR(120),
+      eva_epe_dimension VARCHAR(120),
+      eva_epe_status VARCHAR(20) DEFAULT 'OK',
+      soldering_temp DOUBLE,
+      cell_manufacturer VARCHAR(120),
+      cell_efficiency DOUBLE,
+      cell_size VARCHAR(120),
+      cell_condition VARCHAR(20) DEFAULT 'OK',
+      cell_loading_cleanliness VARCHAR(20) DEFAULT 'Clean',
+      stringer_specification VARCHAR(20) DEFAULT 'OK',
+      cutting_equal VARCHAR(20) DEFAULT 'Equal',
+      ts_visual VARCHAR(20) DEFAULT 'OK',
+      ts_el_image VARCHAR(20) DEFAULT 'OK',
+      string_length VARCHAR(80),
+      cell_gap_ts01a DOUBLE,
+      cell_gap_ts01b DOUBLE,
+      cell_gap_ts02a DOUBLE,
+      cell_gap_ts02b DOUBLE,
+      cell_gap_ts03a DOUBLE,
+      cell_gap_ts03b DOUBLE,
+      cell_gap_ts04a DOUBLE,
+      cell_gap_ts04b DOUBLE,
 
       -- Page 2: Soldering & Layout
-      peel_strength_ribbon_cell REAL,
-      peel_strength_ribbon_busbar REAL,
-      string_to_string_gap REAL,
-      cell_edge_glass_top REAL,
-      cell_edge_glass_bottom REAL,
-      cell_edge_glass_sides REAL,
-      terminal_busbar_to_cell REAL,
-      soldering_quality TEXT DEFAULT 'OK',
-      creepage_top REAL,
-      creepage_bottom REAL,
-      creepage_left REAL,
-      creepage_right REAL,
-      creepage_extra REAL,
-      auto_taping TEXT DEFAULT 'OK',
-      rfid_logo_position TEXT DEFAULT 'OK',
-      back_eva_type TEXT,
-      back_eva_dimension TEXT,
-      back_glass_dimension TEXT,
+      peel_strength_ribbon_cell DOUBLE,
+      peel_strength_ribbon_busbar DOUBLE,
+      string_to_string_gap DOUBLE,
+      cell_edge_glass_top DOUBLE,
+      cell_edge_glass_bottom DOUBLE,
+      cell_edge_glass_sides DOUBLE,
+      terminal_busbar_to_cell DOUBLE,
+      soldering_quality VARCHAR(20) DEFAULT 'OK',
+      creepage_top DOUBLE,
+      creepage_bottom DOUBLE,
+      creepage_left DOUBLE,
+      creepage_right DOUBLE,
+      creepage_extra DOUBLE,
+      auto_taping VARCHAR(20) DEFAULT 'OK',
+      rfid_logo_position VARCHAR(20) DEFAULT 'OK',
+      back_eva_type VARCHAR(120),
+      back_eva_dimension VARCHAR(120),
+      back_glass_dimension VARCHAR(120),
 
       -- Page 3: Pre-Lamination
-      holes_count INTEGER DEFAULT 3,
-      hole1_dimension REAL,
-      hole2_dimension REAL,
-      hole3_dimension REAL,
-      busbar_flatten TEXT DEFAULT 'OK',
-      pre_lam_visual TEXT DEFAULT 'OK',
-      rework_station_clean TEXT DEFAULT 'Clean',
-      soldering_iron_temp1 REAL,
-      soldering_iron_temp2 REAL,
-      rework_method TEXT DEFAULT 'Manual',
+      holes_count INT DEFAULT 3,
+      hole1_dimension DOUBLE,
+      hole2_dimension DOUBLE,
+      hole3_dimension DOUBLE,
+      busbar_flatten VARCHAR(20) DEFAULT 'OK',
+      pre_lam_visual VARCHAR(20) DEFAULT 'OK',
+      rework_station_clean VARCHAR(20) DEFAULT 'Clean',
+      soldering_iron_temp1 DOUBLE,
+      soldering_iron_temp2 DOUBLE,
+      rework_method VARCHAR(40) DEFAULT 'Manual',
 
       -- Page 4: Post-Lamination
-      peel_test_eva_glass TEXT,
-      peel_test_eva_backsheet TEXT,
-      gel_content TEXT,
-      tape_removing TEXT DEFAULT 'OK',
-      trimming_quality TEXT DEFAULT 'OK',
-      trimming_blade_status TEXT DEFAULT 'OK',
-      post_lam_visual TEXT DEFAULT 'OK',
-      glue_uniformity TEXT DEFAULT 'OK',
-      short_side_glue_weight REAL,
-      long_side_glue_weight REAL,
-      anodizing_thickness REAL,
+      peel_test_eva_glass VARCHAR(120),
+      peel_test_eva_backsheet VARCHAR(120),
+      gel_content VARCHAR(120),
+      tape_removing VARCHAR(20) DEFAULT 'OK',
+      trimming_quality VARCHAR(20) DEFAULT 'OK',
+      trimming_blade_status VARCHAR(20) DEFAULT 'OK',
+      post_lam_visual VARCHAR(20) DEFAULT 'OK',
+      glue_uniformity VARCHAR(20) DEFAULT 'OK',
+      short_side_glue_weight DOUBLE,
+      long_side_glue_weight DOUBLE,
+      anodizing_thickness DOUBLE,
 
       -- Page 5: JB Assembly & Curing
-      jb_appearance TEXT DEFAULT 'OK',
-      jb_cable_length REAL,
-      silicon_glue_weight REAL,
-      welding_time TEXT,
-      welding_current REAL,
-      soldering_quality_jb TEXT DEFAULT 'OK',
-      glue_ratio TEXT,
-      potting_weight REAL,
-      nozzle_status TEXT DEFAULT 'OK',
-      potting_inspection TEXT DEFAULT 'OK',
-      curing_visual TEXT DEFAULT 'OK',
-      curing_temp REAL,
-      curing_humidity REAL,
-      curing_time TEXT,
-      buffing_condition TEXT DEFAULT 'OK',
-      cleaning_status TEXT DEFAULT 'OK',
+      jb_appearance VARCHAR(20) DEFAULT 'OK',
+      jb_cable_length DOUBLE,
+      silicon_glue_weight DOUBLE,
+      welding_time VARCHAR(40),
+      welding_current DOUBLE,
+      soldering_quality_jb VARCHAR(20) DEFAULT 'OK',
+      glue_ratio VARCHAR(100),
+      potting_weight DOUBLE,
+      nozzle_status VARCHAR(20) DEFAULT 'OK',
+      potting_inspection VARCHAR(20) DEFAULT 'OK',
+      curing_visual VARCHAR(20) DEFAULT 'OK',
+      curing_temp DOUBLE,
+      curing_humidity DOUBLE,
+      curing_time VARCHAR(40),
+      buffing_condition VARCHAR(20) DEFAULT 'OK',
+      cleaning_status VARCHAR(20) DEFAULT 'OK',
 
       -- Page 6: Flash Tester & EL
-      ambient_temp REAL,
-      module_temp REAL,
-      simulator_calibration TEXT DEFAULT 'OK',
-      silver_ref_module TEXT,
-      el_check TEXT DEFAULT 'OK',
-      dcw_value1 REAL,
-      dcw_value2 REAL,
-      dcw_value3 REAL,
-      dcw_value4 REAL,
-      ir_value1 REAL,
-      ir_value2 REAL,
-      ir_value3 REAL,
-      ir_value4 REAL,
-      ground_continuity TEXT,
-      voltage_verification REAL,
-      current_verification REAL,
-      post_el_visual TEXT DEFAULT 'OK',
-      rfid_position TEXT DEFAULT 'OK',
-      manufacturing_month TEXT,
+      ambient_temp DOUBLE,
+      module_temp DOUBLE,
+      simulator_calibration VARCHAR(20) DEFAULT 'OK',
+      silver_ref_module VARCHAR(120),
+      el_check VARCHAR(20) DEFAULT 'OK',
+      dcw_value1 DOUBLE,
+      dcw_value2 DOUBLE,
+      dcw_value3 DOUBLE,
+      dcw_value4 DOUBLE,
+      ir_value1 DOUBLE,
+      ir_value2 DOUBLE,
+      ir_value3 DOUBLE,
+      ir_value4 DOUBLE,
+      ground_continuity VARCHAR(80),
+      voltage_verification DOUBLE,
+      current_verification DOUBLE,
+      post_el_visual VARCHAR(20) DEFAULT 'OK',
+      rfid_position VARCHAR(20) DEFAULT 'OK',
+      manufacturing_month VARCHAR(40),
 
       -- Page 7: Final & Packaging
-      final_visual TEXT DEFAULT 'OK',
-      backlabel TEXT DEFAULT 'OK',
-      module_dimension TEXT,
-      mounting_hole_x REAL,
-      mounting_hole_y REAL,
-      diagonal_difference REAL,
-      corner_gap REAL,
-      cable_length_final REAL,
-      packaging_label TEXT DEFAULT 'OK',
-      box_content TEXT DEFAULT 'OK',
-      box_condition TEXT DEFAULT 'OK',
-      pallet_dimension TEXT,
+      final_visual VARCHAR(20) DEFAULT 'OK',
+      backlabel VARCHAR(20) DEFAULT 'OK',
+      module_dimension VARCHAR(120),
+      mounting_hole_x DOUBLE,
+      mounting_hole_y DOUBLE,
+      diagonal_difference DOUBLE,
+      corner_gap DOUBLE,
+      cable_length_final DOUBLE,
+      packaging_label VARCHAR(20) DEFAULT 'OK',
+      box_content VARCHAR(20) DEFAULT 'OK',
+      box_condition VARCHAR(20) DEFAULT 'OK',
+      pallet_dimension VARCHAR(120),
 
       -- Metadata
-      fraud_verdict TEXT,
-      fraud_score INTEGER,
-      ocr_data_file TEXT,
-      created_at TEXT DEFAULT (datetime('now','localtime')),
-      updated_at TEXT DEFAULT (datetime('now','localtime'))
+      fraud_verdict VARCHAR(40),
+      fraud_score INT,
+      ocr_data_file VARCHAR(255),
+      created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+      updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
     );
+  `);
 
+    await d.query(`
     CREATE TABLE IF NOT EXISTS ipqc_serials (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
-      checksheet_id INTEGER NOT NULL,
-      serial_number TEXT NOT NULL,
-      page_number INTEGER,
-      stage TEXT,
+      id INT AUTO_INCREMENT PRIMARY KEY,
+      checksheet_id INT NOT NULL,
+      serial_number VARCHAR(100) NOT NULL,
+      page_number INT,
+      stage VARCHAR(50),
       FOREIGN KEY (checksheet_id) REFERENCES ipqc_checksheets(id) ON DELETE CASCADE
     );
-
-    CREATE INDEX IF NOT EXISTS idx_checksheet_date ON ipqc_checksheets(date);
-    CREATE INDEX IF NOT EXISTS idx_checksheet_line ON ipqc_checksheets(line);
-    CREATE INDEX IF NOT EXISTS idx_checksheet_shift ON ipqc_checksheets(shift);
-    CREATE INDEX IF NOT EXISTS idx_serial_checksheet ON ipqc_serials(checksheet_id);
-    CREATE INDEX IF NOT EXISTS idx_serial_number ON ipqc_serials(serial_number);
   `);
+
+    await ensureIndex(d, 'ipqc_checksheets', 'idx_checksheet_date', 'date');
+    await ensureIndex(d, 'ipqc_checksheets', 'idx_checksheet_line', 'line');
+    await ensureIndex(d, 'ipqc_checksheets', 'idx_checksheet_shift', 'shift');
+    await ensureIndex(d, 'ipqc_serials', 'idx_serial_checksheet', 'checksheet_id');
+    await ensureIndex(d, 'ipqc_serials', 'idx_serial_number', 'serial_number');
+  })();
+
+  return initPromise;
 }
 
 // ========== SAVE CHECKSHEET ==========
-function saveChecksheet(data) {
-  const d = getDB();
+async function saveChecksheet(data) {
+  await initTables();
+  const d = await getDB();
+  const conn = await d.getConnection();
 
   const cols = [
     'date','shift','line','time','po_number','inspector_name','source',
@@ -232,27 +280,35 @@ function saveChecksheet(data) {
   const placeholders = cols.map(() => '?').join(',');
   const colNames = cols.join(',');
 
-  const stmt = d.prepare(`INSERT INTO ipqc_checksheets (${colNames}) VALUES (${placeholders})`);
-  const result = stmt.run(...values);
-  const checksheetId = result.lastInsertRowid;
+  try {
+    await conn.beginTransaction();
+    const [result] = await conn.query(`INSERT INTO ipqc_checksheets (${colNames}) VALUES (${placeholders})`, values);
+    const checksheetId = result.insertId;
 
-  // Save serial numbers
-  if (data.serials && Array.isArray(data.serials)) {
-    const serialStmt = d.prepare('INSERT INTO ipqc_serials (checksheet_id, serial_number, page_number, stage) VALUES (?, ?, ?, ?)');
-    const insertSerials = d.transaction((serials) => {
-      for (const s of serials) {
-        serialStmt.run(checksheetId, s.serial_number || s, s.page_number || null, s.stage || null);
+    if (data.serials && Array.isArray(data.serials)) {
+      for (const s of data.serials) {
+        await conn.query(
+          'INSERT INTO ipqc_serials (checksheet_id, serial_number, page_number, stage) VALUES (?, ?, ?, ?)',
+          [checksheetId, s.serial_number || s, s.page_number || null, s.stage || null]
+        );
       }
-    });
-    insertSerials(data.serials);
-  }
+    }
 
-  return { id: checksheetId, success: true };
+    await conn.commit();
+    return { id: checksheetId, success: true };
+  } catch (error) {
+    await conn.rollback();
+    throw error;
+  } finally {
+    conn.release();
+  }
 }
 
 // ========== UPDATE CHECKSHEET ==========
-function updateChecksheet(id, data) {
-  const d = getDB();
+async function updateChecksheet(id, data) {
+  await initTables();
+  const d = await getDB();
+  const conn = await d.getConnection();
   const setClauses = [];
   const values = [];
 
@@ -264,26 +320,37 @@ function updateChecksheet(id, data) {
 
   if (setClauses.length === 0) return { success: false, error: 'No fields to update' };
 
-  setClauses.push("updated_at = datetime('now','localtime')");
+  setClauses.push('updated_at = CURRENT_TIMESTAMP');
   values.push(id);
 
-  d.prepare(`UPDATE ipqc_checksheets SET ${setClauses.join(', ')} WHERE id = ?`).run(...values);
+  try {
+    await conn.beginTransaction();
+    await conn.query(`UPDATE ipqc_checksheets SET ${setClauses.join(', ')} WHERE id = ?`, values);
 
-  // Update serials if provided
-  if (data.serials && Array.isArray(data.serials)) {
-    d.prepare('DELETE FROM ipqc_serials WHERE checksheet_id = ?').run(id);
-    const serialStmt = d.prepare('INSERT INTO ipqc_serials (checksheet_id, serial_number, page_number, stage) VALUES (?, ?, ?, ?)');
-    for (const s of data.serials) {
-      serialStmt.run(id, s.serial_number || s, s.page_number || null, s.stage || null);
+    if (data.serials && Array.isArray(data.serials)) {
+      await conn.query('DELETE FROM ipqc_serials WHERE checksheet_id = ?', [id]);
+      for (const s of data.serials) {
+        await conn.query(
+          'INSERT INTO ipqc_serials (checksheet_id, serial_number, page_number, stage) VALUES (?, ?, ?, ?)',
+          [id, s.serial_number || s, s.page_number || null, s.stage || null]
+        );
+      }
     }
-  }
 
-  return { success: true };
+    await conn.commit();
+    return { success: true };
+  } catch (error) {
+    await conn.rollback();
+    throw error;
+  } finally {
+    conn.release();
+  }
 }
 
 // ========== GET ALL CHECKSHEETS ==========
-function getAllChecksheets(filters = {}) {
-  const d = getDB();
+async function getAllChecksheets(filters = {}) {
+  await initTables();
+  const d = await getDB();
   let where = [];
   let params = [];
 
@@ -297,46 +364,54 @@ function getAllChecksheets(filters = {}) {
   const limit = filters.limit || 100;
   const offset = filters.offset || 0;
 
-  const rows = d.prepare(`SELECT * FROM ipqc_checksheets ${whereClause} ORDER BY created_at DESC LIMIT ? OFFSET ?`).all(...params, limit, offset);
-  const count = d.prepare(`SELECT COUNT(*) as total FROM ipqc_checksheets ${whereClause}`).get(...params);
+  const [rows] = await d.query(
+    `SELECT * FROM ipqc_checksheets ${whereClause} ORDER BY created_at DESC LIMIT ? OFFSET ?`,
+    [...params, limit, offset]
+  );
+  const [countRows] = await d.query(`SELECT COUNT(*) as total FROM ipqc_checksheets ${whereClause}`, params);
 
-  // Get serial counts
   for (const row of rows) {
-    const sc = d.prepare('SELECT COUNT(*) as cnt FROM ipqc_serials WHERE checksheet_id = ?').get(row.id);
-    row.serial_count = sc.cnt;
+    const [scRows] = await d.query('SELECT COUNT(*) as cnt FROM ipqc_serials WHERE checksheet_id = ?', [row.id]);
+    row.serial_count = scRows[0].cnt;
   }
 
-  return { rows, total: count.total };
+  return { rows, total: countRows[0].total };
 }
 
 // ========== GET ONE CHECKSHEET ==========
-function getChecksheet(id) {
-  const d = getDB();
-  const row = d.prepare('SELECT * FROM ipqc_checksheets WHERE id = ?').get(id);
+async function getChecksheet(id) {
+  await initTables();
+  const d = await getDB();
+  const [rows] = await d.query('SELECT * FROM ipqc_checksheets WHERE id = ?', [id]);
+  const row = rows[0];
   if (!row) return null;
 
-  row.serials = d.prepare('SELECT * FROM ipqc_serials WHERE checksheet_id = ? ORDER BY page_number, id').all(id);
+  const [serialRows] = await d.query('SELECT * FROM ipqc_serials WHERE checksheet_id = ? ORDER BY page_number, id', [id]);
+  row.serials = serialRows;
   return row;
 }
 
 // ========== DELETE CHECKSHEET ==========
-function deleteChecksheet(id) {
-  const d = getDB();
-  d.prepare('DELETE FROM ipqc_checksheets WHERE id = ?').run(id);
+async function deleteChecksheet(id) {
+  await initTables();
+  const d = await getDB();
+  await d.query('DELETE FROM ipqc_checksheets WHERE id = ?', [id]);
   return { success: true };
 }
 
 // ========== STATS ==========
-function getStats() {
-  const d = getDB();
-  const total = d.prepare('SELECT COUNT(*) as cnt FROM ipqc_checksheets').get().cnt;
-  const fromForm = d.prepare("SELECT COUNT(*) as cnt FROM ipqc_checksheets WHERE source = 'form'").get().cnt;
-  const fromOCR = d.prepare("SELECT COUNT(*) as cnt FROM ipqc_checksheets WHERE source = 'ocr'").get().cnt;
-  const genuine = d.prepare("SELECT COUNT(*) as cnt FROM ipqc_checksheets WHERE fraud_verdict = 'GENUINE'").get().cnt;
-  const suspicious = d.prepare("SELECT COUNT(*) as cnt FROM ipqc_checksheets WHERE fraud_verdict IN ('SUSPICIOUS','LIKELY_DUMMY')").get().cnt;
-  const uniqueDates = d.prepare('SELECT COUNT(DISTINCT date) as cnt FROM ipqc_checksheets').get().cnt;
-  const uniqueLines = d.prepare('SELECT DISTINCT line FROM ipqc_checksheets ORDER BY line').all().map(r => r.line);
-  const last5 = d.prepare('SELECT id, date, line, shift, source, fraud_verdict, created_at FROM ipqc_checksheets ORDER BY created_at DESC LIMIT 5').all();
+async function getStats() {
+  await initTables();
+  const d = await getDB();
+  const [[{ cnt: total }]] = await d.query('SELECT COUNT(*) as cnt FROM ipqc_checksheets');
+  const [[{ cnt: fromForm }]] = await d.query("SELECT COUNT(*) as cnt FROM ipqc_checksheets WHERE source = 'form'");
+  const [[{ cnt: fromOCR }]] = await d.query("SELECT COUNT(*) as cnt FROM ipqc_checksheets WHERE source = 'ocr'");
+  const [[{ cnt: genuine }]] = await d.query("SELECT COUNT(*) as cnt FROM ipqc_checksheets WHERE fraud_verdict = 'GENUINE'");
+  const [[{ cnt: suspicious }]] = await d.query("SELECT COUNT(*) as cnt FROM ipqc_checksheets WHERE fraud_verdict IN ('SUSPICIOUS','LIKELY_DUMMY')");
+  const [[{ cnt: uniqueDates }]] = await d.query('SELECT COUNT(DISTINCT date) as cnt FROM ipqc_checksheets');
+  const [lineRows] = await d.query('SELECT DISTINCT line FROM ipqc_checksheets ORDER BY line');
+  const uniqueLines = lineRows.map((r) => r.line);
+  const [last5] = await d.query('SELECT id, date, line, shift, source, fraud_verdict, created_at FROM ipqc_checksheets ORDER BY created_at DESC LIMIT 5');
 
   return { total, fromForm, fromOCR, genuine, suspicious, uniqueDates, uniqueLines, last5 };
 }

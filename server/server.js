@@ -201,6 +201,98 @@ function parseIPQCData(text, pageNumber) {
   return data;
 }
 
+async function autoSaveOcrPagesToDb(allPagesData, meta = {}) {
+  const ocrValues = extractIPQCValues(allPagesData || []);
+  const nowDate = new Date().toISOString().slice(0, 10);
+  const dateValue = meta.date || ocrValues.date || nowDate;
+  const shiftValue = meta.shift || ocrValues.shift || 'Unknown';
+  const lineRaw = meta.line || ocrValues.line || 'Unknown';
+  const lineValue = String(lineRaw).replace(/^Line\s*/i, '').trim() || 'Unknown';
+
+  const dbRecord = {
+    date: dateValue,
+    shift: shiftValue,
+    line: lineValue,
+    time: ocrValues.time || '',
+    po_number: meta.poNumber || '',
+    inspector_name: meta.inspectorName || '',
+    source: 'ocr',
+    shop_floor_temp: ocrValues.shopFloorTemp,
+    shop_floor_humidity: ocrValues.shopFloorHumidity,
+    soldering_temp: ocrValues.solderingTemp,
+    cell_efficiency: ocrValues.cellEfficiency,
+    cell_gap_ts01a: ocrValues.cellToGapValues[0] || null,
+    cell_gap_ts01b: ocrValues.cellToGapValues[1] || null,
+    cell_gap_ts02a: ocrValues.cellToGapValues[2] || null,
+    cell_gap_ts02b: ocrValues.cellToGapValues[3] || null,
+    cell_gap_ts03a: ocrValues.cellToGapValues[4] || null,
+    cell_gap_ts03b: ocrValues.cellToGapValues[5] || null,
+    cell_gap_ts04a: ocrValues.cellToGapValues[6] || null,
+    cell_gap_ts04b: ocrValues.cellToGapValues[7] || null,
+    string_to_string_gap: ocrValues.stringToStringGap,
+    cell_edge_glass_top: ocrValues.cellEdgeToGlassTop,
+    cell_edge_glass_bottom: ocrValues.cellEdgeToGlassBottom,
+    cell_edge_glass_sides: ocrValues.cellEdgeToGlassSides,
+    terminal_busbar_to_cell: ocrValues.terminalBusbarToCell,
+    creepage_top: ocrValues.creepageDistances[0] || null,
+    creepage_bottom: ocrValues.creepageDistances[1] || null,
+    creepage_left: ocrValues.creepageDistances[2] || null,
+    creepage_right: ocrValues.creepageDistances[3] || null,
+    creepage_extra: ocrValues.creepageDistances[4] || null,
+    hole1_dimension: ocrValues.holeDimensions[0] || null,
+    hole2_dimension: ocrValues.holeDimensions[1] || null,
+    hole3_dimension: ocrValues.holeDimensions[2] || null,
+    soldering_iron_temp1: ocrValues.solderingIronTemp,
+    soldering_iron_temp2: ocrValues.solderingIronTemp2,
+    anodizing_thickness: ocrValues.anodizingThickness,
+    short_side_glue_weight: ocrValues.glueWeight,
+    potting_weight: ocrValues.pottingWeight,
+    welding_current: ocrValues.weldingCurrent,
+    curing_temp: ocrValues.curingTemp,
+    curing_humidity: ocrValues.curingHumidity,
+    ambient_temp: ocrValues.ambientTemp,
+    module_temp: ocrValues.moduleTemp,
+    dcw_value1: ocrValues.dcwValues[0] || null,
+    dcw_value2: ocrValues.dcwValues[1] || null,
+    dcw_value3: ocrValues.dcwValues[2] || null,
+    dcw_value4: ocrValues.dcwValues[3] || null,
+    ir_value1: ocrValues.irValues[0] || null,
+    ir_value2: ocrValues.irValues[1] || null,
+    ir_value3: ocrValues.irValues[2] || null,
+    ir_value4: ocrValues.irValues[3] || null,
+    module_dimension: ocrValues.moduleDimension,
+    diagonal_difference: ocrValues.diagonalDiff,
+    fraud_verdict: meta.fraudVerdict || null,
+    fraud_score: meta.fraudScore || null,
+    ocr_data_file: meta.ocrDataFile || null,
+    serials: []
+  };
+
+  if (ocrValues.preELSerials?.length) {
+    ocrValues.preELSerials.forEach(s => dbRecord.serials.push({ serial_number: s, page_number: 3, stage: 'Pre-EL' }));
+  }
+  if (ocrValues.postLamSerials?.length) {
+    ocrValues.postLamSerials.forEach(s => dbRecord.serials.push({ serial_number: s, page_number: 4, stage: 'Post-Lam' }));
+  }
+  if (ocrValues.flashTesterSerials?.length) {
+    ocrValues.flashTesterSerials.forEach(s => dbRecord.serials.push({ serial_number: s, page_number: 6, stage: 'Flash Tester' }));
+  }
+  if (ocrValues.finalVisualSerials?.length) {
+    ocrValues.finalVisualSerials.forEach(s => dbRecord.serials.push({ serial_number: s, page_number: 7, stage: 'Final Visual' }));
+  }
+
+  if (!dbRecord.serials.length) {
+    (allPagesData || []).forEach((page, index) => {
+      const pageNo = page?.pageNumber || (index + 1);
+      (page?.serialNumbers || []).forEach((serial) => {
+        dbRecord.serials.push({ serial_number: serial, page_number: pageNo, stage: 'OCR' });
+      });
+    });
+  }
+
+  return ipqcDB.saveChecksheet(dbRecord);
+}
+
 // ========== FILL EXCEL WITH PYTHON ==========
 async function fillExcel(templatePath, outputPath, allPagesData) {
   return new Promise((resolve, reject) => {
@@ -351,6 +443,21 @@ app.post('/api/ipqc-ocr/process-all', upload.array('images', 10), async (req, re
     const outputFilename = path.basename(outputPath);
     const humanOutputFilename = path.basename(humanOutputPath);
     const humanExcelGenerated = fs.existsSync(humanOutputPath);
+
+    let dbSaveResult = null;
+    try {
+      dbSaveResult = await autoSaveOcrPagesToDb(allPagesData, {
+        date: req.body.date,
+        shift: req.body.shift,
+        line: req.body.line,
+        poNumber: req.body.poNumber,
+        inspectorName: req.body.inspectorName,
+        ocrDataFile: `IPQC_FILLED_${Date.now()}_data.json`
+      });
+      console.log(`[IPQC DB] Auto-saved (process-all): ID #${dbSaveResult.id}`);
+    } catch (dbErr) {
+      console.error('[IPQC DB] Auto-save error (process-all):', dbErr.message);
+    }
     
     res.json({
       success: true,
@@ -361,7 +468,8 @@ app.post('/api/ipqc-ocr/process-all', upload.array('images', 10), async (req, re
       humanExcelGenerated,
       humanOutputFile: humanOutputFilename,
       humanDownloadUrl: `/api/ipqc-ocr/download/${humanOutputFilename}`,
-      allData: allPagesData
+      allData: allPagesData,
+      dbSaved: dbSaveResult ? { success: true, id: dbSaveResult.id } : { success: false }
     });
     
   } catch (error) {
@@ -428,6 +536,31 @@ app.post('/api/ipqc-ocr/process-from-urls', async (req, res) => {
     const outputFilename = path.basename(outputPath);
     const humanOutputFilename = path.basename(humanOutputPath);
     const humanExcelGenerated = fs.existsSync(humanOutputPath);
+
+    let fraudAnalysis = null;
+    try {
+      const uploadsDir = path.join(__dirname, 'uploads');
+      fraudAnalysis = analyzeIPQCFraud(allPagesData, uploadsDir, `IPQC_FILLED_${timestamp}_data.json`);
+    } catch (fraudErr) {
+      console.error('[IPQC Fraud] Auto-check error (process-from-urls):', fraudErr.message);
+    }
+
+    let dbSaveResult = null;
+    try {
+      dbSaveResult = await autoSaveOcrPagesToDb(allPagesData, {
+        date: checklistInfo?.date || req.body.date,
+        shift: checklistInfo?.shift || req.body.shift,
+        line: checklistInfo?.line || req.body.line,
+        poNumber: checklistInfo?.poNumber || req.body.poNumber,
+        inspectorName: req.body.inspectorName,
+        fraudVerdict: fraudAnalysis?.overallVerdict,
+        fraudScore: fraudAnalysis?.overallScore,
+        ocrDataFile: `IPQC_FILLED_${timestamp}_data.json`
+      });
+      console.log(`[IPQC DB] Auto-saved (process-from-urls): ID #${dbSaveResult.id}`);
+    } catch (dbErr) {
+      console.error('[IPQC DB] Auto-save error (process-from-urls):', dbErr.message);
+    }
     
     res.json({
       success: true,
@@ -438,7 +571,9 @@ app.post('/api/ipqc-ocr/process-from-urls', async (req, res) => {
       humanExcelGenerated,
       humanOutputFile: humanOutputFilename,
       humanDownloadUrl: `/api/ipqc-ocr/download/${humanOutputFilename}`,
-      allData: allPagesData
+      allData: allPagesData,
+      fraudAnalysis,
+      dbSaved: dbSaveResult ? { success: true, id: dbSaveResult.id } : { success: false }
     });
     
   } catch (error) {
@@ -698,6 +833,30 @@ app.post('/api/ipqc-checklist/fetch-and-process', async (req, res) => {
     }
     
     const outputFilename = path.basename(outputPath);
+
+    let fraudAnalysis = null;
+    try {
+      const uploadsDir = path.join(__dirname, 'uploads');
+      fraudAnalysis = analyzeIPQCFraud(allPagesData, uploadsDir, `IPQC_CHECKLIST_${safeDate2}_${safeLine2}_${safeShift2}_${timestamp}_data.json`);
+    } catch (fraudErr) {
+      console.error('[IPQC Fraud] Auto-check error (fetch-and-process):', fraudErr.message);
+    }
+
+    let dbSaveResult = null;
+    try {
+      dbSaveResult = await autoSaveOcrPagesToDb(allPagesData, {
+        date: targetItem.date,
+        shift: targetItem.Shift,
+        line: targetItem.Line,
+        poNumber: targetItem.poNumber || '',
+        fraudVerdict: fraudAnalysis?.overallVerdict,
+        fraudScore: fraudAnalysis?.overallScore,
+        ocrDataFile: `IPQC_CHECKLIST_${safeDate2}_${safeLine2}_${safeShift2}_${timestamp}_data.json`
+      });
+      console.log(`[IPQC DB] Auto-saved (fetch-and-process): ID #${dbSaveResult.id}`);
+    } catch (dbErr) {
+      console.error('[IPQC DB] Auto-save error (fetch-and-process):', dbErr.message);
+    }
     
     res.json({
       success: true,
@@ -712,7 +871,9 @@ app.post('/api/ipqc-checklist/fetch-and-process', async (req, res) => {
       excelGenerated,
       outputFile: outputFilename,
       downloadUrl: `/api/ipqc-ocr/download/${outputFilename}`,
-      extractedData: allPagesData
+      extractedData: allPagesData,
+      fraudAnalysis,
+      dbSaved: dbSaveResult ? { success: true, id: dbSaveResult.id } : { success: false }
     });
     
   } catch (error) {
@@ -951,7 +1112,7 @@ app.post('/api/ipqc-checklist/process-item', async (req, res) => {
       if (ocrValues.finalVisualSerials && ocrValues.finalVisualSerials.length > 0) {
         ocrValues.finalVisualSerials.forEach(s => dbRecord.serials.push({ serial_number: s, page_number: 7, stage: 'Final Visual' }));
       }
-      dbSaveResult = ipqcDB.saveChecksheet(dbRecord);
+      dbSaveResult = await ipqcDB.saveChecksheet(dbRecord);
       console.log(`[IPQC DB] Auto-saved to database: ID #${dbSaveResult.id} | ${dbRecord.serials.length} serials`);
     } catch (dbErr) {
       console.error('[IPQC DB] Auto-save error:', dbErr.message);
@@ -1044,13 +1205,13 @@ app.post('/api/ipqc/fraud-check-file', (req, res) => {
 // ========================================
 
 // POST /api/ipqc-data/save — Save IPQC checksheet (from form or OCR)
-app.post('/api/ipqc-data/save', (req, res) => {
+app.post('/api/ipqc-data/save', async (req, res) => {
   try {
     const data = req.body;
     if (!data.date || !data.shift || !data.line) {
       return res.status(400).json({ success: false, error: 'date, shift, line are required' });
     }
-    const result = ipqcDB.saveChecksheet(data);
+    const result = await ipqcDB.saveChecksheet(data);
     console.log(`[IPQC DB] Saved checksheet #${result.id} — ${data.date} ${data.line} ${data.shift} (source: ${data.source || 'form'})`);
     res.json({ success: true, id: result.id });
   } catch (error) {
@@ -1060,10 +1221,10 @@ app.post('/api/ipqc-data/save', (req, res) => {
 });
 
 // PUT /api/ipqc-data/update/:id — Update checksheet
-app.put('/api/ipqc-data/update/:id', (req, res) => {
+app.put('/api/ipqc-data/update/:id', async (req, res) => {
   try {
     const id = parseInt(req.params.id);
-    const result = ipqcDB.updateChecksheet(id, req.body);
+    const result = await ipqcDB.updateChecksheet(id, req.body);
     res.json({ success: true, ...result });
   } catch (error) {
     console.error('[IPQC DB] Update error:', error.message);
@@ -1072,7 +1233,7 @@ app.put('/api/ipqc-data/update/:id', (req, res) => {
 });
 
 // GET /api/ipqc-data/list — List all checksheets with filters
-app.get('/api/ipqc-data/list', (req, res) => {
+app.get('/api/ipqc-data/list', async (req, res) => {
   try {
     const filters = {
       date: req.query.date,
@@ -1083,7 +1244,7 @@ app.get('/api/ipqc-data/list', (req, res) => {
       limit: parseInt(req.query.limit) || 100,
       offset: parseInt(req.query.offset) || 0,
     };
-    const result = ipqcDB.getAllChecksheets(filters);
+    const result = await ipqcDB.getAllChecksheets(filters);
     res.json({ success: true, data: result.rows, total: result.total });
   } catch (error) {
     console.error('[IPQC DB] List error:', error.message);
@@ -1092,10 +1253,10 @@ app.get('/api/ipqc-data/list', (req, res) => {
 });
 
 // GET /api/ipqc-data/get/:id — Get single checksheet with serials
-app.get('/api/ipqc-data/get/:id', (req, res) => {
+app.get('/api/ipqc-data/get/:id', async (req, res) => {
   try {
     const id = parseInt(req.params.id);
-    const row = ipqcDB.getChecksheet(id);
+    const row = await ipqcDB.getChecksheet(id);
     if (!row) return res.status(404).json({ success: false, error: 'Not found' });
     res.json({ success: true, data: row });
   } catch (error) {
@@ -1105,10 +1266,10 @@ app.get('/api/ipqc-data/get/:id', (req, res) => {
 });
 
 // DELETE /api/ipqc-data/delete/:id — Delete checksheet
-app.delete('/api/ipqc-data/delete/:id', (req, res) => {
+app.delete('/api/ipqc-data/delete/:id', async (req, res) => {
   try {
     const id = parseInt(req.params.id);
-    ipqcDB.deleteChecksheet(id);
+    await ipqcDB.deleteChecksheet(id);
     res.json({ success: true });
   } catch (error) {
     console.error('[IPQC DB] Delete error:', error.message);
@@ -1117,9 +1278,9 @@ app.delete('/api/ipqc-data/delete/:id', (req, res) => {
 });
 
 // GET /api/ipqc-data/stats — Dashboard stats
-app.get('/api/ipqc-data/stats', (req, res) => {
+app.get('/api/ipqc-data/stats', async (req, res) => {
   try {
-    const stats = ipqcDB.getStats();
+    const stats = await ipqcDB.getStats();
     res.json({ success: true, stats });
   } catch (error) {
     console.error('[IPQC DB] Stats error:', error.message);
@@ -2116,7 +2277,7 @@ app.post('/api/ipqc-ocr/summary-pdf', async (req, res) => {
 app.get('/api/ipqc-data/summary-pdf/:id', async (req, res) => {
   try {
     const id = parseInt(req.params.id);
-    const row = ipqcDB.getChecksheet(id);
+    const row = await ipqcDB.getChecksheet(id);
 
     if (!row) {
       return res.status(404).json({ error: 'Checksheet not found' });
