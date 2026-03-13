@@ -987,6 +987,9 @@ app.post('/api/ipqc-checklist/fetch-and-process', async (req, res) => {
 
 // Process a single checklist item directly (already fetched data passed from frontend)
 app.post('/api/ipqc-checklist/process-item', async (req, res) => {
+  // Extend timeout for long OCR processing (10 min)
+  req.setTimeout(600000);
+  res.setTimeout(600000);
   try {
     const { checklist } = req.body;
     

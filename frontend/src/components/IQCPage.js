@@ -64,7 +64,8 @@ function IQCInspectionForm({ material, onBack, onSave }) {
       fd.append('materialType', material.id);
       
       const res = await axios.post(`${API_BASE}/iqc/ocr-process`, fd, {
-        headers: { 'Content-Type': 'multipart/form-data' }
+        headers: { 'Content-Type': 'multipart/form-data' },
+        timeout: 600000
       });
       
       if (res.data.success) {

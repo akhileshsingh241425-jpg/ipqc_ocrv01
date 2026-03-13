@@ -38,7 +38,7 @@ function IQCVerifyPage() {
       
       const res = await axios.post(`${API_BASE}/iqc/verify-report`, fd, {
         headers: { 'Content-Type': 'multipart/form-data' },
-        timeout: 300000, // 5 min timeout for OCR
+        timeout: 600000, // 10 min timeout for OCR
       });
 
       if (res.data.success) {

@@ -521,7 +521,7 @@ function OcrTab() {
     try {
       const urls = pdfUrls.split('\n').map(u => u.trim()).filter(Boolean);
       setStatus(`Processing ${urls.length} PDF(s) with Azure OCR...`);
-      const res = await axios.post(`${API_BASE}/ipqc-ocr/process-from-urls`, { pdfUrls: urls });
+      const res = await axios.post(`${API_BASE}/ipqc-ocr/process-from-urls`, { pdfUrls: urls }, { timeout: 600000 });
       if (res.data.success) { setResult(res.data); setExtractedData(res.data.extractedData); setStatus('✅ OCR Complete!'); }
       else { setError(res.data.error || 'Failed'); setStatus(''); }
     } catch (e) { setError(e.response?.data?.error || e.message); setStatus(''); }
@@ -640,7 +640,7 @@ function ChecklistTab() {
   const handleProcess = async (checklist, index) => {
     setProcessing(index); setError('');
     try {
-      const res = await axios.post(`${API_BASE}/ipqc-checklist/process-item`, { checklist });
+      const res = await axios.post(`${API_BASE}/ipqc-checklist/process-item`, { checklist }, { timeout: 600000 });
       if (res.data.success) { setProcessResults(prev => ({ ...prev, [index]: res.data })); }
       else { setError(res.data.error || 'Processing failed'); }
     } catch (e) { setError(e.response?.data?.error || e.message); }
@@ -651,7 +651,7 @@ function ChecklistTab() {
 
   const handleDownloadSummaryPdf = async (checklist, result) => {
     try {
-      const res = await axios.post(`${API_BASE}/ipqc-ocr/summary-pdf`, { checklist, result }, { responseType: 'blob' });
+      const res = await axios.post(`${API_BASE}/ipqc-ocr/summary-pdf`, { checklist, result }, { responseType: 'blob', timeout: 600000 });
       const url = window.URL.createObjectURL(new Blob([res.data], { type: 'application/pdf' }));
       const a = document.createElement('a'); a.href = url;
       a.download = `IPQC_Summary_${checklist.date || 'report'}_${checklist.Line || ''}_${checklist.Shift || ''}.pdf`;
@@ -662,7 +662,7 @@ function ChecklistTab() {
   const handleSavePdf = async (checklist) => {
     setSavingPdf(true);
     try {
-      const res = await axios.post(`${API_BASE}/ipqc-ocr/save-original-pdfs`, { checklist });
+      const res = await axios.post(`${API_BASE}/ipqc-ocr/save-original-pdfs`, { checklist }, { timeout: 600000 });
       if (res.data.success) { for (const f of res.data.files) { if (!f.error) window.open(`${API_BASE}/ipqc-ocr/download/${f.filename}`, '_blank'); } }
     } catch (e) { setError('Failed to save PDFs: ' + e.message); }
     finally { setSavingPdf(false); }
