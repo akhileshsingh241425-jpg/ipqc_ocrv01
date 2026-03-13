@@ -1202,7 +1202,8 @@ app.post('/api/ipqc-checklist/process-item', async (req, res) => {
       console.error('[IPQC DB] Auto-save error:', dbErr.message);
     }
 
-    res.json({
+    // Build full process result object
+    const processResult = {
       success: true,
       message: `Processed ${pdfPages.length} pages`,
       pagesProcessed: pdfPages.length,
@@ -1220,7 +1221,20 @@ app.post('/api/ipqc-checklist/process-item', async (req, res) => {
       stats,
       fraudAnalysis,
       dbSaved: dbSaveResult ? { success: true, id: dbSaveResult.id } : { success: false }
-    });
+    };
+
+    // ===== SAVE PROCESS RESULT FOR PERSISTENCE =====
+    try {
+      await ipqcDB.saveProcessResult(
+        { date: checklist.date, line: checklist.Line, shift: checklist.Shift },
+        processResult
+      );
+      console.log(`[IPQC DB] Process result saved for ${checklist.date}/${checklist.Line}/${checklist.Shift}`);
+    } catch (prErr) {
+      console.error('[IPQC DB] Process result save error:', prErr.message);
+    }
+
+    res.json(processResult);
     
   } catch (error) {
     console.error('[IPQC Process] Error:', error.message);
@@ -1357,6 +1371,32 @@ app.delete('/api/ipqc-data/delete/:id', async (req, res) => {
     res.json({ success: true });
   } catch (error) {
     console.error('[IPQC DB] Delete error:', error.message);
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
+
+// ========== PROCESS RESULTS API (FOR REFRESH PERSISTENCE) ==========
+
+// GET /api/ipqc-data/process-results — Get all saved process results
+app.get('/api/ipqc-data/process-results', async (req, res) => {
+  try {
+    const results = await ipqcDB.getAllProcessResults();
+    res.json({ success: true, data: results });
+  } catch (error) {
+    console.error('[IPQC DB] Process results fetch error:', error.message);
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
+
+// GET /api/ipqc-data/process-result/:date/:line/:shift — Get single process result
+app.get('/api/ipqc-data/process-result/:date/:line/:shift', async (req, res) => {
+  try {
+    const { date, line, shift } = req.params;
+    const result = await ipqcDB.getProcessResultByChecklist(date, line, shift);
+    if (!result) return res.status(404).json({ success: false, error: 'Not found' });
+    res.json({ success: true, data: result });
+  } catch (error) {
+    console.error('[IPQC DB] Process result fetch error:', error.message);
     res.status(500).json({ success: false, error: error.message });
   }
 });
@@ -1720,7 +1760,7 @@ app.post('/api/iqc/verify-report', upload.fields([
       return res.json({ success: false, error: `Material type '${materialType}' verification not yet implemented` });
     }
 
-    // Step 5: Save verification report
+    // Step 5: Save verification report to JSON file
     const timestamp = Date.now();
     const reportFilename = `IQC_VERIFY_${materialType}_${timestamp}.json`;
     const reportPath = path.join(__dirname, 'uploads', reportFilename);
@@ -1738,6 +1778,21 @@ app.post('/api/iqc/verify-report', upload.fields([
     };
     fs.writeFileSync(reportPath, JSON.stringify(fullReport, null, 2));
 
+    // Step 6: Save to MySQL database
+    let dbSaveResult = null;
+    try {
+      dbSaveResult = await ipqcDB.saveIQCReport({
+        materialType,
+        reportFile: reportFilename,
+        iqcData,
+        cocData,
+        verification,
+      });
+      console.log(`[IQC Verify] Saved to MySQL: ID=${dbSaveResult.id}`);
+    } catch (dbErr) {
+      console.error('[IQC Verify] MySQL save error:', dbErr.message);
+    }
+
     console.log(`[IQC Verify] Result: ${verification.overallResult} — ${verification.summary.passed}/${verification.summary.totalChecks} passed`);
 
     res.json({
@@ -1746,6 +1801,7 @@ app.post('/api/iqc/verify-report', upload.fields([
       iqcRawText: iqcFullText,
       cocRawText: cocFullText,
       reportFile: reportFilename,
+      dbId: dbSaveResult?.id || null,
     });
 
   } catch (error) {
@@ -1779,6 +1835,52 @@ app.get('/api/iqc/verify-history', (req, res) => {
 
     res.json({ success: true, reports });
   } catch (error) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
+
+// ==================== IQC DATABASE API ENDPOINTS ====================
+// Get IQC data list from MySQL
+app.get('/api/iqc-data/list', async (req, res) => {
+  try {
+    const filters = {
+      material_type: req.query.material_type,
+      supplier_name: req.query.supplier_name,
+      invoice_no: req.query.invoice_no,
+      overall_result: req.query.overall_result,
+      limit: parseInt(req.query.limit) || 100,
+      offset: parseInt(req.query.offset) || 0,
+    };
+    const result = await ipqcDB.getAllIQCReports(filters);
+    res.json({ success: true, data: result.rows, total: result.total });
+  } catch (error) {
+    console.error('[IQC API] List error:', error);
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
+
+// Get single IQC report from MySQL
+app.get('/api/iqc-data/get/:id', async (req, res) => {
+  try {
+    const id = parseInt(req.params.id);
+    const row = await ipqcDB.getIQCReport(id);
+    if (!row) {
+      return res.status(404).json({ success: false, error: 'IQC report not found' });
+    }
+    res.json({ success: true, data: row });
+  } catch (error) {
+    console.error('[IQC API] Get error:', error);
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
+
+// Get IQC stats from MySQL
+app.get('/api/iqc-data/stats', async (req, res) => {
+  try {
+    const stats = await ipqcDB.getIQCStats();
+    res.json({ success: true, stats });
+  } catch (error) {
+    console.error('[IQC API] Stats error:', error);
     res.status(500).json({ success: false, error: error.message });
   }
 });

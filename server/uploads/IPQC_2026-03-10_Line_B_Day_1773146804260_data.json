@@ -1,0 +1,183 @@
+{
+  "pages": [
+    {
+      "serialNumbers": [],
+      "temperatures": [],
+      "dimensions": [
+        "2378X 1175X 06981 mm"
+      ],
+      "times": [
+        "8:05 Am",
+        "9:05 Am"
+      ],
+      "dates": [
+        "10/09/2006",
+        "18/05/10",
+        "01/12/1924",
+        "01/10-08",
+        "26-01-09"
+      ],
+      "percentages": [
+        "560%",
+        "55%",
+        "25.60%"
+      ],
+      "rawText": "GAUTAM\nSOLAR\nDate\n10/09/2006\nNo\nStare\nCheck point\nPage 1 of 1\nGautam Solar Private Limited\nIPQC Check Sheet\nTime: 18/05/10\nShift DAY\nQuantum of Check\nSample Size\nAcceptance Criteria\nFrequency\nTemperature\n1\nShop Floor\n2 Glass Loader\nHumidity\nGlass dimension(L*W*1)\nonce\nper shift\nAppearance(Visual) once\nEVA/TPE Type once per shift\nEVA/EPE\n,\nEVA/EFE Cutting dimension(\\\"W\"T) once per shift\nEVA/EPE Status\ntva/IN Soldering at\n4\nSoldering Temprature and Quality of Soldering Once per shift\nApplicable]\nCell Manufacturer & Eff. once per shift\nCell Size(t*W] once\nCell Condition once per shift\nCell Loading\nCleanliness of Cell\nLoading Area once per shift\nVerification of Process\nParameter\nCell Cross cutting once per shift\nVerification of Process Parameter\nVisual Check after\nStringing\nOnce\nonce per shift\nonce per shift\nonce per shift\nonce\nance\nper shift\nper shift\nper shift\nMonth\nDocument Ne\nIssue Date\nRev. No./Blev Date\n01/12/1924\n01/10-08- 2015\nMonitoring Result\nRemarks if arre\nTemp. 25:3℃\nTime 8:05 Am\n25℃\nRH 560%\nTime 9:05 Am\n55%\nAs Per PO 12376×1128×2.001) mm\nGlass Broken, Crack, Scratches and Line mark not allowed\nOK\nAs per approved BOM EP 304\nAs per Specification (2378X 1175X 06981 mm\nNot allowed dust & foreign particle/Cut & non Uniform Embossing /Mig Date\nOK/2026-01-09\nAs per specification and Should be property soldered ( 400 : 20℃]\n415℃\nRefer Process Card Solar Space 25.60%\nRefer Process Card\n(105.09×182.41)mm\nFree From dust, finger spot,color variation OK\nNo unwanted or waste material should be at Cell Loading Area\nClean\nATW Stringer Specification\nMonitoring of ATW STRINGER\nBoth side cutting should be equal.\nATW Stringer specification\nEqual\nATW Temprature Validation\nTSOLA\n1 String/TS shift\nTS Visual Criteria\nTabber & stringer\nEL Image of Strings\nonce\nTS01B\nTSOZA\nOK\nTS02A\nOK\nOK\nTSO1A\nTSO1B\nOK\nOK\nTSO1A\nTS018 TSOZA\n1163\nTSOLA\n1163 TSO1B T502A\n0 78\n076 0.79 0.82 0.79 0.78\nTS044 TS048\nTS028\nOK OK\nT5028 TSO3A\nTSO3A\n1 String/TS/shift\nTS EL Criteria\nString length\nonce\nTSO4A\nTS048\n1\nString/Stringer/ shift\nRefer Process Card\nCell to Cell Gap\nOK\n1163 1163 1163\nOK OK\nTS028 TSO3A TSO3B\nroz8\nTSO3A\nTSO3B\nOK\nTS038\nOK\n1163\nTS038\nTSO4A\nTS048\nT504A\nTSO48",
+      "pageNumber": 1
+    },
+    {
+      "serialNumbers": [],
+      "temperatures": [
+        "132°C"
+      ],
+      "dimensions": [],
+      "times": [],
+      "dates": [
+        "10/05/2026",
+        "01/11/2014",
+        "01/10-08",
+        "26-02-01"
+      ],
+      "percentages": [],
+      "rawText": "GAUTAM SOLAR\nGautam Solar Private Limited\nIPQC Check Sheet\nPage 1 of 2\nDocument Na\nIssue Date\nRev. No./Rev.Date\nDet.\n10/05/2026\nTime : 18. 20 Am Quantum of Chers\nStage\nCheck point\nSample Size\nFrequency\n2 cell each stringer Front & Back\nVerification of Soldering Tvel Strength\nper shift\nShift DA1\nAcceptance Criteria\nFeel Strength 2IN\nMonitoring Result\n01/11/2014\n01/10-08 2025\nRemarks,If any\nRibbon to cell soldering peel strength\nString to String Gap once per shift\nCell edge to Glass edge distance (Top,bottom & once\nsiden)\nSoldering Pvel Strength b/w Ribbon to brunsbar once\ninterconnector\nper shift\nper shift\nRefer Process Card & Module Drawing\nTOR\n15mm\nBottom\n18.68 mm\nSidet 12.91 mm\n13.71mm\nRibbon to busbar peel test\n3.05 mm\nTerminal busbar to edge of Cell once per shift\nAuto bussing . Layup & Tapping\n,\nSoldering Quality of Ribbon to busbar Every 4h per shift\nTop & Bottom Creepage Dinstance/Terminal busbar to Glass Edge\nEvery 4h per shift\nVerification of Process Parameter once per shift\nQuality of auto taping Every 4h per shift\nAute RFID Logo/Barcode\nPosition verification of RIDE Logo /Barcode placing\n-\nphương (M Applicable)\nIEVA/LPE Type once per shift IVA/IM dimensionft*W*T) once per shift\nEVA/IM cutting\nEvery 4h per shift\n132 Cell module drawing\nRefer Module Drawing GSPL/N144/6/001\nNo Dry/Poor Soldering\nOK\nCreepage distance should be as per process card/Drawing B-11.79mm 11.58mm 11.78 mm\n7-12.25mm\n12.72 mm\nSpecification for Auto Bussing\nTaping should be proper,no Cell Shifting allowed OK\nShould not be tilt\nOK\nEVA\nAs per Specification\n-\nOK\nOK\nOK\nOK\nOK\n12.31mm\nOK\nOK\nCP 904 (2378×1125× 0.698) mm\nEVA/EPE Status once per shift\nNot allowed dust & foreign particle/Cut & non Uniform Embossing /Mfg Date\nOK/2026-02-01\nBaca Glass\nLoader\nGlass dimensionft*W*T) once Per shift\nAs per PO\n(2376×1128×2.002)mm",
+      "pageNumber": 2
+    },
+    {
+      "serialNumbers": [
+        "GS04890KG0522619809",
+        "GS04890KG1052261980",
+        "GS04890KG0522619807",
+        "GS04830KG70522619801"
+      ],
+      "temperatures": [
+        "12°C",
+        "10522619811°C"
+      ],
+      "dimensions": [],
+      "times": [
+        "18:40 Am",
+        "8:40 AM",
+        "8:50 Am"
+      ],
+      "dates": [
+        "10/03/2026",
+        "01/12/2024",
+        "01/30-08"
+      ],
+      "percentages": [],
+      "rawText": "GAUTAM\nSOLAR\nDate > 10/03/2026\nUNO\nStage\nCheck point\nGautam Solar Private Limited\nIPQC Check Sheet\nTime : 18:40 Am Shift DAY\nQuantum of Check\nAcceptance Criteria\nSample Size\nFrequency\nNo. of Holes/ Holes dimension\nonce\nPer shift\n3 hole with dimension 12mm+0.5mm\nPage 3 of 7\nDocument No.\nGSPL/IPOC/IPC/001\nIssue Date\nRev. No./Rev.Date\nPo.no .:-\nMonitoring Result\n01/12/2024\n01/30-08-2025\nRemarks,If any\n3 Hole :- 12.01mm, 11.98mm, 12.00mm\nAuto Busbar Flatten (If Applicable)\n11\nVisual Inspection 5 pieces per shift\nPre lamination EL &Visual inspection\nEL Inspection and Visual inspection\n12\ncleaning of rework station/Soldering iron once per shift\nString Rework Station\n13\nand sponge\nSoldering Iron Temp. once\n5 pieces per shift\nper shift\nNo cracks/ breaks in busbar &property flattened without bending and twisting OK\nPre EL Inspection Criteria\nPre El Visual Criteria\nRework Station should be Clean/Sponge should be Wet\n400130℃\nS.No\nS.No USO9890KG1052261980S\n5.No GSO9890KG0522619807\n5.No\nS.No\nTime: 8:40 AM 41.5℃\nOK\nOK\nOK\nOK\nGS09830KG70522619801\nGS04890KG0522619809\nGS07890KM10522619811\nClean and wet\nMethod of Rework once per shift\nModule Rework Station\n14\n15\nLaminator\nCleaning of Rework station/Soldering iron sponge\nSoldering Iron Temp. once per shift\nMonitoring of Laminator Process parameter once per shift\nCleaning of Diaphragm/release sheet\nonce per shift\nAs per WI (GSPL/P/W1/012)\nRework Station should be Clean/Sponge should be Wet\n400130℃\nManual\nTime: 8:50 Am\nonce 24h\nProcess Parameter of jinchen Laminator\nDiaphragm/Release sheet should be clean, No EVA residue is allowed\nClean\n420℃\nOK\nClean",
+      "pageNumber": 3
+    },
+    {
+      "serialNumbers": [
+        "GS04890KG0522616478",
+        "GS04890KG0522616499",
+        "GS04890KG10522616501",
+        "GS048901590522616516",
+        "GS04890KG0522616523",
+        "GS04890KG0522616551",
+        "GS04890KG0522616563",
+        "GS04890190522616513"
+      ],
+      "temperatures": [],
+      "dimensions": [],
+      "times": [
+        "08:10Am"
+      ],
+      "dates": [
+        "10-03-26",
+        "01/12/2024",
+        "01/30-08"
+      ],
+      "percentages": [
+        "95%"
+      ],
+      "rawText": "GAUTAM\nSOLAR\nDate: 10-03-26\nSr.No.\nStage\nCheck point\nGautam Solar Private Limited\nIPQC Check Sheet\nShift\nDay\nTime :- 08:10Am\nQuantum of Check\nAcceptance Criteria\nSample Size\nFrequency\nPeel of Test b/w. EVA/Backsheet EVA/EPE/POE to Glass\nPage 4 of 1\nDocument No\nIssue Date\nRev. No./Rev.Date\nPo.no .:\n01/12/2024\n01/30-08-2025\nMonitoring Result\nRemarks,if any\nRefer Document GSPL/IPQC/QC/001\nAll position\nAll laminators to E/G ≥60N/cm E/8260N/cm\nbe coverd in a month\n75to 95%\nRefer Document GSPL/IPQC/QC/001\nGel Content Test\nAuto Tape Removing (If Applicable)\nVisual Check after Lamination\n16\n5 pieces per shift\nCheck Tape Removing Should be smooth and No visual bubble Should be found.\nOK OK\nS.No. GS04890KG0522616478\nS.No.\nGSO4890KG05226I6486\n5 pieces per shift\nExcess layer from the glass edge should be removed, Uneven Trimming not allowed\nS.No.\nGS04890KG0522616499\nAuto Edge Trimming\n17\nTrimming Quality\nS.NO. G504890KG10522616501\nS.No.\nTrimming Blade life cycle once\nper month\nWorn out not allowed\nS.No\n05048901590522616516\nS.No\nGS04890KG0522616523\n90\" Visual inspection\n18\n19\nFraming\nVisual Inspection\nGlue uniformity & continuity in frame groove\nShort Side Glue Weight\nS pieces per shift\nS.No\nGS048SOK90522616550\nPost Lam Visual Inspection Criteria\nS.NO GS04890KG0522616551\nS.No GS04890KG0522616563\n1 set per shift\nShould be uniform, Back sealing should be\nproper\nonce Per shift\nFill as per Specification\nLong Side Glue Weight once\nAnodizing Thickness\nPer shift\nonce\nPer shift\n215 micron\nOK\nOK\nOIL\n9504890190522616513 20 days\nOIL\nRefer Document GSPL/IPQC/QC/011\n18. 3 micron",
+      "pageNumber": 4
+    },
+    {
+      "serialNumbers": [
+        "GS04890KG0522616588",
+        "GS048901290522616751",
+        "GS04890KG0522616772",
+        "GS04890KG0522616565",
+        "GS04890KG0522616741"
+      ],
+      "temperatures": [
+        "24°C",
+        "26°C"
+      ],
+      "dimensions": [],
+      "times": [
+        "08:15 AM",
+        "02:10 PM",
+        "08:10 AM"
+      ],
+      "dates": [
+        "10-03-26",
+        "01/12/2024",
+        "01/30-08"
+      ],
+      "percentages": [
+        "250%",
+        "58%"
+      ],
+      "rawText": "Gautam Solar Private Limited\nGAUTAM\nSOLAR\nDate: 10-03-26\nIPQC Check Sheet\nDay\nTime :- 08:15 AM Shift\nQuantum of Check\nAcceptance Criteria\nSample Size Frequency\nSr.No.\nStage\nCheck point\nJunction Box(Connector\nAppereance & Cable\nLength]\nJunction Box Assembly\n20\nSilicon Glue Weight on\nthe bottom (g)\nMax Welding time once\nAuto JB Soldering\n21\n22\nJB Potting\nOLE Potting Inspection {If Applicable)\n23\n24\nCuring\nSoldering Quality once per shift\nA/B Glue Ratio once Per shift\nPage 5 cf 7\nPotting material weight once Per shift\nNozzle Changing once every 6h\nVisual Check once 5 piece\nTemperature\nper shift\nonce\nHumidity once per shift\nonce\nonce\nonce Soldering current per shift\nPer shift\nPer shift\nPer shift\nAs per Process Card & module drawing\n300 MM\n2115 gm\n19.357 PM\nAs per Specification\n2.5 sec\nAs per Specification\n17 Amp\nWelding area should be fully covered & checked by twizzer, no yellowing allowed OK\nAs per Specification\nRefer Document GSPL/IPQC/QC/011\nDocument No.\nIssue Date\nRev. No./Rev.Date\nPo.no .:\nGSPL/IPQC/IPC/003\n01/12/2024\n01/30-08-2025\nMonitoring Result\nRemarks,if any\n2116 gm\n17.663 gM\nTime\n02:10 PM\nShould be changed after 6 hours or when\nTime:\nfound issue of damage or extra amount\ndispensing.\n08:10 AM\nPotting should be properly filled, and\nmounting hole should be as per drawing.\nOK\nOK\n01\nOK\nCuring Time(h) once Per shift\n25\nBuffing\n26\nCleaning\nCorner Edge, Buffing belt condition\n5 pieces per shift\n25+3°C\n250%\n24 hours\nShould not be sharp & No worn out OK OK\nModule should be free from\nTape,Dust,Dirt,EVA/Backs heet residue, Corner Burrs, Glue residue on\n5 pieces per shift\n(glass,backsheet,JB,Wire etc.\nPost Lam Visual Criteria\nS.No\nGSO4890KG0522616565\nS.No\nGS04890KG0522616588\nS.No GSO4890KG0522616741\n5.No GS048901290522616751\nS.No\n9504890KG0522616772\n0/\n26.2℃\n58%\n4 hours\nOIL\nOK\nOIL",
+      "pageNumber": 5
+    },
+    {
+      "serialNumbers": [
+        "GS04890KG105461743",
+        "GS04890KG105221176",
+        "GS04890KG0521818363",
+        "GS048901250522616790",
+        "GS04890KG10522616791",
+        "GS048901570522616916",
+        "GS04800KG2552500001",
+        "TSU4890KG0522618326"
+      ],
+      "temperatures": [
+        "24.62°C",
+        "5048901570522616916°C"
+      ],
+      "dimensions": [],
+      "times": [
+        "05:20Am",
+        "08:04 AM"
+      ],
+      "dates": [
+        "10-03-26",
+        "01/12/2024",
+        "01/30-08"
+      ],
+      "percentages": [],
+      "rawText": "GAUTAM\nSOLAR\nDate: 10-03-26\nSr.No.\nStage\nCheck point\nPage 1 of 7\nGautam Solar Private Limited\nDocument No\nIssue Date\nRev. No./Rev.Date Po.no .:-\nGSPL/DOC/PC/001\n01/12/2024\n01/30-08-2025\nIPQC Check Sheet\nTime :- 05:20Am\nShift\nDay\nQuantum of Check\nAcceptance Criteria\nSample Size\nFrequency\nAmbient Temp.\nModule Temp.\nonce\nonce\n27\nFlash Tester\nSunsimulator Calibration\nValidation\nSilver Reference Module EL Check\nonce\nonce\nonce\nper shift\nper shift\n12h\nevery 6h\nMonitoring Result\nRemarks,if any\n25+3°C\n24.62 C\n25+2℃\n24.70℃\nSunsimulator must be calibrated at the start of the shift with Golden/Silver module(GSPL/QA/S/11)\nAs per GSPL/QA/S/11\nGSO4800KG2552500001 Time: - 08:04 AM\nOK\nole\nTwo weeks\nShould be same as orignal EL picture\nDCW/IR/Ground\n28\nHipot Test\nContinuity\nVoltage & Current Verification in DC power once\nsupply\n29\nPost EL Test\nEL Inspection and Visual inspection\nRFID Position\nCell & Module Make & Manufacturing Month Verification\n30\nRFID\n5 pieces per shift\n5 pieces per shift\nonce\nonce\nShift\nper shift\nper shift\nOK\nS.No\nDCW\nIR\nGround Continuity\n550uA, >40MD.m2 ,(0-100) mQ\nGIS04890KG105461743 1.Jut\nG504890KG105221176 1. 3MA 6.723GM 4.669MM\nG504890KG0521818363 2.0 0A 4.04KM\nGTSU4890KG0522618326 1.9 MA\nGS04890K5105LL811112 1.4 um\n5.15km\n4.587MQ\n2.066MR\n4.14591\n1. 7LIMA\nSolar 4.51211\nAs per WI (GSPL/P/WI/027)\nS.No GIS048901250522616790\nPost EL Inspection Criteria\nS.No GS04890KG10522616791\nS.No GSO4890KG0522GI6796\nS.No GS048TOKSI0522616949\nPost EL Visual Criteria\nS.No\nAs per Process card\n50.38 V 7.464 Amp\nGI5048901570522616916\nCenter\nAs per BOM and Process card\nMarch, 2026",
+      "pageNumber": 6
+    },
+    {
+      "serialNumbers": [
+        "GS04890KG0522616971",
+        "GS04890KG052261700",
+        "GS04890K50522617004",
+        "GS04890190522612006",
+        "GS048901010522617011",
+        "GS04890100522617126",
+        "GS04890KG0522612123",
+        "GS04890KR0522617"
+      ],
+      "temperatures": [],
+      "dimensions": [],
+      "times": [
+        "08:25 AM"
+      ],
+      "dates": [
+        "10-03-26",
+        "01/12/2024",
+        "01/30-08"
+      ],
+      "percentages": [],
+      "rawText": "GAUTAM SOLAR\nDate: 10-03-26\nStage\nCheck point\nGautam Solar Private Limited\nIPQC Check Sheet\nShift\nTime :* 08:25 AM\nDay\nQuantum of Check\nAcceptance Criteria\nSample Size\nFrequency\nPage 7 of 7\nS.No. GIS04890KG0522616971\nSr.No.\nVisual Inspection\n5 pieces per shift\nFinal Visual Inspection\n31\nBacklabel\n5 pieces per shift\nLOW and Module Profile once\nMounting Hole X & Y Pitch once Per shift\nDimension measurement\n32\n33 Packaging\nDiagonal Difference once\nCorner Gap\n1B Cable length once Per shift\nPackaging Label once Per shift\nContent in Box once\nBox Condition once\nonce Per shift\nPost lam visual inspection criteria\nAir bubble,Tilt,Misprint,folded label not acceptable\nper shift\nAs per Module drawing (+1mm)\nPer shift $3mm\nAs per visual Inspection criteria 0.02 MM\nAs per Process card 300 mm\nWI For Packaging\nPer shift\nPer shift\nS.No.\nG504890KG052261700J\nS.No. GS04890K50522617004\nS.No. G504890190522612006\nS.No. G5048901010522617011\nS.No GTS04890KG052LG1712I\nS.No\nGI504890100522617126\nS.No\nGS04890KG0522612123\nS.No GTS04890KR0522617ILS\nS.No GS04890KG05LL612130\nDamage,dull printing, wet boxes not allowed\nWooden Pallet dimension once\nPer shift\nShould not be less than module dimension (2390 X1021X145)mn\nChecked By\nDocument No.\nIssue Date\nRev. No./Rev.Date\nPo.no .:-\nGSPL/IPQC/IPC/003\n01/12/2024\n01/30-08-2025\nMonitoring Result\nRemarks, if any\n(2382×1134x 30) MM (1400 ×1091) mm\n1 mm\nOIL\n01\nOK\nReviewed By",
+      "pageNumber": 7
+    }
+  ]
+}

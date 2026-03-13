@@ -581,15 +581,47 @@ function ChecklistTab() {
   const [filterShift, setFilterShift] = useState('');
   const [filterLine, setFilterLine] = useState('');
 
+  // Fetch saved process results from database
+  const loadSavedResults = useCallback(async (checklistsData) => {
+    try {
+      const res = await axios.get(`${API_BASE}/ipqc-data/process-results`);
+      if (res.data.success && res.data.data) {
+        const savedResults = res.data.data;
+        const newProcessResults = {};
+        
+        // Map saved results to checklist indexes
+        checklistsData.forEach((item, idx) => {
+          const key = `${item.date}_${item.Line}_${item.Shift}`;
+          if (savedResults[key] && savedResults[key].process_result) {
+            newProcessResults[idx] = savedResults[key].process_result;
+          }
+        });
+        
+        if (Object.keys(newProcessResults).length > 0) {
+          setProcessResults(newProcessResults);
+          console.log(`[IPQC] Loaded ${Object.keys(newProcessResults).length} saved process results`);
+        }
+      }
+    } catch (e) {
+      console.warn('[IPQC] Could not load saved process results:', e.message);
+    }
+  }, []);
+
   const fetchAll = useCallback(async () => {
     setLoading(true); setError('');
     try {
       const res = await axios.post(`${API_BASE}/ipqc-checklist/fetch`, {});
-      if (res.data.success) { setChecklists(res.data.data || []); if ((res.data.data || []).length === 0) setError('No IPQC checklists found.'); }
+      if (res.data.success) { 
+        const checklistsData = res.data.data || [];
+        setChecklists(checklistsData); 
+        if (checklistsData.length === 0) setError('No IPQC checklists found.');
+        // Load saved process results after checklists are loaded
+        await loadSavedResults(checklistsData);
+      }
       else { setError(res.data.error || 'Fetch failed'); }
     } catch (e) { setError(e.response?.data?.error || e.message); }
     finally { setLoading(false); }
-  }, []);
+  }, [loadSavedResults]);
 
   useEffect(() => { fetchAll(); }, [fetchAll]);
 

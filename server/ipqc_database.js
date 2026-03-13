@@ -209,6 +209,15 @@ async function initTables() {
       fraud_verdict VARCHAR(40),
       fraud_score INT,
       ocr_data_file VARCHAR(255),
+      
+      -- Process Result Files
+      excel_output_file VARCHAR(255),
+      human_excel_file VARCHAR(255),
+      scanned_pdf_file VARCHAR(255),
+      summary_pdf_file VARCHAR(255),
+      process_result JSON,
+      is_processed BOOLEAN DEFAULT FALSE,
+      
       created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
       updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
     );
@@ -230,6 +239,98 @@ async function initTables() {
     await ensureIndex(d, 'ipqc_checksheets', 'idx_checksheet_shift', 'shift');
     await ensureIndex(d, 'ipqc_serials', 'idx_serial_checksheet', 'checksheet_id');
     await ensureIndex(d, 'ipqc_serials', 'idx_serial_number', 'serial_number');
+
+    // ========== ADD NEW COLUMNS IF MISSING (for existing tables) ==========
+    const newColumns = [
+      { name: 'excel_output_file', def: 'VARCHAR(255)' },
+      { name: 'human_excel_file', def: 'VARCHAR(255)' },
+      { name: 'scanned_pdf_file', def: 'VARCHAR(255)' },
+      { name: 'summary_pdf_file', def: 'VARCHAR(255)' },
+      { name: 'process_result', def: 'JSON' },
+      { name: 'is_processed', def: 'BOOLEAN DEFAULT FALSE' },
+    ];
+    for (const col of newColumns) {
+      try {
+        await d.query(`ALTER TABLE ipqc_checksheets ADD COLUMN ${col.name} ${col.def}`);
+        console.log(`[IPQC DB] Added column: ${col.name}`);
+      } catch (e) {
+        // Column already exists - ignore
+      }
+    }
+
+    // ========== IQC VERIFICATION TABLES ==========
+    await d.query(`
+      CREATE TABLE IF NOT EXISTS iqc_reports (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        material_type VARCHAR(50) NOT NULL,
+        report_filename VARCHAR(255),
+        
+        -- IQC Document Info
+        document_no VARCHAR(100),
+        issue_date VARCHAR(50),
+        material_name VARCHAR(120),
+        supplier_name VARCHAR(255),
+        invoice_no VARCHAR(100),
+        receipt_date VARCHAR(50),
+        lot_no VARCHAR(100),
+        quantity VARCHAR(100),
+        sample_count INT,
+        aql_info TEXT,
+        checked_by VARCHAR(120),
+        approved_by VARCHAR(120),
+        inspection_date VARCHAR(50),
+        mfg_date VARCHAR(50),
+        
+        -- IQC Measurements (stored as JSON arrays)
+        width_values JSON,
+        thickness_values JSON,
+        coating_thickness_values JSON,
+        weight_values JSON,
+        solderability_busbar DOUBLE,
+        solderability_ribbon DOUBLE,
+        tensile_strength DOUBLE,
+        yield_strength DOUBLE,
+        resistivity DOUBLE,
+        packaging_result VARCHAR(255),
+        
+        -- COC Document Info
+        coc_certificate_no VARCHAR(100),
+        coc_customer_name VARCHAR(255),
+        coc_product_name VARCHAR(120),
+        coc_invoice_no VARCHAR(100),
+        coc_delivery_date VARCHAR(50),
+        coc_supplier_name VARCHAR(255),
+        
+        -- COC Measurements (stored as JSON arrays)
+        coc_width_values JSON,
+        coc_thickness_values JSON,
+        coc_tensile_values JSON,
+        coc_resistivity_values JSON,
+        coc_copper_purity_values JSON,
+        coc_weight_values JSON,
+        
+        -- Verification Results
+        overall_result VARCHAR(40),
+        total_checks INT,
+        passed_checks INT,
+        failed_checks INT,
+        warning_checks INT,
+        fraud_score INT,
+        fraud_indicators JSON,
+        
+        -- Full verification details (JSON)
+        verification_details JSON,
+        
+        -- Metadata
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+      );
+    `);
+
+    await ensureIndex(d, 'iqc_reports', 'idx_iqc_material_type', 'material_type');
+    await ensureIndex(d, 'iqc_reports', 'idx_iqc_invoice', 'invoice_no');
+    await ensureIndex(d, 'iqc_reports', 'idx_iqc_supplier', 'supplier_name(100)');
+    await ensureIndex(d, 'iqc_reports', 'idx_iqc_result', 'overall_result');
   })();
 
   return initPromise;
@@ -273,10 +374,18 @@ async function saveChecksheet(data) {
     'final_visual','backlabel','module_dimension',
     'mounting_hole_x','mounting_hole_y','diagonal_difference','corner_gap',
     'cable_length_final','packaging_label','box_content','box_condition','pallet_dimension',
-    'fraud_verdict','fraud_score','ocr_data_file'
+    'fraud_verdict','fraud_score','ocr_data_file',
+    'excel_output_file','human_excel_file','scanned_pdf_file','summary_pdf_file','process_result','is_processed'
   ];
 
-  const values = cols.map(c => data[c] !== undefined ? data[c] : null);
+  const values = cols.map(c => {
+    if (data[c] === undefined) return null;
+    // JSON columns need to be stringified
+    if (c === 'process_result' && typeof data[c] === 'object') {
+      return JSON.stringify(data[c]);
+    }
+    return data[c];
+  });
   const placeholders = cols.map(() => '?').join(',');
   const colNames = cols.join(',');
 
@@ -416,6 +525,282 @@ async function getStats() {
   return { total, fromForm, fromOCR, genuine, suspicious, uniqueDates, uniqueLines, last5 };
 }
 
+// ========== IQC REPORT FUNCTIONS ==========
+async function saveIQCReport(data) {
+  await initTables();
+  const d = await getDB();
+
+  const iqcData = data.iqcData || {};
+  const cocData = data.cocData || {};
+  const verification = data.verification || {};
+
+  const insertData = {
+    material_type: data.materialType || 'busbar',
+    report_filename: data.reportFile || null,
+
+    // IQC Document Info
+    document_no: iqcData.documentNo || null,
+    issue_date: iqcData.issueDate || null,
+    material_name: iqcData.materialName || null,
+    supplier_name: iqcData.supplierName || null,
+    invoice_no: iqcData.invoiceNo || null,
+    receipt_date: iqcData.receiptDate || null,
+    lot_no: iqcData.lotNo || null,
+    quantity: iqcData.quantity || null,
+    sample_count: iqcData.sampleCount || null,
+    aql_info: iqcData.aqlInfo || null,
+    checked_by: iqcData.checkedBy || null,
+    approved_by: iqcData.approvedBy || null,
+    inspection_date: iqcData.inspectionDate || null,
+    mfg_date: iqcData.mfgDate || null,
+
+    // IQC Measurements
+    width_values: JSON.stringify(iqcData.width || []),
+    thickness_values: JSON.stringify(iqcData.thickness || []),
+    coating_thickness_values: JSON.stringify(iqcData.coatingThickness || []),
+    weight_values: JSON.stringify(iqcData.weight || []),
+    solderability_busbar: iqcData.solderabilityBusBar || null,
+    solderability_ribbon: iqcData.solderabilityRibbon || null,
+    tensile_strength: iqcData.tensileStrength || null,
+    yield_strength: iqcData.yieldStrength || null,
+    resistivity: iqcData.resistivity || null,
+    packaging_result: iqcData.packagingResult || null,
+
+    // COC Document Info
+    coc_certificate_no: cocData.certificateNo || null,
+    coc_customer_name: cocData.customerName || null,
+    coc_product_name: cocData.productName || null,
+    coc_invoice_no: cocData.invoiceNo || null,
+    coc_delivery_date: cocData.deliveryDate || null,
+    coc_supplier_name: cocData.supplierName || null,
+
+    // COC Measurements
+    coc_width_values: JSON.stringify(cocData.width || []),
+    coc_thickness_values: JSON.stringify(cocData.thickness || []),
+    coc_tensile_values: JSON.stringify(cocData.tensileStrength || []),
+    coc_resistivity_values: JSON.stringify(cocData.resistivity || []),
+    coc_copper_purity_values: JSON.stringify(cocData.copperPurity || []),
+    coc_weight_values: JSON.stringify(cocData.weight || []),
+
+    // Verification Results
+    overall_result: verification.overallResult || null,
+    total_checks: verification.summary?.totalChecks || null,
+    passed_checks: verification.summary?.passed || null,
+    failed_checks: verification.summary?.failed || null,
+    warning_checks: verification.summary?.warnings || null,
+    fraud_score: verification.fraudAnalysis?.fraudLikelihood?.score || null,
+    fraud_indicators: JSON.stringify(verification.fraudAnalysis?.suspiciousPatterns || []),
+    verification_details: JSON.stringify(verification.checks || []),
+  };
+
+  const cols = Object.keys(insertData);
+  const values = Object.values(insertData);
+  const placeholders = cols.map(() => '?').join(',');
+
+  const [result] = await d.query(
+    `INSERT INTO iqc_reports (${cols.join(',')}) VALUES (${placeholders})`,
+    values
+  );
+
+  console.log(`[IQC DB] Saved IQC report ID=${result.insertId}, material=${insertData.material_type}, result=${insertData.overall_result}`);
+  return { id: result.insertId, success: true };
+}
+
+async function getAllIQCReports(filters = {}) {
+  await initTables();
+  const d = await getDB();
+  let where = [];
+  let params = [];
+
+  if (filters.material_type) { where.push('material_type = ?'); params.push(filters.material_type); }
+  if (filters.supplier_name) { where.push('supplier_name LIKE ?'); params.push(`%${filters.supplier_name}%`); }
+  if (filters.invoice_no) { where.push('invoice_no LIKE ?'); params.push(`%${filters.invoice_no}%`); }
+  if (filters.overall_result) { where.push('overall_result = ?'); params.push(filters.overall_result); }
+
+  const whereClause = where.length > 0 ? 'WHERE ' + where.join(' AND ') : '';
+  const limit = filters.limit || 100;
+  const offset = filters.offset || 0;
+
+  const [rows] = await d.query(
+    `SELECT id, material_type, report_filename, document_no, material_name, supplier_name, invoice_no, receipt_date, 
+            overall_result, total_checks, passed_checks, failed_checks, warning_checks, fraud_score, created_at 
+     FROM iqc_reports ${whereClause} ORDER BY created_at DESC LIMIT ? OFFSET ?`,
+    [...params, limit, offset]
+  );
+  const [countRows] = await d.query(`SELECT COUNT(*) as total FROM iqc_reports ${whereClause}`, params);
+
+  return { rows, total: countRows[0].total };
+}
+
+async function getIQCReport(id) {
+  await initTables();
+  const d = await getDB();
+  const [rows] = await d.query('SELECT * FROM iqc_reports WHERE id = ?', [id]);
+  const row = rows[0];
+  if (!row) return null;
+
+  // Parse JSON fields
+  try { row.width_values = JSON.parse(row.width_values); } catch (e) { row.width_values = []; }
+  try { row.thickness_values = JSON.parse(row.thickness_values); } catch (e) { row.thickness_values = []; }
+  try { row.coating_thickness_values = JSON.parse(row.coating_thickness_values); } catch (e) { row.coating_thickness_values = []; }
+  try { row.weight_values = JSON.parse(row.weight_values); } catch (e) { row.weight_values = []; }
+  try { row.coc_width_values = JSON.parse(row.coc_width_values); } catch (e) { row.coc_width_values = []; }
+  try { row.coc_thickness_values = JSON.parse(row.coc_thickness_values); } catch (e) { row.coc_thickness_values = []; }
+  try { row.coc_tensile_values = JSON.parse(row.coc_tensile_values); } catch (e) { row.coc_tensile_values = []; }
+  try { row.coc_resistivity_values = JSON.parse(row.coc_resistivity_values); } catch (e) { row.coc_resistivity_values = []; }
+  try { row.coc_copper_purity_values = JSON.parse(row.coc_copper_purity_values); } catch (e) { row.coc_copper_purity_values = []; }
+  try { row.coc_weight_values = JSON.parse(row.coc_weight_values); } catch (e) { row.coc_weight_values = []; }
+  try { row.fraud_indicators = JSON.parse(row.fraud_indicators); } catch (e) { row.fraud_indicators = []; }
+  try { row.verification_details = JSON.parse(row.verification_details); } catch (e) { row.verification_details = []; }
+
+  return row;
+}
+
+async function getIQCStats() {
+  await initTables();
+  const d = await getDB();
+  const [[{ cnt: total }]] = await d.query('SELECT COUNT(*) as cnt FROM iqc_reports');
+  const [[{ cnt: passed }]] = await d.query("SELECT COUNT(*) as cnt FROM iqc_reports WHERE overall_result = 'PASS'");
+  const [[{ cnt: failed }]] = await d.query("SELECT COUNT(*) as cnt FROM iqc_reports WHERE overall_result = 'FAIL'");
+  const [[{ cnt: suspicious }]] = await d.query("SELECT COUNT(*) as cnt FROM iqc_reports WHERE overall_result = 'SUSPICIOUS'");
+  const [materialRows] = await d.query('SELECT DISTINCT material_type FROM iqc_reports');
+  const materialTypes = materialRows.map(r => r.material_type);
+  const [last5] = await d.query('SELECT id, material_type, supplier_name, invoice_no, overall_result, created_at FROM iqc_reports ORDER BY created_at DESC LIMIT 5');
+
+  return { total, passed, failed, suspicious, materialTypes, last5 };
+}
+
+// ========== SAVE PROCESS RESULT ==========
+async function saveProcessResult(checklistInfo, processResult) {
+  await initTables();
+  const d = await getDB();
+  const conn = await d.getConnection();
+
+  const { date, line, shift } = checklistInfo;
+  if (!date || !line || !shift) {
+    throw new Error('date, line, shift are required to save process result');
+  }
+
+  try {
+    await conn.beginTransaction();
+
+    // Find existing checksheet by date, line, shift
+    const [existing] = await conn.query(
+      'SELECT id FROM ipqc_checksheets WHERE date = ? AND line = ? AND shift = ? LIMIT 1',
+      [date, line, shift]
+    );
+
+    let checksheetId;
+    if (existing.length > 0) {
+      // Update existing record
+      checksheetId = existing[0].id;
+      await conn.query(
+        `UPDATE ipqc_checksheets SET 
+          excel_output_file = ?,
+          human_excel_file = ?,
+          scanned_pdf_file = ?,
+          summary_pdf_file = ?,
+          process_result = ?,
+          fraud_verdict = ?,
+          fraud_score = ?,
+          is_processed = TRUE,
+          updated_at = CURRENT_TIMESTAMP
+         WHERE id = ?`,
+        [
+          processResult.outputFile || null,
+          processResult.humanOutputFile || null,
+          processResult.scannedPdfFile || null,
+          processResult.summaryPdfFile || null,
+          JSON.stringify(processResult),
+          processResult.fraudAnalysis?.overallVerdict || null,
+          processResult.fraudAnalysis?.overallScore || null,
+          checksheetId
+        ]
+      );
+    } else {
+      // Create new record
+      const [insertResult] = await conn.query(
+        `INSERT INTO ipqc_checksheets (date, line, shift, source, excel_output_file, human_excel_file, scanned_pdf_file, summary_pdf_file, process_result, fraud_verdict, fraud_score, is_processed)
+         VALUES (?, ?, ?, 'ocr', ?, ?, ?, ?, ?, ?, ?, TRUE)`,
+        [
+          date,
+          line,
+          shift,
+          processResult.outputFile || null,
+          processResult.humanOutputFile || null,
+          processResult.scannedPdfFile || null,
+          processResult.summaryPdfFile || null,
+          JSON.stringify(processResult),
+          processResult.fraudAnalysis?.overallVerdict || null,
+          processResult.fraudAnalysis?.overallScore || null
+        ]
+      );
+      checksheetId = insertResult.insertId;
+    }
+
+    await conn.commit();
+    return { success: true, id: checksheetId };
+  } catch (error) {
+    await conn.rollback();
+    throw error;
+  } finally {
+    conn.release();
+  }
+}
+
+// ========== GET ALL PROCESS RESULTS ==========
+async function getAllProcessResults() {
+  await initTables();
+  const d = await getDB();
+
+  const [rows] = await d.query(
+    `SELECT id, date, line AS Line, shift AS Shift, excel_output_file, human_excel_file, scanned_pdf_file, summary_pdf_file, process_result, fraud_verdict, fraud_score, is_processed
+     FROM ipqc_checksheets 
+     WHERE is_processed = TRUE
+     ORDER BY created_at DESC`
+  );
+
+  // Parse JSON process_result
+  const results = {};
+  for (const row of rows) {
+    try {
+      row.process_result = row.process_result ? JSON.parse(row.process_result) : null;
+    } catch (e) {
+      row.process_result = null;
+    }
+    // Create key from date_line_shift
+    const key = `${row.date}_${row.Line}_${row.Shift}`;
+    results[key] = row;
+  }
+
+  return results;
+}
+
+// ========== GET PROCESS RESULT BY CHECKLIST ==========
+async function getProcessResultByChecklist(date, line, shift) {
+  await initTables();
+  const d = await getDB();
+
+  const [rows] = await d.query(
+    `SELECT id, date, line AS Line, shift AS Shift, excel_output_file, human_excel_file, scanned_pdf_file, summary_pdf_file, process_result, fraud_verdict, fraud_score, is_processed
+     FROM ipqc_checksheets 
+     WHERE date = ? AND line = ? AND shift = ? AND is_processed = TRUE
+     LIMIT 1`,
+    [date, line, shift]
+  );
+
+  if (rows.length === 0) return null;
+
+  const row = rows[0];
+  try {
+    row.process_result = row.process_result ? JSON.parse(row.process_result) : null;
+  } catch (e) {
+    row.process_result = null;
+  }
+
+  return row;
+}
+
 module.exports = {
   getDB,
   initTables,
@@ -425,4 +810,13 @@ module.exports = {
   getChecksheet,
   deleteChecksheet,
   getStats,
+  // Process Result Functions
+  saveProcessResult,
+  getAllProcessResults,
+  getProcessResultByChecklist,
+  // IQC Functions
+  saveIQCReport,
+  getAllIQCReports,
+  getIQCReport,
+  getIQCStats,
 };
