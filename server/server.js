@@ -506,6 +506,9 @@ app.post('/api/ipqc-ocr/upload', upload.single('image'), async (req, res) => {
 
 // Upload multiple images and fill Excel
 app.post('/api/ipqc-ocr/process-all', upload.array('images', 10), async (req, res) => {
+  // Extend timeout for long OCR processing (10 min)
+  req.setTimeout(600000);
+  res.setTimeout(600000);
   try {
     if (!req.files || req.files.length === 0) {
       return res.status(400).json({ error: 'No files uploaded' });
@@ -571,6 +574,9 @@ app.post('/api/ipqc-ocr/process-all', upload.array('images', 10), async (req, re
 
 // Process from PDF URLs (called from main app)
 app.post('/api/ipqc-ocr/process-from-urls', async (req, res) => {
+  // Extend timeout for long OCR processing (10 min)
+  req.setTimeout(600000);
+  res.setTimeout(600000);
   try {
     const { pdfUrls, checklistInfo } = req.body;
     
@@ -817,6 +823,9 @@ app.post('/api/ipqc-checklist/fetch', async (req, res) => {
 
 // Fetch checklist and process all pages through OCR
 app.post('/api/ipqc-checklist/fetch-and-process', async (req, res) => {
+  // Extend timeout for long OCR processing (10 min)
+  req.setTimeout(600000);
+  res.setTimeout(600000);
   try {
     const { date, shift, line, checklistIndex } = req.body;
     
@@ -1705,6 +1714,9 @@ app.post('/api/iqc/verify-report', upload.fields([
   { name: 'iqcImages', maxCount: 5 },
   { name: 'cocImages', maxCount: 5 }
 ]), async (req, res) => {
+  // Extend timeout for long OCR processing (10 min)
+  req.setTimeout(600000);
+  res.setTimeout(600000);
   try {
     const materialType = req.body.materialType || 'busbar';
     const iqcFiles = req.files?.iqcImages || [];
@@ -2502,7 +2514,7 @@ app.get('*', (req, res) => {
 });
 
 // Start server
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log(`
 ╔═══════════════════════════════════════════════════════════╗
 ║                                                           ║
@@ -2536,3 +2548,8 @@ app.listen(PORT, () => {
 ╚═══════════════════════════════════════════════════════════╝
   `);
 });
+
+// Increase timeout for long OCR processing (10 minutes)
+server.timeout = 600000;        // 10 min request timeout
+server.keepAliveTimeout = 620000; // keep-alive slightly longer
+server.headersTimeout = 625000;   // headers timeout slightly longer
