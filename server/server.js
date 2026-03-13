@@ -41,7 +41,10 @@ app.use(cors());
 app.use(express.json({ limit: '50mb' }));
 
 // Serve React build (frontend + backend on same port)
-const buildPath = path.join(__dirname, '..', 'build');
+// Check frontend/build first (git-tracked), then root build/ (legacy)
+const frontendBuildPath = path.join(__dirname, '..', 'frontend', 'build');
+const rootBuildPath = path.join(__dirname, '..', 'build');
+const buildPath = fs.existsSync(frontendBuildPath) ? frontendBuildPath : rootBuildPath;
 if (fs.existsSync(buildPath)) {
   app.use(express.static(buildPath));
   console.log('📦 Serving React build from:', buildPath);
@@ -2511,7 +2514,7 @@ app.get('/api/ipqc-data/summary-pdf/:id', async (req, res) => {
 
 // Serve React app for all non-API routes (SPA support)
 app.get('*', (req, res) => {
-  const indexPath = path.join(__dirname, '..', 'build', 'index.html');
+  const indexPath = path.join(buildPath, 'index.html');
   if (fs.existsSync(indexPath)) {
     res.sendFile(indexPath);
   } else {
