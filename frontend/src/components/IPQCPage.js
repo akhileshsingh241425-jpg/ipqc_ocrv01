@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import CircleProgress from './CircleProgress';
 
-const API_BASE = 'http://localhost:5001/api';
+const API_BASE = '/api';
 
 // ========== FRAUD VERDICT BADGE ==========
 function FraudBadge({ verdict, score }) {

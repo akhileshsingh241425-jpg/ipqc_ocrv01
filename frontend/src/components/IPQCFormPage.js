@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import axios from 'axios';
 
-const API = 'http://localhost:5001/api';
+const API = '/api';
 
 /* ═══════════════════════════════════════════════════════════════════
    IPQC CHECK SHEET — COMPACT NO-SCROLL EDITION
