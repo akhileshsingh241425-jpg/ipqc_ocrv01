@@ -31,8 +31,10 @@ const PORT = process.env.PORT || 5001;
 const AZURE_ENDPOINT = 'https://ipqcdoc1234.cognitiveservices.azure.com/';
 const AZURE_KEY = '3SAIOHgwBwreEtn7g7Kd9zzePXR9uUDkVmSMkT9oA8FCWjjrlMOFJQQJ99CBACrJL3JXJ3w3AAALACOGzUYp';
 
-// Excel template path (update this to your template location)
-const EXCEL_TEMPLATE_PATH = 'C:\\Users\\hp\\Desktop\\IPQC Check Sheet.xlsx';
+// Excel template path — auto-detect OS, fallback to server/templates/
+const EXCEL_TEMPLATE_PATH = process.platform === 'win32'
+  ? 'C:\\Users\\hp\\Desktop\\IPQC Check Sheet.xlsx'
+  : path.join(__dirname, 'templates', 'IPQC_Check_Sheet.xlsx');
 
 // Middleware
 app.use(cors());
@@ -396,7 +398,8 @@ async function fillExcel(templatePath, outputPath, allPagesData) {
     
     // Call Python script
     const pythonScript = path.join(__dirname, 'fill_complete_ocr.py');
-    const python = spawn('python', [pythonScript, jsonPath, templatePath, outputPath]);
+    const pythonCmd = process.platform === 'win32' ? 'python' : 'python3';
+    const python = spawn(pythonCmd, [pythonScript, jsonPath, templatePath, outputPath]);
     
     let stdout = '';
     let stderr = '';
