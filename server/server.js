@@ -1139,7 +1139,7 @@ app.post('/api/ipqc-checklist/process-item', async (req, res) => {
       const ocrValues = extractIPQCValues(allPagesData);
       const dataJsonFilename = `IPQC_${safeDate}_${safeLine}_${safeShift}_${timestamp}_data.json`;
       const dbRecord = {
-        date: checklist.date || ocrValues.date || safeDate,
+        date: (checklist.date || ocrValues.date || safeDate).substring(0, 10),
         shift: checklist.Shift || ocrValues.shift || safeShift,
         line: (checklist.Line || ocrValues.line || safeLine).replace(/^Line\s*/i, ''),
         time: ocrValues.time || '',

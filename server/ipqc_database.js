@@ -71,7 +71,7 @@ async function initTables() {
     await d.query(`
     CREATE TABLE IF NOT EXISTS ipqc_checksheets (
       id INT AUTO_INCREMENT PRIMARY KEY,
-      date VARCHAR(20) NOT NULL,
+      date VARCHAR(30) NOT NULL,
       shift VARCHAR(20) NOT NULL,
       line VARCHAR(50) NOT NULL,
       time VARCHAR(30),
@@ -256,6 +256,13 @@ async function initTables() {
       } catch (e) {
         // Column already exists - ignore
       }
+    }
+
+    // ========== WIDEN DATE COLUMN (existing tables may have VARCHAR(20)) ==========
+    try {
+      await d.query(`ALTER TABLE ipqc_checksheets MODIFY COLUMN date VARCHAR(30) NOT NULL`);
+    } catch (e) {
+      // Ignore if already correct
     }
 
     // ========== IQC VERIFICATION TABLES ==========
@@ -676,10 +683,16 @@ async function saveProcessResult(checklistInfo, processResult) {
   const d = await getDB();
   const conn = await d.getConnection();
 
-  const { date, line, shift } = checklistInfo;
+  let { date, line, shift } = checklistInfo;
   if (!date || !line || !shift) {
     throw new Error('date, line, shift are required to save process result');
   }
+
+  // Normalize date to YYYY-MM-DD (ERP sends ISO like '2026-03-01T00:00:00.000Z')
+  date = date.substring(0, 10);
+  // Normalize line to strip 'Line ' prefix (consistent with saveChecksheet)
+  line = line.replace(/^Line\s*/i, '');
+  console.log(`[IPQC DB] saveProcessResult normalized: date=${date}, line=${line}, shift=${shift}`);
 
   try {
     await conn.beginTransaction();
@@ -768,8 +781,8 @@ async function getAllProcessResults() {
     } catch (e) {
       row.process_result = null;
     }
-    // Create key from date_line_shift
-    const key = `${row.date}_${row.Line}_${row.Shift}`;
+    // Create key matching ERP format: date(YYYY-MM-DD)_Line X_Shift
+    const key = `${row.date}_Line ${row.Line}_${row.Shift}`;
     results[key] = row;
   }
 

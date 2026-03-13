@@ -591,7 +591,8 @@ function ChecklistTab() {
         
         // Map saved results to checklist indexes
         checklistsData.forEach((item, idx) => {
-          const key = `${item.date}_${item.Line}_${item.Shift}`;
+          const dateStr = item.date ? item.date.substring(0, 10) : '';
+          const key = `${dateStr}_${item.Line}_${item.Shift}`;
           if (savedResults[key] && savedResults[key].process_result) {
             newProcessResults[idx] = savedResults[key].process_result;
           }
