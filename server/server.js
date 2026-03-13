@@ -2492,9 +2492,8 @@ app.get('/api/ipqc-data/summary-pdf/:id', async (req, res) => {
 });
 
 // Serve React app for all non-API routes (SPA support)
-const buildPath = path.join(__dirname, '..', 'build');
 app.get('*', (req, res) => {
-  const indexPath = path.join(buildPath, 'index.html');
+  const indexPath = path.join(__dirname, '..', 'build', 'index.html');
   if (fs.existsSync(indexPath)) {
     res.sendFile(indexPath);
   } else {
