@@ -4,10 +4,11 @@ import IPQCPage from './components/IPQCPage';
 import IQCPage from './components/IQCPage';
 import IQCVerifyPage from './components/IQCVerifyPage';
 import IPQCFormPage from './components/IPQCFormPage';
+import IPQCResultsPage from './components/IPQCResultsPage';
 
 // ========== MAIN APP ==========
 function App() {
-  const [activeModule, setActiveModule] = useState('ipqc'); // 'ipqc' | 'iqc' | 'iqc-verify' | 'ipqc-form'
+  const [activeModule, setActiveModule] = useState('ipqc'); // 'ipqc' | 'iqc' | 'iqc-verify' | 'ipqc-form' | 'ipqc-results'
 
   // IPQC Form gets full page — no header, no padding
   if (activeModule === 'ipqc-form') {
@@ -42,12 +43,15 @@ function App() {
             <button className={`nav-tab ${activeModule === 'ipqc-form' ? 'active' : ''}`} onClick={() => setActiveModule('ipqc-form')}>
               📝 IPQC Form
             </button>
+            <button className={`nav-tab ${activeModule === 'ipqc-results' ? 'active' : ''}`} onClick={() => setActiveModule('ipqc-results')}>
+              📊 IPQC Results
+            </button>
           </nav>
         </div>
       </header>
 
       <main className="main-area">
-        {activeModule === 'ipqc' ? <IPQCPage /> : activeModule === 'iqc' ? <IQCPage /> : activeModule === 'iqc-verify' ? <IQCVerifyPage /> : null}
+        {activeModule === 'ipqc' ? <IPQCPage /> : activeModule === 'iqc' ? <IQCPage /> : activeModule === 'iqc-verify' ? <IQCVerifyPage /> : activeModule === 'ipqc-results' ? <IPQCResultsPage /> : null}
       </main>
     </div>
   );
