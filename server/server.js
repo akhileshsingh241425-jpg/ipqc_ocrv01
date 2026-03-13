@@ -38,6 +38,13 @@ const EXCEL_TEMPLATE_PATH = 'C:\\Users\\hp\\Desktop\\IPQC Check Sheet.xlsx';
 app.use(cors());
 app.use(express.json({ limit: '50mb' }));
 
+// Serve React build (frontend + backend on same port)
+const buildPath = path.join(__dirname, '..', 'build');
+if (fs.existsSync(buildPath)) {
+  app.use(express.static(buildPath));
+  console.log('📦 Serving React build from:', buildPath);
+}
+
 // Multer setup for file uploads
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -2481,6 +2488,17 @@ app.get('/api/ipqc-data/summary-pdf/:id', async (req, res) => {
   } catch (error) {
     console.error('[IPQC PDF] Error generating PDF:', error);
     res.status(500).json({ error: 'Failed to generate PDF: ' + error.message });
+  }
+});
+
+// Serve React app for all non-API routes (SPA support)
+const buildPath = path.join(__dirname, '..', 'build');
+app.get('*', (req, res) => {
+  const indexPath = path.join(buildPath, 'index.html');
+  if (fs.existsSync(indexPath)) {
+    res.sendFile(indexPath);
+  } else {
+    res.status(404).json({ error: 'Frontend build not found. Run npm run build in frontend folder.' });
   }
 });
 
